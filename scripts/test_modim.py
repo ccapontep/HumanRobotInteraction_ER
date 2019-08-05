@@ -6,7 +6,7 @@ sys.path.append(pdir + '/src/GUI')
 from ws_client import *
 import ws_client
 
-cmdsever_ip = os.getenv('10.3.1.1')
+cmdsever_ip = '10.3.1.1'
 cmdserver_port = 9101
 
 mc = ModimWSClient()
@@ -15,9 +15,11 @@ mc.setCmdServerAddr(cmdsever_ip, cmdserver_port)
 
 
 def i1():
-    im.display.loadUrl('slide.html')
+    im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
+    # im.gitpull()
+    im.display.loadUrl('HRIER/slide.html')
 
-    im.executeModality('TEXT_title','HRI 2019')
+    im.executeModality('TEXT_title','Welcome to Wellness Hosptal!')
     im.executeModality('TEXT_default','Hello!')
     im.executeModality('TTS','Welcome')
     im.executeModality('IMAGE','marrtino.jpg')
@@ -31,10 +33,11 @@ def i1():
 
     time.sleep(3)
 
-    im.display.loadUrl('index.html')    
+    im.display.loadUrl('index.html')
 
 
 def i2():
+    im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
     im.display.loadUrl('slide.html')
     im.execute('ciao')
     time.sleep(3)
@@ -42,6 +45,7 @@ def i2():
 
 
 def i3():
+    im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
     im.display.loadUrl('slide.html')
     im.askUntilCorrect('question')
     time.sleep(3)
@@ -49,5 +53,3 @@ def i3():
 
 
 mc.run_interaction(i1)
-
-
