@@ -18,7 +18,7 @@ def f():
 def i1():
     # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
     # im.gitpull()
-    im.display.loadUrl('HRIER/ER_slide.html')
+    im.display.loadUrl('HRIER/slide.html')
 
     im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
     im.executeModality('TEXT_default','Hello!')
