@@ -56,17 +56,17 @@
 
     <!-- text -->
     <h1>
-    <div align='center' id='text_title'> &nbsp; </div>
+    <div align='center' id='text_title'> Human-Robot Interaction </div>
     </h1>
 
     <br>
 
-    <div align='center'> <img height=250 id='image_default' src="none.jpg" alt=""/> </div>
+    <div align='center'> <img width=800 id='image_default' src="img/hri.jpg" alt=""/> </div>
 
     <br>
 
     <h2>
-    <div align='center' id='text_default'> &nbsp; </div>
+    <div align='center' id='text_default'> Welcome </div>
     </h2>
 
 
@@ -74,7 +74,7 @@
 
     <!-- buttons -->
     <div align='center' id='buttons'>
-
+      <input type="button" id="run" value="Start" onclick="runslides()">
     </div>
 
 
@@ -89,6 +89,41 @@
 
     console.log("Trying connection...")
     wsrobot_init(ip,port);
+
+
+    var codeport = 9010;
+    var codeurl = "ws://"+ip+":"+codeport+"/websocketserver";
+    console.log(codeurl);
+    codews = new WebSocket(codeurl);
+
+    var ctrlport = 9110;
+    var ctrlurl = "ws://"+ip+":"+ctrlport+"/ctrlwebsocketserver";
+    console.log(ctrlurl);
+    ctrlws = new WebSocket(ctrlurl);
+
+    function iminit() {
+        codews.send(
+            "begin()\n" +
+            "im.setRelativeDemoPath('hri2019')\n" +
+            "im.init()\n" +
+            "robot.setAlive(True)\n" +
+            "robot.normalPosture()\n" +
+            "robot.startFaceDetection()\n" +
+            "end()\n");
+        console.log('IM init');
+    }
+
+    setTimeout(iminit,1000)
+
+    function runslides() {
+        console.log('runslides...');
+        code = "\n" +
+            "im.display.loadUrl('slide.html')\n" +
+            "im.execute('ciao')\n" +
+            "time.sleep(5)\n" +
+            "im.display.loadUrl('index.html')\n"
+        codews.send(code);
+    }
 
   </script>
 
