@@ -23,7 +23,7 @@ def i1():
     im.executeModality('TEXT_title','Welcome to Wellness Hosptal!')
     im.executeModality('TEXT_default','Hello!')
     im.executeModality('TTS','Welcome')
-    im.executeModality('IMAGE','marrtino.jpg')
+    im.executeModality('IMAGE','img/hri2.jpg')
 
     im.display.remove_buttons()
     im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
