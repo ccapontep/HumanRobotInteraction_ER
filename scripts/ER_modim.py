@@ -12,8 +12,8 @@ cmdserver_port = 9101
 mc = ModimWSClient()
 mc.setCmdServerAddr(cmdsever_ip, cmdserver_port)
 
-def f():
-    return 1
+# def f():
+#     return 1
 
 def i1():
     # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
