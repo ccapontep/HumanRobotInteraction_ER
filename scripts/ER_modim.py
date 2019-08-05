@@ -34,7 +34,7 @@ def i1():
 
     time.sleep(3)
 
-    im.display.loadUrl('index.html')
+    im.display.loadUrl('ER_index.html')
 
 
 def i2():
