@@ -18,10 +18,9 @@ mc.setCmdServerAddr(cmdsever_ip, cmdserver_port)
 def i1():
     # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
     # im.gitpull()
-
-    im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
     im.display.loadUrl('HRIER/ERslide.html')
 
+    im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
     im.executeModality('TEXT_default','Hello!')
     im.executeModality('TTS','Welcome')
     # im.executeModality('IMAGE','images/hri2.jpg')
