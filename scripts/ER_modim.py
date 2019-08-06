@@ -23,6 +23,7 @@ def i1():
     im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
     im.executeModality('TEXT_default','Hello!')
     im.executeModality('TTS','Welcome')
+    im.display.remove()
     im.executeModality('IMAGE','images/hri2.jpg')
 
     im.display.remove_buttons()
