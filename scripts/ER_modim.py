@@ -33,11 +33,11 @@ def i1():
     # im.executeModality('TEXT_default',a,', I am a new patient.')
 
 
-    if a == 'yes' && a != 'timeout':
+    if a == 'yes' and a != 'timeout':
         im.executeModality('TEXT_default','Yes, I am a new patient.')
         time.sleep(3)
         im.display.loadUrl('ERindex.html')
-    elif a == 'no' && a != 'timeout':
+    elif a == 'no' and a != 'timeout':
         im.executeModality('TEXT_default','No, I am a patient in the database.')
         time.sleep(3)
     elif a == 'timeout':
