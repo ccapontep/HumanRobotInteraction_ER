@@ -11,7 +11,6 @@ cmdserver_port = 9101
 
 mc = ModimWSClient()
 mc.setCmdServerAddr(cmdsever_ip, cmdserver_port)
-mc.say("hello")
 
 
 # def f():
@@ -25,6 +24,7 @@ def i1():
     im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
     im.executeModality('TEXT_default','Have you been helped previously?')
     im.executeModality('TTS','Have you been helped previously')
+    im.executeModality('TTS',im.robot)
     # im.robot.say("Have you been helped previously")
     # im.executeModality('IMAGE','images/hri2.jpg')
 
