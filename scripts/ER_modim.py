@@ -40,7 +40,7 @@ def i1():
     elif a == 'no' and a != 'timeout':
         im.executeModality('TEXT_default','No, I am a patient in the database.')
         time.sleep(3)
-    elif a == 'timeout':
+    elif a == None:
         im.executeModality('TEXT_default','No answer received')
         time.sleep(3)
 
