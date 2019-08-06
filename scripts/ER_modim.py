@@ -37,7 +37,7 @@ def i1():
     if a == 'yes':
         im.executeModality('TEXT_default','Yes, I am a new patient.')
         im.display.loadUrl('ERindex.html')
-    else if a == 'no':
+    elif a == 'no':
         im.executeModality('TEXT_default','No, I am a patient in the database.')
 
 
