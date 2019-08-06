@@ -29,14 +29,17 @@ def i1():
     im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
     im.executeModality('ASR',['yes','no'])
 
-    a = im.ask(actionname=None, timeoutvalue=3)
-    im.executeModality('TEXT_default',a,', I am a new patient.')
+    a = im.ask(actionname=None, timeoutvalue=15)
+    # im.executeModality('TEXT_default',a,', I am a new patient.')
 
-    time.sleep(10)
+    time.sleep(3)
 
     if a == 'yes':
-        # im.executeModality('TEXT_default', ', I am a new patient.')
+        im.executeModality('TEXT_default','Yes, I am a new patient.')
         im.display.loadUrl('ERindex.html')
+    else if a == 'no':
+        im.executeModality('TEXT_default','No, I am a patient in the database.')
+
 
 
 def i2():
