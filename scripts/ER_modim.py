@@ -20,9 +20,9 @@ def i1():
     # im.gitpull()
     im.display.loadUrl('HRIER/ERslide.html')
 
-    im.execute('TEXT_title','Welcome to Wellness Hospital!')
-    im.execute('TEXT_default','Hello!')
-    im.execute('TTS','Welcome')
+    im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
+    im.executeModality('TEXT_default','Hello!')
+    im.executeModality('TTS','Welcome')
     im.executeModality('IMAGE','images/hri2.jpg')
 
     im.display.remove_buttons()
