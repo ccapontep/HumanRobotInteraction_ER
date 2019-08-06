@@ -12,6 +12,8 @@ cmdserver_port = 9101
 mc = ModimWSClient()
 mc.setCmdServerAddr(cmdsever_ip, cmdserver_port)
 
+say("Have you been helped previously")
+
 # def f():
 #     return 1
 
