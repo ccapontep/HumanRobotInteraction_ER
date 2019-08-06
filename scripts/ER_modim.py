@@ -11,7 +11,6 @@ cmdserver_port = 9101
 
 mc = ModimWSClient()
 mc.setCmdServerAddr(cmdsever_ip, cmdserver_port)
-robot_type = "marrtino"
 
 
 
@@ -21,6 +20,7 @@ robot_type = "marrtino"
 def i1():
     # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
     # im.gitpull()
+    im.__init__()
     im.display.loadUrl('HRIER/ERslide.html')
 
     im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
