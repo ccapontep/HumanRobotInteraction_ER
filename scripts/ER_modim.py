@@ -30,7 +30,7 @@ def i1():
     im.executeModality('ASR',['yes','no'])
 
     a = im.ask(actionname=None, timeoutvalue=10)
-    im.executeModality('TEXT_default',a)
+    im.executeModality('TEXT_default',a, ', I am a new patient.')
 
     time.sleep(3)
 
