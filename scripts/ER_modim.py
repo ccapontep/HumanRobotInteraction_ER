@@ -35,11 +35,14 @@ def i1():
 
     if a == 'yes':
         im.executeModality('TEXT_default','Yes, I am a new patient.')
-        time.sleep(5)
+        time.sleep(3)
         im.display.loadUrl('ERindex.html')
     elif a == 'no':
         im.executeModality('TEXT_default','No, I am a patient in the database.')
-        time.sleep(5)
+        time.sleep(3)
+    elif a == '':
+        im.executeModality('TEXT_default','No answer received')
+        time.sleep(3)
 
 
 def i2():
