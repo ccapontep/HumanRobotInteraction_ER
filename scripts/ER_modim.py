@@ -21,8 +21,8 @@ def i1():
     im.display.loadUrl('HRIER/ERslide.html')
 
     im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
-    im.executeModality('TEXT_default','Hello!')
-    im.executeModality('TTS','Welcome')
+    im.executeModality('TEXT_default','Have you been helped previously?')
+    im.executeModality('TTS','Have you been helped previously?')
     # im.executeModality('IMAGE','images/hri2.jpg')
 
     im.display.remove_buttons()
@@ -34,7 +34,8 @@ def i1():
 
     time.sleep(3)
 
-    im.display.loadUrl('ERindex.html')
+    if a == 'yes':
+        im.display.loadUrl('ERindex.html')
 
 
 def i2():
