@@ -46,7 +46,7 @@ def i1():
     if a == 'yes':
         im.executeModality('TEXT_default','I am a patient in the database.')
         time.sleep(3)
-
+        mc.run_interaction(i2)
         # im.display.loadUrl('ERindex.html')
     # elif ('no' in aa) or a == 'no':
     elif a == 'no':
@@ -80,8 +80,10 @@ def i3():
     f()
 
 mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
+mc.store_interaction(i2)
 mc.run_interaction(i1)
-if a_i1=='yes':
-    mc.run_interaction(i2)
+# if a_i1=='yes':
+#     mc.run_interaction(i2)
+
 # mc.store_interaction(f)
 # mc.run_interaction(i3)
