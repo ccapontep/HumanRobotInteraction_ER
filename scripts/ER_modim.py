@@ -77,19 +77,19 @@ def i2():
     im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
     im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
     Num1 = im.ask(actionname=None, timeoutvalue=10)
-    say(Num1)
+    say('number '+Num1)
 
     # Second number:
     im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
     im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
     Num2 = im.ask(actionname=None, timeoutvalue=10)
-    say(Num2)
+    say('number'+Num2)
 
     # Second number:
     im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
     im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
     Num3 = im.ask(actionname=None, timeoutvalue=10)
-    say(Num3)
+    say('number'+Num3)
 
     ticketNumber = str(int(Num1)*100 + int(Num2)*10 + int(Num3))
     say('Your ticket number is '+ticketNumber)
