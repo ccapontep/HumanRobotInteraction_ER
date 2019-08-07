@@ -11,14 +11,14 @@ cmdserver_port = 9101
 
 mc = ModimWSClient()
 mc.setCmdServerAddr(cmdsever_ip, cmdserver_port)
-patient = 'False'
+# patient = 'False'
 # mc.setGlobalVar(patient, 'False')
 
 # def f():
 #     return 1
 
 def i1():
-    global patient
+    global patient = 'False'
     # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
     # im.gitpull()
     begin()
@@ -43,7 +43,6 @@ def i1():
     # while run:
     # aa = asr()
     say('the answer given is '+a)
-    say('the patient is in the database '+patient)
 
     # if ('yes' in aa) or a == 'yes':
     if a == 'yes':
