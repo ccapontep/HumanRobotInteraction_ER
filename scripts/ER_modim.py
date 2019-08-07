@@ -48,6 +48,7 @@ def i1():
         im.executeModality('TEXT_default','I am a patient in the database.')
         time.sleep(3)
         patient = 'True'
+        say('the patient is in the database '+patient)
         mc.setGlobalVar(patient, 'True')
         say('the patient is in the database '+patient)
         # im.executeModality('TEXT_default',patient)
