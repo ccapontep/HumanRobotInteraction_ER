@@ -67,11 +67,10 @@ def i1():
 
 def i2():
     begin()
-    import os
     import numpy as np
     say('Yes', 'en')
     # Get working directory
-    directory = os.getcwd()
+    directory = '/home/ubuntu/playground/HumanRobotInteraction_ER'
     say('Yes here', 'en')
     im.executeModality('TEXT_default', directory)
     ticketNum_data = np.genfromtxt(os.path.join(directory, "PatientTicketNum.txt"))#[:,1:]
