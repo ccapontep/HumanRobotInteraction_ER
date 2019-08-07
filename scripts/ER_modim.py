@@ -72,15 +72,15 @@ def i2():
     say('Yes', 'en')
     # Get working directory
     # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
-    os.chdir("/home/ubuntu/playground/HumanRobotInteraction_ER")
+    os.chdir("/home/ubuntu/playground/HumanRobotInteraction_ER/patientInfo")
     directory = os.getcwd()
     # '/home/ubuntu/playground/HumanRobotInteraction_ER'
-    patientTicketPath = os.path.join(directory, "patientInfo/PatientTicketNum.txt")
-    im.executeModality('TEXT_default', patientTicketPath)
+    # patientTicketPath = os.path.join(directory, "PatientTicketNum.txt")
+    # im.executeModality('TEXT_default', patientTicketPath)
     say('Yes here', 'en')
     ticketNums = []
     say('Yes here 1', 'en')
-    with open(patientTicketPath, "r") as patientTicketNums:
+    with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
         say('Yes here 2', 'en')
         for ticket in patientTicketNums.readlines():
             say('Yes here 3', 'en')
