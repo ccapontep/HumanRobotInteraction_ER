@@ -74,13 +74,11 @@ def i2():
     # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
     os.chdir("/home/ubuntu/playground/HumanRobotInteraction_ER")
     directory = os.getcwd()
-    im.executeModality('TEXT_default', directory)
     # '/home/ubuntu/playground/HumanRobotInteraction_ER'
     patientTicketPath = os.path.join(directory, "patientInfo/PatientTicketNum.txt")
-    im.executeModality('TEXT_default', directory)
+    im.executeModality('TEXT_default', patientTicketPath)
     say('Yes here', 'en')
-    im.executeModality('TEXT_default', directory)
-    ticketNum_data = np.genfromtxt(os.path.join(directory, "PatientTicketNum.txt"))#[:,1:]
+    ticketNum_data = np.genfromtxt(patientTicketPath)#[:,1:]
     say('Yes here too', 'en')
 
     im.display.loadUrl('ERindex.html')
