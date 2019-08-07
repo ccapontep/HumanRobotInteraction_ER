@@ -69,32 +69,25 @@ def i2():
     begin()
     import os
     import numpy as np
-    say('Yes', 'en')
-    # Get working directory
-    # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
-    # os.chdir("/home/ubuntu/playground/HumanRobotInteraction_ER/patientInfo")
-    # directory = os.getcwd()
+
     directory = "/home/ubuntu/playground/HumanRobotInteraction_ER/patientInfo"
-    # '/home/ubuntu/playground/HumanRobotInteraction_ER'
-    # patientTicketPath = os.path.join(directory, "PatientTicketNum.txt")
-    # im.executeModality('TEXT_default', patientTicketPath)
-    say('Yes here', 'en')
+
     ticketNums = []
-    say('Yes here 1', 'en')
     with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
-        # say('Yes here 2', 'en')
         for ticket in patientTicketNums.readlines():
-            # say('Yes here 3', 'en')
             ticketNums.append(str(ticket))
-            say('the ticket number is '+str(ticket), 'en')
-    # ticketNum_data = np.genfromtxt(patientTicketPath)#[:,1:]
-    say('Yes here too', 'en')
+            # say('the ticket number is '+str(ticket), 'en')
 
     im.display.loadUrl('ERindex.html')
     say('Let me look for you in the database. Please enter your ticket number', 'en')
-    im.executeModality('TEXT_default', ticketNum_data)
-    # im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
-    say('Your ticket number is '+ticketNum_data)
+    im.executeModality('TEXT_default', 'Please enter the digits of your ticket number one by one.')
+
+    # There are three digits in the ticket number, check one by one with buttons
+    im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
+    im.executeModality('ASR',['0','1','2', '3', '4'. '5', '6', '7', '8', '9'])
+
+    Num1 = im.ask(actionname=None, timeoutvalue=10)
+    say('Your ticket number is '+Num1)
     # say('Have you been helped previously?','en')
     # im.executeModality('ASR',['yes','no'])
 
