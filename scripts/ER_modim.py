@@ -41,7 +41,7 @@ def i1():
     # run = True
     #
     # while run:
-    #     aa = asr()
+     aa = asr()
 
     if ('yes' in aa) or a == 'yes':
         im.executeModality('TEXT_default','I am a patient in the database.')
