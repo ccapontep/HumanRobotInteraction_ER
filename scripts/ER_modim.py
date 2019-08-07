@@ -106,6 +106,7 @@ def i2():
     ticketNums = []
     with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
         for ticket in patientTicketNums.readlines():
+            im.executeModality('TEXT_default', str(ticket))
             ticketNums.append(str(ticket))
             say('I am here', 'en')
             if ticketNumber == str(ticket):
