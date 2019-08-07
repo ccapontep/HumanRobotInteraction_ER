@@ -49,6 +49,7 @@ def i1():
         time.sleep(3)
         patient = 'True'
         mc.setGlobalVar(patient, 'True')
+        say('the patient is in the database '+patient)
         # im.executeModality('TEXT_default',patient)
         # im.display.loadUrl('ERindex.html')
     # elif ('no' in aa) or a == 'no':
