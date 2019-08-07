@@ -80,8 +80,8 @@ def i3():
     f()
 
 mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
-mc.run_interaction(i1)
-if a=='yes':
+a_i1 = mc.run_interaction(i1)
+if a_i1=='yes':
     mc.run_interaction(i2)
 # mc.store_interaction(f)
 # mc.run_interaction(i3)
