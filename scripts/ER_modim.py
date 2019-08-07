@@ -32,7 +32,7 @@ def i1():
     im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
     im.executeModality('ASR',['yes','no'])
 
-    a = im.ask(actionname=None, timeoutvalue=10)
+    a = im.ask(actionname=None, timeoutvalue=50)
     im.display.remove_buttons()
 
     # run = True
@@ -83,14 +83,14 @@ def i2():
     # Second number:
     im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
     im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
-    Num2 = im.ask(actionname=None, timeoutvalue=100)
+    Num2 = im.ask(actionname=None, timeoutvalue=200)
     say('number'+Num2)
     im.display.remove_buttons()
 
     # Second number:
     im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
     im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
-    Num3 = im.ask(actionname=None, timeoutvalue=100)
+    Num3 = im.ask(actionname=None, timeoutvalue=200)
     say('number'+Num3)
     im.display.remove_buttons()
 
@@ -107,7 +107,8 @@ def i2():
     with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
         for ticket in patientTicketNums.readlines():
             ticketNums.append(str(ticket))
-            # say('the ticket number is '+str(ticket), 'en')
+            if ticketNumber == ticket:
+                say('Your ticket '+str(ticket)+' has been found in the database', 'en')
 
     # say('Have you been helped previously?','en')
     # im.executeModality('ASR',['yes','no'])
