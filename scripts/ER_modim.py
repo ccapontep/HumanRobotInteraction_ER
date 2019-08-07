@@ -11,7 +11,7 @@ cmdserver_port = 9101
 
 mc = ModimWSClient()
 mc.setCmdServerAddr(cmdsever_ip, cmdserver_port)
-
+patient = 'False'
 mc.setGlobalVar(patient, 'False')
 
 # def f():
