@@ -69,9 +69,9 @@ def i2():
     begin()
     im.display.loadUrl('ERindex.html')
     say('Let me look for you in the database. Please enter your ticket number', 'en')
-    im.executeModality('ASRCMD', PatientTicketNum.txt)
+    PatNum = im.executeModality('ASRCMD', PatientTicketNum.txt)
     # im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
-    # im.executeModality('TEXT_default','Have you been helped previously?')
+    im.executeModality('TEXT_default',PatNum)
     # say('Have you been helped previously?','en')
     # im.executeModality('ASR',['yes','no'])
 
