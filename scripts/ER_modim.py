@@ -50,8 +50,8 @@ def i1():
         time.sleep(3)
 
         say('the patient is in the database '+patient)
-        # patient = 'True'
-        mc.setGlobalVar(patient, 'True')
+        patient = 'True'
+        # mc.setGlobalVar(patient, 'True')
         say('the patient is in the database '+patient)
         # im.executeModality('TEXT_default',patient)
         # im.display.loadUrl('ERindex.html')
