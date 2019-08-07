@@ -36,16 +36,13 @@ def i1():
     im.executeModality('ASR',['yes','no'])
 
     a = im.ask(actionname=None, timeoutvalue=10)
-    im.executeModality('TEXT_default',im.answer_buttons)
-
-
 
     if a == 'yes':
-        im.executeModality('TEXT_default','Yes, I am a new patient.')
+        im.executeModality('TEXT_default','I am a patient in the database.')
         time.sleep(3)
         im.display.loadUrl('ERindex.html')
     elif a == 'no':
-        im.executeModality('TEXT_default','No, I am a patient in the database.')
+        im.executeModality('TEXT_default','I am a new patient.')
         time.sleep(3)
     else:
         im.executeModality('TEXT_default','No answer received')
