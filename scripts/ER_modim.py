@@ -18,8 +18,7 @@ mc.setCmdServerAddr(cmdsever_ip, cmdserver_port)
 #     return 1
 
 def i1():
-    global patient
-    patient = 'False'
+
     # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
     # im.gitpull()
     begin()
@@ -28,10 +27,6 @@ def i1():
     im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
     im.executeModality('TEXT_default','Have you been helped previously?')
     say('Have you been helped previously','en')
-
-    # im.executeModality('TEXT_default',im.robot)
-    # im.robot.say("Have you been helped previously")
-    # im.executeModality('IMAGE','images/hri2.jpg')
 
     im.display.remove_buttons()
     im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
@@ -48,18 +43,14 @@ def i1():
     # if ('yes' in aa) or a == 'yes':
     if a == 'yes':
         im.executeModality('TEXT_default','I am a patient in the database.')
+        say('Welcome back')
         time.sleep(3)
         i2()
 
-        say('the patient is in the database '+patient)
-        patient = 'True'
-        # mc.setGlobalVar(patient, 'True')
-        say('the patient is in the database '+patient)
-        # im.executeModality('TEXT_default',patient)
-        # im.display.loadUrl('ERindex.html')
     # elif ('no' in aa) or a == 'no':
     elif a == 'no':
         im.executeModality('TEXT_default','I am a new patient.')
+        say('Welcome to Wellness Hospital. We will take care of you.', 'en')
         time.sleep(3)
     # elif ('' in aa):
     elif ('' in a):
@@ -73,7 +64,7 @@ def i1():
 def i2():
     begin()
     im.display.loadUrl('ERindex.html')
-    say('Let me look for you in the database. What enter your ticket number', 'en')
+    say('Let me look for you in the database. Please enter your ticket number', 'en')
     # im.display.loadUrl('slide.html')
     # im.execute('ciao')
     # time.sleep(3)
@@ -91,9 +82,7 @@ def i3():
 mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
 mc.store_interaction(i2)
 mc.run_interaction(i1)
-print('patient', patient)
-# if a_i1=='yes':
-#     mc.run_interaction(i2)
+
 
 # mc.store_interaction(f)
 # mc.run_interaction(i3)
