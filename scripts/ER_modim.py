@@ -36,6 +36,7 @@ def i1():
     im.executeModality('ASR',['yes','no'])
 
     a = im.ask(actionname=None, timeoutvalue=10)
+    aa = asr()
 
     if a == 'yes':
         im.executeModality('TEXT_default','I am a patient in the database.')
@@ -44,7 +45,7 @@ def i1():
     elif a == 'no':
         im.executeModality('TEXT_default','I am a new patient.')
         time.sleep(3)
-    else:
+    elif aa == '':
         im.executeModality('TEXT_default','No answer received')
         time.sleep(3)
 
