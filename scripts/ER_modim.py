@@ -57,7 +57,7 @@ def i1():
         say('We will take care of you. Thank you for visiting us.', 'en')
         time.sleep(3)
     # elif ('' in aa):
-    elif ('' in a):
+    elif a == '':
         im.executeModality('TEXT_default','No answer received')
         time.sleep(3)
 
