@@ -17,8 +17,8 @@ mc.setGlobalVar(patient, 'False')
 # def f():
 #     return 1
 
-def i1(patient):
-    # global patient
+def i1():
+    global patient
     # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
     # im.gitpull()
     begin()
@@ -49,7 +49,7 @@ def i1(patient):
         im.executeModality('TEXT_default','I am a patient in the database.')
         time.sleep(3)
 
-        say('the patient is in the database '+patient)
+        say('the patient is in the database '+im.patient)
         patient = 'True'
         # mc.setGlobalVar(patient, 'True')
         say('the patient is in the database '+patient)
@@ -88,7 +88,7 @@ def i3():
 
 mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
 mc.store_interaction(i2)
-mc.run_interaction(i1(patient))
+mc.run_interaction(i1)
 print('patient', patient)
 # if a_i1=='yes':
 #     mc.run_interaction(i2)
