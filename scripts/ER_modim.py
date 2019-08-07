@@ -71,7 +71,7 @@ def i2():
     say('Let me look for you in the database. Please enter your ticket number', 'en')
     PatNum = im.executeModality('ASRCMD', PatientTicketNum.txt)
     # im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
-    im.executeModality('TEXT_default',PatNum)
+    say('Your ticket number is '+PatNum)
     # say('Have you been helped previously?','en')
     # im.executeModality('ASR',['yes','no'])
 
