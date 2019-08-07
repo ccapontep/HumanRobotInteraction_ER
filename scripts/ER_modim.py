@@ -59,7 +59,7 @@ def i1():
         time.sleep(3)
 
     end()
-    return a
+
 
 
 def i2():
