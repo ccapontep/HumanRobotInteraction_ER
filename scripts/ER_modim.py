@@ -49,6 +49,7 @@ def i1():
     if a == 'yes':
         im.executeModality('TEXT_default','I am a patient in the database.')
         time.sleep(3)
+        i2()
 
         say('the patient is in the database '+patient)
         patient = 'True'
