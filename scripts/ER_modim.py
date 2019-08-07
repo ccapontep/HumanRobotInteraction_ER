@@ -12,7 +12,7 @@ cmdserver_port = 9101
 mc = ModimWSClient()
 mc.setCmdServerAddr(cmdsever_ip, cmdserver_port)
 
-
+mc.setGlobalVar(patient, 'False')
 
 # def f():
 #     return 1
@@ -41,13 +41,14 @@ def i1():
     #
     # while run:
     # aa = asr()
-    print('the answer given is ', a)
+    say('the answer given is ', a)
 
     # if ('yes' in aa) or a == 'yes':
     if a == 'yes':
         im.executeModality('TEXT_default','I am a patient in the database.')
         time.sleep(3)
-
+        mc.setGlobalVar(patient, 'True')
+        im.executeModality('TEXT_default',patient)
         # im.display.loadUrl('ERindex.html')
     # elif ('no' in aa) or a == 'no':
     elif a == 'no':
