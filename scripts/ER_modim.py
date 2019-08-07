@@ -67,11 +67,16 @@ def i1():
 
 def i2():
     begin()
+    import os, numpuy as np
+    # Get working directory
+    directory = os.getcwd()
+    ticketNum_data = np.genfromtxt(os.path.join(directory, "PatientTicketNum.txt"))#[:,1:]
+
     im.display.loadUrl('ERindex.html')
     say('Let me look for you in the database. Please enter your ticket number', 'en')
-    PatNum = im.executeModality('ASRCMD', PatientTicketNum.txt)
+    im.executeModality('TEXT_default', ticketNum_data)
     # im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
-    say('Your ticket number is '+PatNum)
+    say('Your ticket number is '+ticketNum_data)
     # say('Have you been helped previously?','en')
     # im.executeModality('ASR',['yes','no'])
 
