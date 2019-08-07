@@ -43,9 +43,9 @@ def i1():
 
     # if ('yes' in aa) or a == 'yes':
     if a == 'yes':
-        im.executeModality('TEXT_default','I am a patient in the database.')
+        im.executeModality('TEXT_default','You are a patient in the database.')
         say('Welcome back')
-        time.sleep(3)
+        time.sleep(2)
         i2()
 
     # elif ('no' in aa) or a == 'no':
@@ -69,9 +69,12 @@ def i2():
     begin()
     import os
     import numpy as np
+    say('Yes', 'en')
     # Get working directory
     directory = os.getcwd()
+    say('Yes here', 'en')
     ticketNum_data = np.genfromtxt(os.path.join(directory, "PatientTicketNum.txt"))#[:,1:]
+    say('Yes here too', 'en')
 
     im.display.loadUrl('ERindex.html')
     say('Let me look for you in the database. Please enter your ticket number', 'en')
