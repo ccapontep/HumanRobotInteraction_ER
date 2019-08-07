@@ -80,7 +80,9 @@ def i2():
     say('Yes here', 'en')
     ticketNums = []
     with open(patientTicketPath, "r") as patientTicketNums:
+        say('Yes here 2', 'en')
         for ticket in patientTicketNums.readlines():
+            say('Yes here 3', 'en')
             ticketNums.append(str(ticket))
             say(str(ticket), 'en')
     # ticketNum_data = np.genfromtxt(patientTicketPath)#[:,1:]
