@@ -84,7 +84,7 @@ def i2():
 
     # There are three digits in the ticket number, check one by one with buttons
     im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
-    im.executeModality('ASR',['0','1','2', '3', '4'. '5', '6', '7', '8', '9'])
+    im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
 
     Num1 = im.ask(actionname=None, timeoutvalue=10)
     say('Your ticket number is '+Num1)
