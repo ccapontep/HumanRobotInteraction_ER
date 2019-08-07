@@ -72,8 +72,9 @@ def i2():
     say('Yes', 'en')
     # Get working directory
     # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
-    os.chdir("/home/ubuntu/playground/HumanRobotInteraction_ER/patientInfo")
-    directory = os.getcwd()
+    # os.chdir("/home/ubuntu/playground/HumanRobotInteraction_ER/patientInfo")
+    # directory = os.getcwd()
+    directory = "/home/ubuntu/playground/HumanRobotInteraction_ER/patientInfo"
     # '/home/ubuntu/playground/HumanRobotInteraction_ER'
     # patientTicketPath = os.path.join(directory, "PatientTicketNum.txt")
     # im.executeModality('TEXT_default', patientTicketPath)
@@ -81,11 +82,11 @@ def i2():
     ticketNums = []
     say('Yes here 1', 'en')
     with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
-        say('Yes here 2', 'en')
+        # say('Yes here 2', 'en')
         for ticket in patientTicketNums.readlines():
-            say('Yes here 3', 'en')
+            # say('Yes here 3', 'en')
             ticketNums.append(str(ticket))
-            say(str(ticket), 'en')
+            say('the ticket number is '+str(ticket), 'en')
     # ticketNum_data = np.genfromtxt(patientTicketPath)#[:,1:]
     say('Yes here too', 'en')
 
