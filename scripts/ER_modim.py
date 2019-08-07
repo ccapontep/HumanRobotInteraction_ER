@@ -17,8 +17,8 @@ mc.setGlobalVar(patient, 'False')
 # def f():
 #     return 1
 
-def i1():
-    global patient
+def i1(patient):
+    # global patient
     # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
     # im.gitpull()
     begin()
@@ -88,7 +88,7 @@ def i3():
 
 mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
 mc.store_interaction(i2)
-mc.run_interaction(i1)
+mc.run_interaction(i1(patient))
 print('patient', patient)
 # if a_i1=='yes':
 #     mc.run_interaction(i2)
