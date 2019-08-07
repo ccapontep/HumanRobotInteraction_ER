@@ -71,8 +71,12 @@ def i2():
     import numpy as np
     say('Yes', 'en')
     # Get working directory
-    directory = '/home/ubuntu/playground/HumanRobotInteraction_ER'
-    directory = im.getGrammarURL(PatientTicketNum)
+    im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
+    directory = os.getcwd()
+    im.executeModality('TEXT_default', directory)
+    # '/home/ubuntu/playground/HumanRobotInteraction_ER'
+    patientTicketPath = os.path.join(directory, "patientInfo/PatientTicketNum.txt")
+    im.executeModality('TEXT_default', directory)
     say('Yes here', 'en')
     im.executeModality('TEXT_default', directory)
     ticketNum_data = np.genfromtxt(os.path.join(directory, "PatientTicketNum.txt"))#[:,1:]
