@@ -72,6 +72,7 @@ def i2():
     say('Yes', 'en')
     # Get working directory
     directory = '/home/ubuntu/playground/HumanRobotInteraction_ER'
+    directory = im.getGrammarURL(PatientTicketNum)
     say('Yes here', 'en')
     im.executeModality('TEXT_default', directory)
     ticketNum_data = np.genfromtxt(os.path.join(directory, "PatientTicketNum.txt"))#[:,1:]
