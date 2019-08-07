@@ -36,21 +36,24 @@ def i1():
     im.executeModality('ASR',['yes','no'])
 
     a = im.ask(actionname=None, timeoutvalue=10)
-    forward(1)
 
     # run = True
     #
     # while run:
-    aa = asr()
+    # aa = asr()
 
-    if ('yes' in aa) or a == 'yes':
+    # if ('yes' in aa) or a == 'yes':
+    if a == 'yes':
         im.executeModality('TEXT_default','I am a patient in the database.')
         time.sleep(3)
-        im.display.loadUrl('ERindex.html')
-    elif ('no' in aa) or a == 'no':
+        mc.run_interaction(i2)
+        # im.display.loadUrl('ERindex.html')
+    # elif ('no' in aa) or a == 'no':
+    elif a == 'no':
         im.executeModality('TEXT_default','I am a new patient.')
         time.sleep(3)
-    elif ('' in aa):
+    # elif ('' in aa):
+    elif ('' in a):
         im.executeModality('TEXT_default','No answer received')
         time.sleep(3)
 
@@ -58,11 +61,13 @@ def i1():
 
 
 def i2():
-    # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
-    im.display.loadUrl('slide.html')
-    im.execute('ciao')
-    time.sleep(3)
-    im.display.loadUrl('index.html')
+    begin()
+    im.display.loadUrl('ERindex.html')
+    say('Let me look for you in the database. What enter your ticket number', 'en')
+    # im.display.loadUrl('slide.html')
+    # im.execute('ciao')
+    # time.sleep(3)
+    # im.display.loadUrl('index.html')
 
 
 def i3():
