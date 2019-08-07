@@ -79,6 +79,7 @@ def i2():
     im.executeModality('TEXT_default', patientTicketPath)
     say('Yes here', 'en')
     ticketNums = []
+    say('Yes here 1', 'en')
     with open(patientTicketPath, "r") as patientTicketNums:
         say('Yes here 2', 'en')
         for ticket in patientTicketNums.readlines():
