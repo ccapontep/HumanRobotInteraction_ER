@@ -67,6 +67,34 @@ def i1():
 
 def i2():
     begin()
+
+    im.display.loadUrl('ERindex.html')
+    im.executeModality('TEXT_default', 'Please enter the digits of your ticket number one by one.')
+    say('Let me look for you in the database. Please enter your ticket number', 'en')
+
+    # There are three digits in the ticket number, check one by one with buttons
+    # First number:
+    im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
+    im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
+    Num1 = im.ask(actionname=None, timeoutvalue=10)
+    say(Num1)
+
+    # Second number:
+    im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
+    im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
+    Num2 = im.ask(actionname=None, timeoutvalue=10)
+    say(Num2)
+
+    # Second number:
+    im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
+    im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
+    Num3 = im.ask(actionname=None, timeoutvalue=10)
+    say(Num3)
+
+    ticketNumber = str(int(Num1)*100 + int(Num2)*10 + int(Num3))
+    say('Your ticket number is '+ticketNumber)
+
+
     import os
     import numpy as np
 
@@ -77,30 +105,6 @@ def i2():
         for ticket in patientTicketNums.readlines():
             ticketNums.append(str(ticket))
             # say('the ticket number is '+str(ticket), 'en')
-
-    im.display.loadUrl('ERindex.html')
-    say('Let me look for you in the database. Please enter your ticket number', 'en')
-    im.executeModality('TEXT_default', 'Please enter the digits of your ticket number one by one.')
-
-    # There are three digits in the ticket number, check one by one with buttons
-    # First number:
-    im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
-    im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
-    Num1 = im.ask(actionname=None, timeoutvalue=10)
-
-    # Second number:
-    im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
-    im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
-    Num2 = im.ask(actionname=None, timeoutvalue=10)
-
-    # Second number:
-    im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
-    im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
-    Num3 = im.ask(actionname=None, timeoutvalue=10)
-
-    ticketNumber = str(int(Num1)*100 + int(Num2)*10 + int(Num3))
-    say('Your ticket number is '+ticketNumber)    
-
 
     # say('Have you been helped previously?','en')
     # im.executeModality('ASR',['yes','no'])
