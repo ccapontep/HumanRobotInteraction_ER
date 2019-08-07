@@ -108,7 +108,7 @@ def i2():
         for ticket in patientTicketNums.readlines():
             ticketNums.append(str(ticket))
             if ticketNumber == str(ticket):
-                say('Your ticket '+str(ticket)+' has been found in the database', 'en')
+                say('Your ticket has been found in the database', 'en')
 
     # say('Have you been helped previously?','en')
     # im.executeModality('ASR',['yes','no'])
