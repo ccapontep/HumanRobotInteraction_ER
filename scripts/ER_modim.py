@@ -48,7 +48,7 @@ def i1():
         im.executeModality('TEXT_default','I am a patient in the database.')
         time.sleep(3)
         patient = 'True'
-        # mc.setGlobalVar(patient, 'True')
+        mc.setGlobalVar(patient, 'True')
         # im.executeModality('TEXT_default',patient)
         # im.display.loadUrl('ERindex.html')
     # elif ('no' in aa) or a == 'no':
