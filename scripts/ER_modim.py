@@ -25,8 +25,9 @@ def i1():
     im.display.loadUrl('HRIER/ERslide.html')
 
     im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
+    say('Welcome to Wellness Hospital', 'en')
     im.executeModality('TEXT_default','Have you been helped previously?')
-    say('Have you been helped previously','en')
+    say('Have you been helped previously?','en')
 
     im.display.remove_buttons()
     im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
@@ -50,7 +51,10 @@ def i1():
     # elif ('no' in aa) or a == 'no':
     elif a == 'no':
         im.executeModality('TEXT_default','I am a new patient.')
-        say('Welcome to Wellness Hospital. We will take care of you.', 'en')
+        say('Welcome to Wellness Hospital. My name is Marrtino and I will help you setup your emergency in the database', 'en')
+        say('I will be asking some questions about your emergency and have you see a doctor as soon as possible, depending on the severity of your emergency', 'en')
+        say('I will also be doing routine checks to let you know your wait time left. If at any point you have questions, come ask', 'en')
+        say('We will take care of you. Thank you for visiting us.', 'en')
         time.sleep(3)
     # elif ('' in aa):
     elif ('' in a):
