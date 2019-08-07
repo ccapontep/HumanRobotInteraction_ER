@@ -29,11 +29,11 @@ def i1():
     im.executeModality('TEXT_default','Have you been helped previously?')
     say('Have you been helped previously?','en')
 
-    im.display.remove_buttons()
     im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
     im.executeModality('ASR',['yes','no'])
 
     a = im.ask(actionname=None, timeoutvalue=10)
+    im.display.remove_buttons()
 
     # run = True
     #
@@ -76,21 +76,21 @@ def i2():
     # First number:
     im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
     im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
-    Num1 = im.ask(actionname=None, timeoutvalue=10)
+    Num1 = im.ask(actionname=None, timeoutvalue=20)
     say('number '+Num1)
     im.display.remove_buttons()
 
     # Second number:
     im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
     im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
-    Num2 = im.ask(actionname=None, timeoutvalue=10)
+    Num2 = im.ask(actionname=None, timeoutvalue=20)
     say('number'+Num2)
     im.display.remove_buttons()
 
     # Second number:
     im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
     im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
-    Num3 = im.ask(actionname=None, timeoutvalue=10)
+    Num3 = im.ask(actionname=None, timeoutvalue=20)
     say('number'+Num3)
     im.display.remove_buttons()
 
