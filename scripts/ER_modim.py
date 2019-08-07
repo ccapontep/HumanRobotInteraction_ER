@@ -41,6 +41,7 @@ def i1():
     #
     # while run:
     # aa = asr()
+    print('the answer given is ', a)
 
     # if ('yes' in aa) or a == 'yes':
     if a == 'yes':
@@ -81,7 +82,8 @@ def i3():
 
 mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
 mc.store_interaction(i2)
-mc.run_interaction(a_i1 = i1)
+a_i1 = mc.run_interaction(i1)
+print('a_i1', a_i1)
 # if a_i1=='yes':
 #     mc.run_interaction(i2)
 
