@@ -42,14 +42,14 @@ def i1():
     while run:
         aa = asr()
 
-        if aa == 'yes' or a == 'yes':
+        if ('yes' in aa) or a == 'yes':
             im.executeModality('TEXT_default','I am a patient in the database.')
             time.sleep(3)
             im.display.loadUrl('ERindex.html')
-        elif aa == 'no' or a == 'no':
+        elif ('no' in aa) or a == 'no':
             im.executeModality('TEXT_default','I am a new patient.')
             time.sleep(3)
-        elif aa == '':
+        elif ('' in aa):
             im.executeModality('TEXT_default','No answer received')
             time.sleep(3)
 
