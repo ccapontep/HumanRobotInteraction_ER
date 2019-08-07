@@ -79,7 +79,7 @@ def i2():
     im.executeModality('TEXT_default', patientTicketPath)
     say('Yes here', 'en')
     ticketNums = []
-    with open(file, "r") as patientTicketNums:
+    with open(patientTicketPath, "r") as patientTicketNums:
         for ticket in patientTicketNums:
             ticketNums.append(str(ticket))
             say(str(ticket), 'en')
