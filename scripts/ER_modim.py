@@ -36,22 +36,23 @@ def i1():
     im.executeModality('ASR',['yes','no'])
 
     a = im.ask(actionname=None, timeoutvalue=10)
+    forward(1)
 
-    run = True
+    # run = True
+    #
+    # while run:
+    #     aa = asr()
 
-    while run:
-        aa = asr()
-
-        if ('yes' in aa) or a == 'yes':
-            im.executeModality('TEXT_default','I am a patient in the database.')
-            time.sleep(3)
-            im.display.loadUrl('ERindex.html')
-        elif ('no' in aa) or a == 'no':
-            im.executeModality('TEXT_default','I am a new patient.')
-            time.sleep(3)
-        elif ('' in aa):
-            im.executeModality('TEXT_default','No answer received')
-            time.sleep(3)
+    if ('yes' in aa) or a == 'yes':
+        im.executeModality('TEXT_default','I am a patient in the database.')
+        time.sleep(3)
+        im.display.loadUrl('ERindex.html')
+    elif ('no' in aa) or a == 'no':
+        im.executeModality('TEXT_default','I am a new patient.')
+        time.sleep(3)
+    elif ('' in aa):
+        im.executeModality('TEXT_default','No answer received')
+        time.sleep(3)
 
     end()
 
