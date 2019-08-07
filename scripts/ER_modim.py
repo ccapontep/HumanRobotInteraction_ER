@@ -25,7 +25,7 @@ def i1():
     im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
     im.executeModality('TEXT_default','Have you been helped previously?')
     begin()
-    say('Have you been helped previously')
+    say('Have you been helped previously','en')
     end()
     # im.executeModality('TEXT_default',im.robot)
     # im.robot.say("Have you been helped previously")
