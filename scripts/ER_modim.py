@@ -73,6 +73,7 @@ def i2():
     # Get working directory
     directory = os.getcwd()
     say('Yes here', 'en')
+    im.executeModality('TEXT_default', directory)
     ticketNum_data = np.genfromtxt(os.path.join(directory, "PatientTicketNum.txt"))#[:,1:]
     say('Yes here too', 'en')
 
