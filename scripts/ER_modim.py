@@ -18,6 +18,7 @@ mc.setGlobalVar(patient, 'False')
 #     return 1
 
 def i1():
+    global patient
     # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
     # im.gitpull()
     begin()
@@ -47,9 +48,10 @@ def i1():
     if a == 'yes':
         im.executeModality('TEXT_default','I am a patient in the database.')
         time.sleep(3)
-        # patient = 'True'
+
         say('the patient is in the database '+patient)
-        mc.setGlobalVar(patient, 'True')
+        patient = 'True'
+        # mc.setGlobalVar(patient, 'True')
         say('the patient is in the database '+patient)
         # im.executeModality('TEXT_default',patient)
         # im.display.loadUrl('ERindex.html')
