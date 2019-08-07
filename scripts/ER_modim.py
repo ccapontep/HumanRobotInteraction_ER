@@ -67,7 +67,8 @@ def i1():
 
 def i2():
     begin()
-    import os, numpuy as np
+    import os
+    import numpy as np
     # Get working directory
     directory = os.getcwd()
     ticketNum_data = np.genfromtxt(os.path.join(directory, "PatientTicketNum.txt"))#[:,1:]
