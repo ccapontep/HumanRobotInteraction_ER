@@ -67,6 +67,7 @@ def i1():
 
 def i2():
     begin()
+    import os
     import numpy as np
     say('Yes', 'en')
     # Get working directory
