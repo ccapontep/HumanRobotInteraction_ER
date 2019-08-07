@@ -71,7 +71,8 @@ def i2():
     import numpy as np
     say('Yes', 'en')
     # Get working directory
-    im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
+    # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
+    os.chdir("/home/ubuntu/playground/HumanRobotInteraction_ER")
     directory = os.getcwd()
     im.executeModality('TEXT_default', directory)
     # '/home/ubuntu/playground/HumanRobotInteraction_ER'
