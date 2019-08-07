@@ -58,7 +58,7 @@ def i1():
         time.sleep(3)
 
     end()
-    return(a)
+    return a
 
 
 def i2():
@@ -80,7 +80,7 @@ def i3():
     f()
 
 mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
-a_i1 = mc.run_interaction(i1)
+mc.run_interaction(i1)
 if a_i1=='yes':
     mc.run_interaction(i2)
 # mc.store_interaction(f)
