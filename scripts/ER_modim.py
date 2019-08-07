@@ -78,7 +78,12 @@ def i2():
     patientTicketPath = os.path.join(directory, "patientInfo/PatientTicketNum.txt")
     im.executeModality('TEXT_default', patientTicketPath)
     say('Yes here', 'en')
-    ticketNum_data = np.genfromtxt(patientTicketPath)#[:,1:]
+    ticketNums = []
+    with open(file, "r") as patientTicketNums:
+        for ticket in patientTicketNums:
+            ticketNums.append(str(ticket))
+            say(str(ticket), 'en')
+    # ticketNum_data = np.genfromtxt(patientTicketPath)#[:,1:]
     say('Yes here too', 'en')
 
     im.display.loadUrl('ERindex.html')
