@@ -107,6 +107,7 @@ def i2():
     with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
         for ticket in patientTicketNums.readlines():
             ticketNums.append(str(ticket))
+            say('I am here', 'en')
             if ticketNumber == str(ticket):
                 say('Your ticket has been found in the database', 'en')
 
