@@ -18,7 +18,8 @@ mc.setCmdServerAddr(cmdsever_ip, cmdserver_port)
 #     return 1
 
 def i1():
-    global patient = 'False'
+    global patient
+    patient = 'False'
     # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
     # im.gitpull()
     begin()
