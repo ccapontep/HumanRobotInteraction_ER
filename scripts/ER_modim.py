@@ -148,7 +148,7 @@ def i2():
     say('Hello there 0', 'en')
     RecordNames = ['Name', 'Age', 'PastMedicalHistory', 'EmergencySymptoms', 'Symptoms','LocationofPain', 'LevelofConsciousness', 'TimeAdmitted','UrgencyLevel', 'RemainingWaitTime', 'ChangeinWaitTime']
     im.display.loadUrl('ERretrieve.html')
-    RecordTxt = ticketNums + ".txt"
+    RecordTxt = ticketNumber + ".txt"
     say('Hello there', 'en')
     with open(os.path.join(directory, RecordTxt), "r") as record:
         for line in record.readlines():
