@@ -158,7 +158,7 @@ def i2():
             im.executeModality('TEXT_default', str(line))
             # info_split = info.split(',')
             # vars()[item]
-            RecordDict = RecordDict + {line}
+            RecordDict.update({line})
             # exec("%s = %s" % (item,info))
             say('Hello there 3', 'en')
     im.executeModality('TEXT_default', str(RecordDict['EmergencySymptoms']))
