@@ -69,7 +69,7 @@ def i1():
 # Interaction to check ticket info and retrieve info for the user
 def i2():
     begin()
-    import os, re
+    import os, re, ast
     import numpy as np
 
     im.display.loadUrl('ERindex.html')
@@ -153,8 +153,8 @@ def i2():
         recordStr = str(record.read())
         recordStr = re.sub('\n', '', recordStr)
         # recordStr = re.sub('\n', '', recordStr)
-        RecordDict = {recordStr}
-        im.executeModality('TEXT_default', recordStr)
+        RecordDict = {ast.literal_eval(recordStr)}
+        im.executeModality('TEXT_default', str(RecordDict))
         time.sleep(3)
         say('yes 1', 'en')
         for key in RecordDict.keys():
