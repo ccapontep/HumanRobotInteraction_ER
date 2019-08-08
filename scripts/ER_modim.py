@@ -99,7 +99,7 @@ def i2():
     ticketNumber = str(int(Num1)*100 + int(Num2)*10 + int(Num3))
     say('Your ticket number is '+ticketNumber)
     im.executeModality('TEXT_default', 'yes')
-    time.sleep(1)
+    time.sleep(3)
     im.executeModality('TEXT_default', ticketNumber)
 
     # Check the tickets in the system
@@ -109,9 +109,9 @@ def i2():
     with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
         for ticket in patientTicketNums.readlines():
             im.executeModality('TEXT_default', str(ticket))
-            time.sleep(1)
+            time.sleep(3)
             im.executeModality('TEXT_default', 'ticket')
-            time.sleep(1)
+            time.sleep(3)
             im.executeModality('TEXT_default', ticketNumber)
             ticketNums.append(str(ticket))
             say('I am here', 'en')
