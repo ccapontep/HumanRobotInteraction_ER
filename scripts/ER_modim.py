@@ -161,7 +161,7 @@ def i2():
     recordStr = recordStr + '}'
     RecordDict = recordStr
     say('dictionary done', 'en')
-    im.executeModality('TEXT_default', str(RecordDict["Name"]))
+    im.executeModality('TEXT_default', RecordDict["Name"])
     time.sleep(3)
     say('yes 1', 'en')
     # for key in RecordDict.keys():
