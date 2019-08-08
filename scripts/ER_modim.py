@@ -145,45 +145,30 @@ def i2():
 
     # Retrieve the info of user in database
     RecordDict = dict()
-    recordStr = "{"
-    RecordNames = ['Name', 'Age', 'PastMedicalHistory', 'EmergencySymptoms', 'Symptoms','LocationofPain', 'LevelofConsciousness', 'TimeAdmitted','UrgencyLevel', 'RemainingWaitTime', 'ChangeinWaitTime']
+    # RecordNames = ['Name', 'Age', 'PastMedicalHistory', 'EmergencySymptoms', 'Symptoms','LocationofPain', 'LevelofConsciousness', 'TimeAdmitted','UrgencyLevel', 'RemainingWaitTime', 'ChangeinWaitTime']
     im.display.loadUrl('ERretrieve.html')
     im.executeModality('TEXT_title','Review of your Patient Record')
     RecordTxt = ticketNumber + ".txt"
     with open(os.path.join(directory, RecordTxt), "r") as record:
         for line in record.readlines():
-            recordStr = recordStr + line
-        # recordStr = str(record.read())
-        # recordStr = re.sub('\n', '', recordStr)
-        # recordStr = re.sub('\n', '', recordStr)
-        # RecordDict = {ast.literal_eval(recordStr)}
-    # RecordDict = {eval(recordStr)}
-    recordStr = recordStr + '}'
-    RecordDict = recordStr
-    say('dictionary done I think it should work', 'en')
-    im.executeModality('TEXT_default', str(RecordDict["Name"]))
-    time.sleep(3)
-    say('yes 1', 'en')
-    # for key in RecordDict.keys():
-    #     im.executeModality('TEXT_default', key)
-    # say('yes 2','en')
-    # for line in record.readlines():
-    #     # item, info = str(line).split(':')
-    #     # im.executeModality('TEXT_default', item)
-    #     # time.sleep(3)
-    #     im.executeModality('TEXT_default', str(line))
-    #     # info_split = info.split(',')
-    #     # vars()[item]
-    #     RecordDict.update(line)
-    #     # exec("%s = %s" % (item,info))
-    #     say('Hello there 3', 'en')
-    im.executeModality('TEXT_default', str(RecordDict["EmergencySymptoms"]))
-    time.sleep(3)
-
+            line = line.replace('\n', '')
+            item, info = line.split('=')
+            RecordDict.update({item : info})
     say('Hello there', 'en')
-    # say
+    say(RecordDict["Name"], 'en')
     im.executeModality('TEXT_default', 'What information are you searching for?')
+    say('What can I help you with?', 'en')
+    say('the current time is', 'en')
+    say(str(time),'en')
 
+    # Ask what the user wants
+    im.executeModality('BUTTONS',[['waittime','Get Remaining Wait Time'],['update','Update Records']])
+    im.executeModality('ASR',['waittime','update'])
+    UserQues = im.ask(actionname=None, timeoutvalue=100)
+    im.display.remove_buttons()
+
+    if UserQues == 'waittime':
+        old_wait = RecordDict["RemainingWaitTime"]
 
     end()
 
