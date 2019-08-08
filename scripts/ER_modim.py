@@ -22,51 +22,46 @@ def i1():
     # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
     # im.gitpull()
     begin()
-    NoAns = True
-    while NoAns == True:
-        im.display.remove_buttons()
-        im.display.loadUrl('HRIER/ERslide.html')
+    im.display.remove_buttons()
+    im.display.loadUrl('HRIER/ERslide.html')
 
-        im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
-        say('Welcome to Wellness Hospital', 'en')
-        im.executeModality('TEXT_default','Have you been helped previously?')
-        say('Have you been helped previously?','en')
+    im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
+    say('Welcome to Wellness Hospital', 'en')
+    im.executeModality('TEXT_default','Have you been helped previously?')
+    say('Have you been helped previously?','en')
 
-        im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
-        im.executeModality('ASR',['yes','no'])
+    im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
+    im.executeModality('ASR',['yes','no'])
 
-        a = im.ask(actionname=None, timeoutvalue=50)
-        im.display.remove_buttons()
+    a = im.ask(actionname=None, timeoutvalue=50)
+    im.display.remove_buttons()
 
-        # run = True
-        #
-        # while run:
-        # aa = asr()
-        say('the answer given is '+a)
+    # run = True
+    #
+    # while run:
+    # aa = asr()
+    say('the answer given is '+a)
 
-        # if ('yes' in aa) or a == 'yes':
-        if a == 'yes':
-            im.executeModality('TEXT_default','You are a patient in the database.')
-            say('Welcome back')
-            time.sleep(2)
-            NoAns = False
-            i2()
+    # if ('yes' in aa) or a == 'yes':
+    if a == 'yes':
+        im.executeModality('TEXT_default','You are a patient in the database.')
+        say('Welcome back')
+        time.sleep(2)
+        i2()
 
-
-        # elif ('no' in aa) or a == 'no':
-        elif a == 'no':
-            im.executeModality('TEXT_default','I am a new patient.')
-            say('Welcome to Wellness Hospital. My name is Marrtino and I will help you setup your emergency in the database', 'en')
-            say('I will be asking some questions about your emergency and have you see a doctor as soon as possible, depending on the severity of your emergency', 'en')
-            say('I will also be doing routine checks to let you know your remaining wait time. If at any point you have questions, come ask', 'en')
-            say('We will take care of you. Thank you for visiting us.', 'en')
-            NoAns = False
-            time.sleep(3)
-        # elif ('' in aa):
-        else:
-            im.executeModality('TEXT_default','No answer received')
-            NoAns = True
-            time.sleep(3)
+    # elif ('no' in aa) or a == 'no':
+    elif a == 'no':
+        im.executeModality('TEXT_default','I am a new patient.')
+        say('Welcome to Wellness Hospital. My name is Marrtino and I will help you setup your emergency in the database', 'en')
+        say('I will be asking some questions about your emergency and have you see a doctor as soon as possible, depending on the severity of your emergency', 'en')
+        say('I will also be doing routine checks to let you know your remaining wait time. If at any point you have questions, come ask', 'en')
+        say('We will take care of you. Thank you for visiting us.', 'en')
+        time.sleep(3)
+    # elif ('' in aa):
+    else:
+        im.executeModality('TEXT_default','No answer received')
+        time.sleep(3)
+        i1()
 
     end()
 
@@ -152,6 +147,7 @@ def i3():
 
 mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
 mc.store_interaction(i2)
+mc.store_interaction(i1)
 mc.run_interaction(i1)
 
 
