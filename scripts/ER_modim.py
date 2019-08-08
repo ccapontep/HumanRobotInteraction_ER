@@ -153,13 +153,15 @@ def i2():
         recordStr = str(record.read())
         recordStr = re.sub('\n', '', recordStr)
         # recordStr = re.sub('\n', '', recordStr)
-        RecordDict = {ast.literal_eval(recordStr)}
-        im.executeModality('TEXT_default', str(RecordDict))
+        # RecordDict = {ast.literal_eval(recordStr)}
+        RecordDict = {eval(recordStr)}
+        say('dictionary done', 'en')
+        im.executeModality('TEXT_default', str(RecordDict.keys()))
         time.sleep(3)
         say('yes 1', 'en')
-        for key in RecordDict.keys():
-            im.executeModality('TEXT_default', key)
-        say('yes 2','en')
+        # for key in RecordDict.keys():
+        #     im.executeModality('TEXT_default', key)
+        # say('yes 2','en')
         # for line in record.readlines():
         #     # item, info = str(line).split(':')
         #     # im.executeModality('TEXT_default', item)
