@@ -134,7 +134,7 @@ def i2():
         if ticketNumber not in ticketNums:
             im.executeModality('TEXT_default', 'Sorry. Your ticket was not found.')
             say('Your ticket was not found. Let us start again.', 'en')
-            CorrTick == 'no'
+            CorrTick = 'no'
 
 
     end()
