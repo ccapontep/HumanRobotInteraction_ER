@@ -99,13 +99,13 @@ def i2():
     # ticketNumber = str(int(Num1)*100 + int(Num2)*10 + int(Num3))
     ticketNumber = str(Num1 + Num2 + Num3)
     say('Your ticket number is '+ticketNumber)
-    if int(ticketNumber) < 10:
-        ticketNumber = "00" + ticketNumber
-    elif int(ticketNumber) < 100:
-        ticketNumber = "0" + ticketNumber
-    im.executeModality('TEXT_default', 'yes')
-    time.sleep(3)
-    im.executeModality('TEXT_default', ticketNumber)
+    # if int(ticketNumber) < 10:
+    #     ticketNumber = "00" + ticketNumber
+    # elif int(ticketNumber) < 100:
+    #     ticketNumber = "0" + ticketNumber
+    # im.executeModality('TEXT_default', 'yes')
+    time.sleep(2)
+    im.executeModality('TEXT_default', 'Your ticket number is: '+ticketNumber)
 
     # Check the tickets in the system
     directory = "/home/ubuntu/playground/HumanRobotInteraction_ER/patientInfo"
