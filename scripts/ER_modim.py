@@ -148,6 +148,7 @@ def i2():
     say('Hello there 0', 'en')
     RecordNames = ['Name', 'Age', 'PastMedicalHistory', 'EmergencySymptoms', 'Symptoms','LocationofPain', 'LevelofConsciousness', 'TimeAdmitted','UrgencyLevel', 'RemainingWaitTime', 'ChangeinWaitTime']
     im.display.loadUrl('ERretrieve.html')
+    im.executeModality('TEXT_title','Review of your Patient Record')
     RecordTxt = ticketNumber + ".txt"
     say('Hello there', 'en')
     with open(os.path.join(directory, RecordTxt), "r") as record:
@@ -156,7 +157,7 @@ def i2():
             # info_split = info.split(',')
             # vars()[item]
             say('Hello there 2', 'en')
-            exec("%s = %d" % (item,info_split))
+            exec("%s = %s" % (item,info_split))
             say('Hello there 3', 'en')
             im.executeModality('TEXT_default', Name)
             time.sleep(3)
