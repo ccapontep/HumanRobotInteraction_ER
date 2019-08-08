@@ -49,7 +49,9 @@ def i1():
             im.executeModality('TEXT_default','You are a patient in the database.')
             say('Welcome back')
             time.sleep(2)
+            NoAns = False
             i2()
+
 
         # elif ('no' in aa) or a == 'no':
         elif a == 'no':
@@ -58,6 +60,7 @@ def i1():
             say('I will be asking some questions about your emergency and have you see a doctor as soon as possible, depending on the severity of your emergency', 'en')
             say('I will also be doing routine checks to let you know your remaining wait time. If at any point you have questions, come ask', 'en')
             say('We will take care of you. Thank you for visiting us.', 'en')
+            NoAns = False
             time.sleep(3)
         # elif ('' in aa):
         else:
