@@ -159,7 +159,7 @@ def i2():
     im.executeModality('TEXT_default', 'What information are you searching for?')
     say('What can I help you with?', 'en')
     say('the current time is', 'en')
-    say(str(time),'en')
+    im.executeModality('TEXT_default', str(time))
 
     # Ask what the user wants
     im.executeModality('BUTTONS',[['waittime','Get Remaining Wait Time'],['update','Update Records']])
