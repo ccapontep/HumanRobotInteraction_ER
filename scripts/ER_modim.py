@@ -67,6 +67,8 @@ def i1():
 
 def i2():
     begin()
+    import os
+    import numpy as np
 
     im.display.loadUrl('ERindex.html')
     im.executeModality('TEXT_default', 'Please enter the digits of your ticket number one by one.')
@@ -96,13 +98,11 @@ def i2():
 
     ticketNumber = str(int(Num1)*100 + int(Num2)*10 + int(Num3))
     say('Your ticket number is '+ticketNumber)
-
-
-    import os
-    import numpy as np
-
-    directory = "/home/ubuntu/playground/HumanRobotInteraction_ER/patientInfo"
     im.executeModality('TEXT_default', ticketNumber)
+
+    # Check the tickets in the system
+    directory = "/home/ubuntu/playground/HumanRobotInteraction_ER/patientInfo"
+
     ticketNums = []
     with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
         for ticket in patientTicketNums.readlines():
