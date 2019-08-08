@@ -154,8 +154,9 @@ def i2():
         recordStr = str(record.read())
         im.executeModality('TEXT_default', recordStr)
         time.sleep(3)
-        recordStr.replace('\n', ',')
+        recordStr.replace('', ',')
         im.executeModality('TEXT_default', recordStr)
+
         # for line in record.readlines():
         #     # item, info = str(line).split(':')
         #     # im.executeModality('TEXT_default', item)
