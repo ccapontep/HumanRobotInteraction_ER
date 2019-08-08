@@ -41,6 +41,8 @@ def i1():
     # while run:
     # aa = asr()
     say('the answer given is '+a)
+    time.sleep(10)
+    say('the answer given is '+a)
 
     # if ('yes' in aa) or a == 'yes':
     if a == 'yes':
