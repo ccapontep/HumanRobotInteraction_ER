@@ -160,7 +160,7 @@ def i2():
             im.executeModality('TEXT_default', str(line))
             # info_split = info.split(',')
             # vars()[item]
-            RecordDict.update({line})
+            RecordDict = {line}
             say('Hello there 2', 'en')
 
             # exec("%s = %s" % (item,info))
