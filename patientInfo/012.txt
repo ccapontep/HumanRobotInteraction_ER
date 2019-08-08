@@ -1,0 +1,22 @@
+-Name
+John Parker
+-Age
+38
+-Past Medical History
+smoking
+-Emergency Symptoms
+bleeding that will not stop
+-Symptoms
+fever
+-Location of Pain
+face
+-Level of Consciousness
+barely conscious
+-Time admitted
+7h 36m
+-Urgency Level
+High
+-Remaining wait time
+5m
+-Change in wait time
+no

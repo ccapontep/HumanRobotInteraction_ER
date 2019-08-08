@@ -17,6 +17,7 @@ mc.setCmdServerAddr(cmdsever_ip, cmdserver_port)
 # def f():
 #     return 1
 
+# Interaction to welcome and start interaction
 def i1():
 
     # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
@@ -33,7 +34,7 @@ def i1():
     im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
     im.executeModality('ASR',['yes','no'])
 
-    a = im.ask(actionname=None, timeoutvalue=50)
+    a = im.ask(actionname=None, timeoutvalue)
     im.display.remove_buttons()
 
     # run = True
@@ -66,7 +67,7 @@ def i1():
     end()
 
 
-
+# Interaction to check ticket info and retrieve info for the user
 def i2():
     begin()
     import os
@@ -130,22 +131,30 @@ def i2():
                     im.executeModality('TEXT_default', 'Your ticket has been found!')
                     say('Your ticket has been found in the database', 'en')
                     CorrTick == 'yes'
+                    indexTicket = len(ticketNums) -1
                     break
         if ticketNumber not in ticketNums:
             im.executeModality('TEXT_default', 'Sorry. Your ticket was not found.')
             say('Your ticket was not found. Let us start again.', 'en')
+            im.executeModality('TEXT_default', 'Please enter again the digits of your ticket number one by one.')
             CorrTick = 'no'
+
+    # Retrieve the info of user in database
+    im.display.loadUrl('ERretrieve.html')
+    with open(os.path.join(directory, "PatientTicketInfo.txt"), "r") as patientTicketNums:
+        for ticket in patientTicketNums.readlines():
+    say('Hello there', 'en')
+    say
+    im.executeModality('TEXT_default', 'What information are you searching for?')
 
 
     end()
 
+# Interaction to retrieve info for the user
 def i3():
-    # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
-    im.display.loadUrl('slide.html')
-    im.askUntilCorrect('question')
-    time.sleep(3)
-    im.display.loadUrl('index.html')
-    f()
+    im.display.loadUrl('ERretrieve.html')
+    im.executeModality('TEXT_default', 'What information are you searching for?')
+    say('Hello there', 'en')
 
 mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
 mc.store_interaction(i2)
