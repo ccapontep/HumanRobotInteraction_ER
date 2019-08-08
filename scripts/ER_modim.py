@@ -34,7 +34,7 @@ def i1():
     im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
     im.executeModality('ASR',['yes','no'])
 
-    a = im.ask(actionname=None, timeoutvalue)
+    a = im.ask(actionname=None, timeoutvalue=100000000000)
     im.display.remove_buttons()
 
     # run = True
