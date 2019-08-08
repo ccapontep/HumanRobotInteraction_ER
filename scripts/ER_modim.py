@@ -112,7 +112,7 @@ def i2():
         # Check if ticket was entered correctly
         im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
         im.executeModality('ASR',['yes','no'])
-        CorrTick = im.ask(actionname=None, timeoutvalue=50)
+        CorrTick = im.ask(actionname=None, timeoutvalue=100)
         im.display.remove_buttons()
         if CorrTick == 'yes':
             say('Great! Let me look at your information')
@@ -133,12 +133,12 @@ def i2():
                 #     # indexTicket = len(ticketNums) -1
                 #     CorrTick == 'yes'
                 #     break
-        if len(ticketNums) > 0 and int(ticketNumber) in (map(int, ticketNums)):
+        if CorrTick == 'yes' and len(ticketNums) > 0 and int(ticketNumber) in (map(int, ticketNums)):
             im.executeModality('TEXT_default', 'Your ticket has been found!')
             say('Your ticket has been found in the database', 'en')
             CorrTick == 'yes'
             # break
-        elif int(ticketNumber) not in (map(int, ticketNums)):
+        elif CorrTick == 'yes' and int(ticketNumber) not in (map(int, ticketNums)):
             im.executeModality('TEXT_default', 'Sorry. Your ticket was not found.')
             say('Your ticket was not found. Let us start again.', 'en')
             im.executeModality('TEXT_default', 'Please enter again the digits of your ticket number one by one.')
