@@ -62,7 +62,6 @@ def i1():
     else:
         im.executeModality('TEXT_default','No answer received')
         time.sleep(3)
-        i1()
 
     end()
 
