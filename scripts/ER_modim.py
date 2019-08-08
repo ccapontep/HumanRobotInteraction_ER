@@ -152,9 +152,10 @@ def i2():
     RecordTxt = ticketNumber + ".txt"
     with open(os.path.join(directory, RecordTxt), "r") as record:
         recordStr = record.read()
-        im.executeModality('TEXT_default', str(recordStr))
-        # recordStr = re.sub(';', ',', recordStr)
-        RecordDict = {eval(recordStr)}
+        recordStr = re.sub('\n', '', recordStr)
+        im.executeModality('TEXT_default', recordStr)
+        # recordStr = re.sub('\n', '', recordStr)
+        RecordDict = {recordStr}
         say('yes 1', 'en')
         im.executeModality('TEXT_default', str(RecordDict))
         say('yes 2','en')
