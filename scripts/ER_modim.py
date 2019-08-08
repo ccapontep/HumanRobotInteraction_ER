@@ -119,7 +119,7 @@ def i2():
             im.executeModality('TEXT_default', ticketNumber)
             ticketNums.append(str(ticket))
             say('I am here', 'en')
-            if ticketNumber == str(ticket):
+            if int(ticketNumber) == ticket:
                 say('Your ticket has been found in the database', 'en')
 
 
