@@ -133,7 +133,7 @@ def i2():
                 #     # indexTicket = len(ticketNums) -1
                 #     CorrTick == 'yes'
                 #     break
-        if ticketNumber in ticketNums:
+        if int(ticketNumber) in (map(int, ticketNums):
             im.executeModality('TEXT_default', 'Your ticket has been found!')
             say('Your ticket has been found in the database', 'en')
             CorrTick == 'yes'
