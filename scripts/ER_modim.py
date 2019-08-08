@@ -76,43 +76,45 @@ def i2():
 
     # There are three digits in the ticket number, check one by one with buttons
     # First number:
-    im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
-    im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
-    Num1 = im.ask(actionname=None, timeoutvalue=500)
-    say('number '+Num1)
-    im.display.remove_buttons()
+    CorrTick == 'no'
+    while CorrTick == 'no':
+        im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
+        im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
+        Num1 = im.ask(actionname=None, timeoutvalue=500)
+        say('number '+Num1)
+        im.display.remove_buttons()
 
-    # Second number:
-    im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
-    im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
-    Num2 = im.ask(actionname=None, timeoutvalue=200)
-    say('number'+Num2)
-    im.display.remove_buttons()
+        # Second number:
+        im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
+        im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
+        Num2 = im.ask(actionname=None, timeoutvalue=200)
+        say('number'+Num2)
+        im.display.remove_buttons()
 
-    # Second number:
-    im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
-    im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
-    Num3 = im.ask(actionname=None, timeoutvalue=200)
-    say('number'+Num3)
-    im.display.remove_buttons()
+        # Second number:
+        im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
+        im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
+        Num3 = im.ask(actionname=None, timeoutvalue=200)
+        say('number'+Num3)
+        im.display.remove_buttons()
 
-    # Final ticket number
-    ticketNumber = str(Num1 + Num2 + Num3)
-    time.sleep(1)
-    ticketStr = 'Your ticket number is: ' + ticketNumber
-    im.executeModality('TEXT_default', ticketStr)
-    say('Your ticket number is '+ticketNumber)
+        # Final ticket number
+        ticketNumber = str(Num1 + Num2 + Num3)
+        time.sleep(1)
+        ticketStr = 'Your ticket number is: ' + ticketNumber
+        im.executeModality('TEXT_default', ticketStr)
+        say('Your ticket number is '+ticketNumber)
 
-    # Check if ticket was entered correctly
-    im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
-    im.executeModality('ASR',['yes','no'])
-    CorrTick = im.ask(actionname=None, timeoutvalue=50)
-    im.display.remove_buttons()
-    if CorrTick == 'yes':
-        say('Great! Let me look at your information in the database')
-    elif CorrTick == 'no':
-        say('Sorry about that. Let us try again')
-        i2()
+        # Check if ticket was entered correctly
+        im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
+        im.executeModality('ASR',['yes','no'])
+        CorrTick = im.ask(actionname=None, timeoutvalue=50)
+        im.display.remove_buttons()
+        if CorrTick == 'yes':
+            say('Great! Let me look at your information in the database')
+        elif CorrTick == 'no':
+            say('Sorry about that. Let us try again')
+            # i2()
     # im.executeModality('TEXT_default', 'yes')
 
 
