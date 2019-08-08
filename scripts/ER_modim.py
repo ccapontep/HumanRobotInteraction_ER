@@ -96,16 +96,22 @@ def i2():
     say('number'+Num3)
     im.display.remove_buttons()
 
-    # ticketNumber = str(int(Num1)*100 + int(Num2)*10 + int(Num3))
+    # Final ticket number
     ticketNumber = str(Num1 + Num2 + Num3)
     time.sleep(1)
     ticketStr = 'Your ticket number is: ' + ticketNumber
     im.executeModality('TEXT_default', ticketStr)
     say('Your ticket number is '+ticketNumber)
-    # if int(ticketNumber) < 10:
-    #     ticketNumber = "00" + ticketNumber
-    # elif int(ticketNumber) < 100:
-    #     ticketNumber = "0" + ticketNumber
+
+    # Check if ticket was entered correctly
+    im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
+    im.executeModality('ASR',['yes','no'])
+    CorrTick = im.ask(actionname=None, timeoutvalue=50)
+    im.display.remove_buttons()
+    if CorrTick == 'yes':
+        continue
+    elif CorrTick == 'no':
+        i2()
     # im.executeModality('TEXT_default', 'yes')
 
 
