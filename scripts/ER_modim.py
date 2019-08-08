@@ -98,7 +98,7 @@ def i2():
 
     ticketNumber = str(int(Num1)*100 + int(Num2)*10 + int(Num3))
     say('Your ticket number is '+ticketNumber)
-    im.executeModality('TEXT_default', ticketNumber)
+    # im.executeModality('TEXT_default', ticketNumber)
     im.executeModality('TEXT_default', 'yes')
 
     # Check the tickets in the system
