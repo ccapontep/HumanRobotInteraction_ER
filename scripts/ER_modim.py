@@ -152,8 +152,8 @@ def i2():
     RecordTxt = ticketNumber + ".txt"
     with open(os.path.join(directory, RecordTxt), "r") as record:
         recordStr = str(record.read())
-        recordStr = re.sub(';', ',', recordStr)
-        RecordDict = recordStr
+        # recordStr = re.sub(';', ',', recordStr)
+        RecordDict = {recordStr}
         # for line in record.readlines():
         #     # item, info = str(line).split(':')
         #     # im.executeModality('TEXT_default', item)
