@@ -131,7 +131,7 @@ def i2():
                     say('Your ticket has been found in the database', 'en')
                     CorrTick == 'yes'
                     break
-        if ticketNumber in not in ticketNums:
+        if ticketNumber not in ticketNums:
             im.executeModality('TEXT_default', 'Sorry. Your ticket was not found.')
             say('Your ticket was not found. Let us start again.', 'en')
             CorrTick == 'no'
