@@ -127,13 +127,18 @@ def i2():
         with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
             for ticket in patientTicketNums.readlines():
                 ticketNums.append(str(ticket))
-                if int(ticketNumber) == int(ticket):
-                    im.executeModality('TEXT_default', 'Your ticket has been found!')
-                    say('Your ticket has been found in the database', 'en')
-                    # indexTicket = len(ticketNums) -1
-                    CorrTick == 'yes'
-                    break
-        if ticketNumber not in ticketNums:
+                # if int(ticketNumber) == int(ticket):
+                #     im.executeModality('TEXT_default', 'Your ticket has been found!')
+                #     say('Your ticket has been found in the database', 'en')
+                #     # indexTicket = len(ticketNums) -1
+                #     CorrTick == 'yes'
+                #     break
+        if ticketNumber in ticketNums:
+            im.executeModality('TEXT_default', 'Your ticket has been found!')
+            say('Your ticket has been found in the database', 'en')
+            CorrTick == 'yes'
+            break
+        else:
             im.executeModality('TEXT_default', 'Sorry. Your ticket was not found.')
             say('Your ticket was not found. Let us start again.', 'en')
             im.executeModality('TEXT_default', 'Please enter again the digits of your ticket number one by one.')
