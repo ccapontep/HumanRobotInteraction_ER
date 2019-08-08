@@ -154,6 +154,9 @@ def i2():
     with open(os.path.join(directory, RecordTxt), "r") as record:
         for line in record.readlines():
             item, info = str(line).split(':')
+            im.executeModality('TEXT_default', item)
+            time.sleep(3)
+            im.executeModality('TEXT_default', info)
             # info_split = info.split(',')
             # vars()[item]
             say('Hello there 2', 'en')
