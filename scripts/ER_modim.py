@@ -151,16 +151,21 @@ def i2():
     im.executeModality('TEXT_title','Review of your Patient Record')
     RecordTxt = ticketNumber + ".txt"
     with open(os.path.join(directory, RecordTxt), "r") as record:
-        for line in record.readlines():
-            # item, info = str(line).split(':')
-            # im.executeModality('TEXT_default', item)
-            # time.sleep(3)
-            im.executeModality('TEXT_default', str(line))
-            # info_split = info.split(',')
-            # vars()[item]
-            RecordDict.update({line})
-            # exec("%s = %s" % (item,info))
-            say('Hello there 3', 'en')
+        recordStr = str(record)
+        im.executeModality('TEXT_default', recordStr)
+        time.sleep(3)
+        recordStr.replace('\n', ',')
+        im.executeModality('TEXT_default', recordStr)
+        # for line in record.readlines():
+        #     # item, info = str(line).split(':')
+        #     # im.executeModality('TEXT_default', item)
+        #     # time.sleep(3)
+        #     im.executeModality('TEXT_default', str(line))
+        #     # info_split = info.split(',')
+        #     # vars()[item]
+        #     RecordDict.update(line)
+        #     # exec("%s = %s" % (item,info))
+        #     say('Hello there 3', 'en')
     im.executeModality('TEXT_default', str(RecordDict['EmergencySymptoms']))
     time.sleep(3)
 
