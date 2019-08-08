@@ -47,7 +47,7 @@ def i1():
     if a == 'yes':
         im.executeModality('TEXT_default','You are a patient in the database.')
         say('Welcome back')
-        time.sleep(2)
+        time.sleep(1)
         i2()
 
     # elif ('no' in aa) or a == 'no':
@@ -57,7 +57,7 @@ def i1():
         say('I will be asking some questions about your emergency and have you see a doctor as soon as possible, depending on the severity of your emergency', 'en')
         say('I will also be doing routine checks to let you know your remaining wait time. If at any point you have questions, come ask', 'en')
         say('We will take care of you. Thank you for visiting us.', 'en')
-        time.sleep(3)
+        time.sleep(2)
     # elif ('' in aa):
     else:
         im.executeModality('TEXT_default','No answer received')
@@ -146,6 +146,7 @@ def i2():
 
     # Retrieve the info of user in database
     say('Hello there 0', 'en')
+    RecordDict = dict()
     RecordNames = ['Name', 'Age', 'PastMedicalHistory', 'EmergencySymptoms', 'Symptoms','LocationofPain', 'LevelofConsciousness', 'TimeAdmitted','UrgencyLevel', 'RemainingWaitTime', 'ChangeinWaitTime']
     im.display.loadUrl('ERretrieve.html')
     im.executeModality('TEXT_title','Review of your Patient Record')
@@ -153,16 +154,18 @@ def i2():
     say('Hello there', 'en')
     with open(os.path.join(directory, RecordTxt), "r") as record:
         for line in record.readlines():
-            item, info = str(line).split(':')
-            im.executeModality('TEXT_default', item)
-            time.sleep(3)
-            im.executeModality('TEXT_default', info)
+            # item, info = str(line).split(':')
+            # im.executeModality('TEXT_default', item)
+            # time.sleep(3)
+            # im.executeModality('TEXT_default', info)
             # info_split = info.split(',')
             # vars()[item]
+            RecordDict.update({line})
             say('Hello there 2', 'en')
-            exec("%s = %s" % (item,info))
+
+            # exec("%s = %s" % (item,info))
             say('Hello there 3', 'en')
-            im.executeModality('TEXT_default', Name)
+            im.executeModality('TEXT_default', RecordDict['Name'])
             time.sleep(3)
 
     say('Hello there', 'en')

@@ -1,13 +1,13 @@
-Name:
-Age:
-PastMedicalHistory:
-EmergencySymptoms:
-Symptoms:
-LocationofPain:
-LevelofConsciousness:
-TimeAdmitted:
-UrgencyLevel:
-RemainingWaitTime:
-ChangeinWaitTime:
+'Name':
+'Age':
+'PastMedicalHistory':
+'EmergencySymptoms':
+'Symptoms':
+'LocationofPain':
+'LevelofConsciousness':
+'TimeAdmitted':
+'UrgencyLevel':
+'RemainingWaitTime':
+'ChangeinWaitTime':
 
 
