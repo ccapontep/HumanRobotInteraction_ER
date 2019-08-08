@@ -140,11 +140,21 @@ def i2():
             CorrTick = 'no'
 
     # Retrieve the info of user in database
+    RecordNames = ['Name', 'Age', 'PastMedicalHistory', 'EmergencySymptoms', 'Symptoms','LocationofPain', 'LevelofConsciousness', 'TimeAdmitted','UrgencyLevel', 'RemainingWaitTime', 'ChangeinWaitTime']
+    CompleteRecord = np.matrix()
     im.display.loadUrl('ERretrieve.html')
-    with open(os.path.join(directory, "PatientTicketInfo.txt"), "r") as patientTicketNums:
-        for ticket in patientTicketNums.readlines():
+    RecordTxt = ticketNums + ".txt"
+    with open(os.path.join(directory, RecordTxt), "r") as record:
+        for line in record.readlines():
+            item, info = str(line).split(':')
+            # info_split = info.split(',')
+            # vars()[item]
+            exec("%s = %d" % (item,info_split))
+            im.executeModality('TEXT_default', Name)
+            time.sleep(3)
+
     say('Hello there', 'en')
-    say
+    # say
     im.executeModality('TEXT_default', 'What information are you searching for?')
 
 

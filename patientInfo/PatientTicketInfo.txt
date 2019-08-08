@@ -1,22 +1,13 @@
--Name
+Name:
+Age:
+PastMedicalHistory:
+EmergencySymptoms:
+Symptoms:
+LocationofPain:
+LevelofConsciousness:
+TimeAdmitted:
+UrgencyLevel:
+RemainingWaitTime:
+ChangeinWaitTime:
 
--Age
-
--Past Medical History
-
--Emergency Symptoms
-
--Symptoms
-
--Location of Pain
-
--Level of Consciousness
-
--Time admitted
-
--Urgency Level
-
--Remaining wait time
-
--Change in wait time
 
