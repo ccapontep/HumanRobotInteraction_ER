@@ -165,7 +165,7 @@ def i2():
 
             # exec("%s = %s" % (item,info))
             say('Hello there 3', 'en')
-            im.executeModality('TEXT_default', RecordDict['Name'])
+            im.executeModality('TEXT_default', str(RecordDict))
             time.sleep(3)
 
     say('Hello there', 'en')
