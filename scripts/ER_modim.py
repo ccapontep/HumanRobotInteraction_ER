@@ -138,7 +138,7 @@ def i2():
             say('Your ticket has been found in the database', 'en')
             CorrTick == 'yes'
             break
-        else:
+        elif int(ticketNumber) not in (map(int, ticketNums)):
             im.executeModality('TEXT_default', 'Sorry. Your ticket was not found.')
             say('Your ticket was not found. Let us start again.', 'en')
             im.executeModality('TEXT_default', 'Please enter again the digits of your ticket number one by one.')
