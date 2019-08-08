@@ -78,6 +78,7 @@ def i2():
     # First number:
     CorrTick = 'no'
     while CorrTick == 'no':
+
         im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
         im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
         Num1 = im.ask(actionname=None, timeoutvalue=500)
@@ -113,6 +114,7 @@ def i2():
         if CorrTick == 'yes':
             say('Great! Let me look at your information in the database')
         elif CorrTick == 'no':
+            im.executeModality('TEXT_default', 'Please enter again the digits of your ticket number one by one.')
             say('Sorry about that. Let us try again')
             # i2()
     # im.executeModality('TEXT_default', 'yes')
@@ -126,6 +128,7 @@ def i2():
         for ticket in patientTicketNums.readlines():
             ticketNums.append(str(ticket))
             if int(ticketNumber) == int(ticket):
+                im.executeModality('TEXT_default', 'Your ticket has been found!')
                 say('Your ticket has been found in the database', 'en')
                 break
 
