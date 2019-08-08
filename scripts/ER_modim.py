@@ -70,7 +70,7 @@ def i1():
 # Interaction to check ticket info and retrieve info for the user
 def i2():
     begin()
-    import os
+    import os, re
     import numpy as np
 
     im.display.loadUrl('ERindex.html')
@@ -154,7 +154,7 @@ def i2():
         recordStr = str(record.read())
         im.executeModality('TEXT_default', recordStr)
         time.sleep(3)
-        recordStr.replace(';', ',')
+        recordStr = re.sub(';', ',', recordStr)
         im.executeModality('TEXT_default', recordStr)
 
         # for line in record.readlines():
