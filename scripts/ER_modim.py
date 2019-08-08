@@ -41,8 +41,6 @@ def i1():
     # while run:
     # aa = asr()
     say('the answer given is '+a)
-    time.sleep(10)
-    say('the answer given is '+a)
 
     # if ('yes' in aa) or a == 'yes':
     if a == 'yes':
@@ -120,21 +118,23 @@ def i2():
         elif CorrTick == 'no':
             im.executeModality('TEXT_default', 'Please enter again the digits of your ticket number one by one.')
             say('Sorry about that. Let us try again')
-            # i2()
-    # im.executeModality('TEXT_default', 'yes')
 
+        # Check the tickets in the system
+        directory = "/home/ubuntu/playground/HumanRobotInteraction_ER/patientInfo"
 
-    # Check the tickets in the system
-    directory = "/home/ubuntu/playground/HumanRobotInteraction_ER/patientInfo"
-
-    ticketNums = []
-    with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
-        for ticket in patientTicketNums.readlines():
-            ticketNums.append(str(ticket))
-            if int(ticketNumber) == int(ticket):
-                im.executeModality('TEXT_default', 'Your ticket has been found!')
-                say('Your ticket has been found in the database', 'en')
-                break
+        ticketNums = []
+        with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
+            for ticket in patientTicketNums.readlines():
+                ticketNums.append(str(ticket))
+                if int(ticketNumber) == int(ticket):
+                    im.executeModality('TEXT_default', 'Your ticket has been found!')
+                    say('Your ticket has been found in the database', 'en')
+                    CorrTick == 'yes'
+                    break
+        if ticketNumber in not in ticketNums:
+            im.executeModality('TEXT_default', 'Sorry. Your ticket was not found.')
+            say('Your ticket was not found. Let us start again.', 'en')
+            CorrTick == 'no'
 
 
     end()
