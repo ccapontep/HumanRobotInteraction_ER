@@ -97,10 +97,10 @@ def i2():
     im.display.remove_buttons()
 
     ticketNumber = str(int(Num1)*100 + int(Num2)*10 + int(Num3))
-    im.executeModality('TEXT_default', ticketNumber)
     say('Your ticket number is '+ticketNumber)
-
     im.executeModality('TEXT_default', 'yes')
+    time.sleep(1)
+    im.executeModality('TEXT_default', ticketNumber)
 
     # Check the tickets in the system
     directory = "/home/ubuntu/playground/HumanRobotInteraction_ER/patientInfo"
@@ -108,8 +108,10 @@ def i2():
     ticketNums = []
     with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
         for ticket in patientTicketNums.readlines():
-            # im.executeModality('TEXT_default', str(ticket))
+            im.executeModality('TEXT_default', str(ticket))
+            time.sleep(1)
             im.executeModality('TEXT_default', 'ticket')
+            time.sleep(1)
             im.executeModality('TEXT_default', ticketNumber)
             ticketNums.append(str(ticket))
             say('I am here', 'en')
