@@ -145,19 +145,23 @@ def i2():
 
     # Retrieve the info of user in database
     RecordDict = dict()
+    recordStr = "{"
     RecordNames = ['Name', 'Age', 'PastMedicalHistory', 'EmergencySymptoms', 'Symptoms','LocationofPain', 'LevelofConsciousness', 'TimeAdmitted','UrgencyLevel', 'RemainingWaitTime', 'ChangeinWaitTime']
     im.display.loadUrl('ERretrieve.html')
     im.executeModality('TEXT_title','Review of your Patient Record')
     RecordTxt = ticketNumber + ".txt"
     with open(os.path.join(directory, RecordTxt), "r") as record:
-        # for line in record.readlines():
-        recordStr = str(record.read())
-        recordStr = re.sub('\n', '', recordStr)
+        for line in record.readlines():
+            recordStr = recordStr + line
+        # recordStr = str(record.read())
+        # recordStr = re.sub('\n', '', recordStr)
         # recordStr = re.sub('\n', '', recordStr)
         # RecordDict = {ast.literal_eval(recordStr)}
-    RecordDict = {eval(recordStr)}
+    # RecordDict = {eval(recordStr)}
+    recordStr = recordStr + '}'
+    RecordDict = recordStr
     say('dictionary done', 'en')
-    im.executeModality('TEXT_default', str(RecordDict.keys()))
+    im.executeModality('TEXT_default', str(RecordDict["Name"]))
     time.sleep(3)
     say('yes 1', 'en')
     # for key in RecordDict.keys():
