@@ -109,7 +109,7 @@ def i2():
     CorrTick = im.ask(actionname=None, timeoutvalue=50)
     im.display.remove_buttons()
     if CorrTick == 'yes':
-        say('Great let me look at your information in the database')
+        say('Great! Let me look at your information in the database')
     elif CorrTick == 'no':
         say('Sorry about that. Let us try again')
         i2()
@@ -122,15 +122,10 @@ def i2():
     ticketNums = []
     with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
         for ticket in patientTicketNums.readlines():
-            im.executeModality('TEXT_default', str(ticket))
-            time.sleep(3)
-            im.executeModality('TEXT_default', 'ticket')
-            time.sleep(3)
-            im.executeModality('TEXT_default', ticketNumber)
             ticketNums.append(str(ticket))
-            say('I am here', 'en')
             if int(ticketNumber) == int(ticket):
                 say('Your ticket has been found in the database', 'en')
+                break
 
 
 
