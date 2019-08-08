@@ -41,7 +41,7 @@ def i1():
     #
     # while run:
     # aa = asr()
-    say('the answer given is '+a)
+    # say('the answer given is '+a)
 
     # if ('yes' in aa) or a == 'yes':
     if a == 'yes':
@@ -160,7 +160,7 @@ def i2():
             # info_split = info.split(',')
             # vars()[item]
             say('Hello there 2', 'en')
-            exec("%s = %s" % (item,info_split))
+            exec("%s = %s" % (item,info))
             say('Hello there 3', 'en')
             im.executeModality('TEXT_default', Name)
             time.sleep(3)
