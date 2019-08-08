@@ -145,13 +145,11 @@ def i2():
             CorrTick = 'no'
 
     # Retrieve the info of user in database
-    say('Hello there 0', 'en')
     RecordDict = dict()
     RecordNames = ['Name', 'Age', 'PastMedicalHistory', 'EmergencySymptoms', 'Symptoms','LocationofPain', 'LevelofConsciousness', 'TimeAdmitted','UrgencyLevel', 'RemainingWaitTime', 'ChangeinWaitTime']
     im.display.loadUrl('ERretrieve.html')
     im.executeModality('TEXT_title','Review of your Patient Record')
     RecordTxt = ticketNumber + ".txt"
-    say('Hello there', 'en')
     with open(os.path.join(directory, RecordTxt), "r") as record:
         for line in record.readlines():
             # item, info = str(line).split(':')
@@ -161,11 +159,9 @@ def i2():
             # info_split = info.split(',')
             # vars()[item]
             RecordDict = {line}
-            say('Hello there 2', 'en')
-
             # exec("%s = %s" % (item,info))
             say('Hello there 3', 'en')
-            im.executeModality('TEXT_default', str(RecordDict))
+            im.executeModality('TEXT_default', str(RecordDict['EmergencySymptoms']))
             time.sleep(3)
 
     say('Hello there', 'en')
