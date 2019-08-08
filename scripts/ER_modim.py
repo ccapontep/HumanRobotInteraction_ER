@@ -150,28 +150,29 @@ def i2():
     im.executeModality('TEXT_title','Review of your Patient Record')
     RecordTxt = ticketNumber + ".txt"
     with open(os.path.join(directory, RecordTxt), "r") as record:
+        # for line in record.readlines():
         recordStr = str(record.read())
         recordStr = re.sub('\n', '', recordStr)
         # recordStr = re.sub('\n', '', recordStr)
         # RecordDict = {ast.literal_eval(recordStr)}
-        RecordDict = {eval(recordStr)}
-        say('dictionary done', 'en')
-        im.executeModality('TEXT_default', str(RecordDict.keys()))
-        time.sleep(3)
-        say('yes 1', 'en')
-        # for key in RecordDict.keys():
-        #     im.executeModality('TEXT_default', key)
-        # say('yes 2','en')
-        # for line in record.readlines():
-        #     # item, info = str(line).split(':')
-        #     # im.executeModality('TEXT_default', item)
-        #     # time.sleep(3)
-        #     im.executeModality('TEXT_default', str(line))
-        #     # info_split = info.split(',')
-        #     # vars()[item]
-        #     RecordDict.update(line)
-        #     # exec("%s = %s" % (item,info))
-        #     say('Hello there 3', 'en')
+    RecordDict = {eval(recordStr)}
+    say('dictionary done', 'en')
+    im.executeModality('TEXT_default', str(RecordDict.keys()))
+    time.sleep(3)
+    say('yes 1', 'en')
+    # for key in RecordDict.keys():
+    #     im.executeModality('TEXT_default', key)
+    # say('yes 2','en')
+    # for line in record.readlines():
+    #     # item, info = str(line).split(':')
+    #     # im.executeModality('TEXT_default', item)
+    #     # time.sleep(3)
+    #     im.executeModality('TEXT_default', str(line))
+    #     # info_split = info.split(',')
+    #     # vars()[item]
+    #     RecordDict.update(line)
+    #     # exec("%s = %s" % (item,info))
+    #     say('Hello there 3', 'en')
     im.executeModality('TEXT_default', RecordDict["EmergencySymptoms"])
     time.sleep(3)
 
