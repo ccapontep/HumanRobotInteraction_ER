@@ -160,8 +160,8 @@ def i2():
     # RecordDict = {eval(recordStr)}
     recordStr = recordStr + '}'
     RecordDict = recordStr
-    say('dictionary done', 'en')
-    im.executeModality('TEXT_default', RecordDict["Name"])
+    say('dictionary done I think it should work', 'en')
+    im.executeModality('TEXT_default', str(RecordDict["Name"]))
     time.sleep(3)
     say('yes 1', 'en')
     # for key in RecordDict.keys():
@@ -177,7 +177,7 @@ def i2():
     #     RecordDict.update(line)
     #     # exec("%s = %s" % (item,info))
     #     say('Hello there 3', 'en')
-    im.executeModality('TEXT_default', RecordDict["EmergencySymptoms"])
+    im.executeModality('TEXT_default', str(RecordDict["EmergencySymptoms"]))
     time.sleep(3)
 
     say('Hello there', 'en')
