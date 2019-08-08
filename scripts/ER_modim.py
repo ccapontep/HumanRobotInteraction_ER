@@ -157,7 +157,7 @@ def i2():
             # item, info = str(line).split(':')
             # im.executeModality('TEXT_default', item)
             # time.sleep(3)
-            # im.executeModality('TEXT_default', info)
+            im.executeModality('TEXT_default', str(line))
             # info_split = info.split(',')
             # vars()[item]
             RecordDict.update({line})
