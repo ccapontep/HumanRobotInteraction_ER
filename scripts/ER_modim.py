@@ -155,7 +155,7 @@ def i2():
         recordStr = re.sub('\n', '', recordStr)
         # recordStr = re.sub('\n', '', recordStr)
         RecordDict = {recordStr}
-        im.executeModality('TEXT_default', RecordDict)
+        im.executeModality('TEXT_default', recordStr)
         time.sleep(3)
         say('yes 1', 'en')
         for key in RecordDict.keys():
