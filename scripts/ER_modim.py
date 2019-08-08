@@ -153,9 +153,10 @@ def i2():
     with open(os.path.join(directory, RecordTxt), "r") as record:
         recordStr = str(record.read())
         recordStr = re.sub('\n', '', recordStr)
-        im.executeModality('TEXT_default', str(type(record.read())))
         # recordStr = re.sub('\n', '', recordStr)
         RecordDict = {recordStr}
+        im.executeModality('TEXT_default', str(type(RecordDict)))
+        time.sleep(3)
         say('yes 1', 'en')
         for key in RecordDict.keys():
             im.executeModality('TEXT_default', key)
