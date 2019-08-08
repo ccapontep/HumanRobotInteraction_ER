@@ -8,4 +8,4 @@
 'TimeAdmitted':'7h36m',
 'UrgencyLevel':'High',
 'RemainingWaitTime':'5m',
-'ChangeinWaitTime':'no',
+'ChangeinWaitTime':'no'
