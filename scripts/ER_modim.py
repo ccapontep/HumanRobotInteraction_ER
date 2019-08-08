@@ -147,7 +147,6 @@ def i2():
     # Retrieve the info of user in database
     say('Hello there 0', 'en')
     RecordNames = ['Name', 'Age', 'PastMedicalHistory', 'EmergencySymptoms', 'Symptoms','LocationofPain', 'LevelofConsciousness', 'TimeAdmitted','UrgencyLevel', 'RemainingWaitTime', 'ChangeinWaitTime']
-    CompleteRecord = np.matrix()
     im.display.loadUrl('ERretrieve.html')
     RecordTxt = ticketNums + ".txt"
     say('Hello there', 'en')
