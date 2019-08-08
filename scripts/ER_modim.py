@@ -102,7 +102,7 @@ def i2():
     import numpy as np
 
     directory = "/home/ubuntu/playground/HumanRobotInteraction_ER/patientInfo"
-
+    im.executeModality('TEXT_default', ticketNumber)
     ticketNums = []
     with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
         for ticket in patientTicketNums.readlines():
@@ -114,13 +114,7 @@ def i2():
             if ticketNumber == str(ticket):
                 say('Your ticket has been found in the database', 'en')
 
-    # say('Have you been helped previously?','en')
-    # im.executeModality('ASR',['yes','no'])
 
-    # im.display.loadUrl('slide.html')
-    # im.execute('ciao')
-    # time.sleep(3)
-    # im.display.loadUrl('index.html')
 
 
 def i3():
