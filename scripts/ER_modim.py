@@ -130,9 +130,9 @@ def i2():
                 if int(ticketNumber) == int(ticket):
                     im.executeModality('TEXT_default', 'Your ticket has been found!')
                     say('Your ticket has been found in the database', 'en')
+                    # indexTicket = len(ticketNums) -1
                     CorrTick == 'yes'
-                    indexTicket = len(ticketNums) -1
-                    # break
+                    break
         if ticketNumber not in ticketNums:
             im.executeModality('TEXT_default', 'Sorry. Your ticket was not found.')
             say('Your ticket was not found. Let us start again.', 'en')
