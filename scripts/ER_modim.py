@@ -109,8 +109,9 @@ def i2():
     CorrTick = im.ask(actionname=None, timeoutvalue=50)
     im.display.remove_buttons()
     if CorrTick == 'yes':
-        continue
+        say('Great let me look at your information in the database')
     elif CorrTick == 'no':
+        say('Sorry about that. Let us try again')
         i2()
     # im.executeModality('TEXT_default', 'yes')
 
