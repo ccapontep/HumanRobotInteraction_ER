@@ -149,12 +149,15 @@ def i2():
     CompleteRecord = np.matrix()
     im.display.loadUrl('ERretrieve.html')
     RecordTxt = ticketNums + ".txt"
+    say('Hello there', 'en')
     with open(os.path.join(directory, RecordTxt), "r") as record:
         for line in record.readlines():
             item, info = str(line).split(':')
             # info_split = info.split(',')
             # vars()[item]
+            say('Hello there 2', 'en')
             exec("%s = %d" % (item,info_split))
+            say('Hello there 3', 'en')
             im.executeModality('TEXT_default', Name)
             time.sleep(3)
 
