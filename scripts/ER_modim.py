@@ -155,7 +155,7 @@ def i2():
         im.executeModality('TEXT_default', recordStr)
         # recordStr = re.sub(';', ',', recordStr)
         RecordDict = {recordStr}
-        im.executeModality('TEXT_default', str(RecordDict))
+        im.executeModality('TEXT_default', str(RecordDict.keys()))
         say('yes')
         # for line in record.readlines():
         #     # item, info = str(line).split(':')
