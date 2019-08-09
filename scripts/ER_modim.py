@@ -46,7 +46,7 @@ def i1():
     # im.gitpull()
     begin()
     im.display.remove_buttons()
-    im.display.loadUrl('ERslide.html')
+    im.display.loadUrl('HRIER/ERslide.html')
 
     im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
     say('Welcome to Wellness Hospital', 'en')
@@ -240,7 +240,7 @@ def i3():
     im.executeModality('TEXT_default', 'What information are you searching for?')
     say('Hello there', 'en')
 
-mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER/HRIER')
+mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
 mc.store_interaction(i2)
 mc.store_interaction(i1)
 mc.store_interaction(i0)
