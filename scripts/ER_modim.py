@@ -93,6 +93,8 @@ def i2():
     begin()
     import os, re, ast, time
     import numpy as np
+    im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
+
     say('why is this not working', 'en')
     im.display.loadUrl('ERindex.html')
     im.executeModality('TEXT_default', 'Please enter the digits of your ticket number one by one.')
