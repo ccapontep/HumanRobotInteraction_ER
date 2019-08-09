@@ -240,19 +240,17 @@ def i2():
                     hist2add = ''
                     histDone = True
                     while histDone == True:
-                        im.executeModality('BUTTONS',[['weight','Overweight/Obese'],['cigar','SmokeCigarettes'], ['chol', 'HighCholesterol'], ['hyper', 'Hypertension'], ['diabetes', 'Diabetes'], ['againSym', 'CurrentSymptomsRecurring'], ['done', 'Done, exit.']])
-                        im.executeModality('ASR',['weight','cigar', 'chol', 'hyper', 'diabetes', 'againSym', 'done'])
+                        im.executeModality('BUTTONS',[['overweight or obese','Overweight or Obese'],['smoke cigarettes','Smoke Cigarettes'], ['High Cholesterol', 'High Cholesterol'], ['hypertension', 'Hypertension'], ['diabetes', 'Diabetes'], ['current symptoms recurring', 'Current Symptoms Recurring'], ['done', 'Done, exit.']])
+                        im.executeModality('ASR',['overweight or obese','smoke cigarettes', 'high cholesterol', 'hypertension', 'diabetes', 'current symptoms recurring', 'done'])
                         histQ = im.ask(actionname=None, timeoutvalue=10000)
                         im.display.remove_buttons()
 
                         if not histQ == 'done':
                             say('Item added', 'en')
                             hist2add = hist2add + histQ + ','
-                            im.executeModality('TEXT_default', hist2add)
                         else:
-                            histDone = False
                             hist2add = hist2add[:-1]
-                            im.executeModality('TEXT_default', hist2add)
+                            histDone = False
                     RecordDict.update({"PastMedicalHistory" : hist2add}) # Update data in record
                     im.executeModality('TEXT_default', RecordDict['PastMedicalHistory'])
 
