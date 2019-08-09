@@ -242,7 +242,7 @@ def i2():
                     while histDone == True:
                         im.executeModality('BUTTONS',[['bleeding','Bleeding that will not stop'],['breathing','Breathing problems'], ['unusual behavior', 'Unusual behavior, confusion, difficulty arousing'], ['chest pain', 'Chest pain'], ['choking', 'Choking'], ['coughing', 'Coughing up or vomiting blood'], ['severe vomiting', 'Severe or persistent vomiting'], ['fainting', 'Fainting or loss of consciousness'], \
                         ['feeling suicide murder', 'Feeling of committing suicide or murder'], ['done', 'Done, exit.']])
-                        im.executeModality('ASR',['bleeding', 'breathing', 'unusual behavior', 'chest pain', 'choking', 'coughing', 'severe vomiting', 'fainting', 'feeling suicide murder', 'serious injury', 'deep wound', 'sudden severe pain', 'sudden dizziness', 'swallowing poisonous', 'severe abdominal', 'head spine', 'done'])
+                        im.executeModality('ASR',['bleeding', 'breathing', 'unusual behavior', 'chest pain', 'choking', 'coughing', 'severe vomiting', 'fainting', 'feeling suicide murder', 'done'])
                         emergQ = im.ask(actionname=None, timeoutvalue=10000)
                         im.display.remove_buttons()
 
