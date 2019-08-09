@@ -249,7 +249,10 @@ def i2():
                             say('Item added', 'en')
                             hist2add = hist2add + histQ + ','
                             im.executeModality('TEXT_default', hist2add)
-                        else: histDone = False
+                        else:
+                            histDone = False
+                            hist2add = hist2add[:-1]
+                            im.executeModality('TEXT_default', hist2add)
                     RecordDict.update({"PastMedicalHistory" : hist2add}) # Update data in record
                     im.executeModality('TEXT_default', RecordDict['PastMedicalHistory'])
 
