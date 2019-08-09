@@ -231,15 +231,17 @@ def i2():
             if UserQues == 'history':
                 im.executeModality('TEXT_default', 'Select again all that apply.')
                 hist2add = ''
-                while True:
-                    im.executeModality('BUTTONS',[['weight','OverweightorObese'],['cigar','SmokeCigarettes'], ['chol', 'HighCholesterol'], ['hyper', 'Hypertension'], ['diabetes', 'Diabetes'], ['againSym', 'CurrentSymptomsRecurring'], ['done', 'Done, exit.']])
+                histD = True
+                while histD == True:
+                    im.executeModality('BUTTONS',[['weight','Overweight/Obese'],['cigar','SmokeCigarettes'], ['chol', 'HighCholesterol'], ['hyper', 'Hypertension'], ['diabetes', 'Diabetes'], ['againSym', 'CurrentSymptomsRecurring'], ['done', 'Done, exit.']])
                     im.executeModality('ASR',['weight','cigar', 'chol', 'hyper', 'diabetes', 'againSym', 'done'])
                     histQ = im.ask(actionname=None, timeoutvalue=10000)
                     im.display.remove_buttons()
 
                     if not histQ == 'done':
+                        say('Item has been added', 'en')
                         hist2add = hist2add + ',' + histQ
-                    else: break
+                    else: histD = False
                 RecordDict.update({"PastMedicalHistory" : hist2add}) # Update data in record
 
 
