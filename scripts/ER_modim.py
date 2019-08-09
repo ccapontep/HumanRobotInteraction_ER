@@ -243,12 +243,12 @@ def i2():
                     while emergDone == True:
                         if nextEm == False:
                             im.executeModality('BUTTONS',[['bleeding','Bleeding that will not stop'],['breathing','Breathing problems'], ['unusual behavior', 'Unusual behavior, confusion, difficulty arousing'], ['chest pain', 'Chest pain'], ['choking', 'Choking'], ['coughing', 'Coughing up or vomiting blood'], ['severe vomiting', 'Severe or persistent vomiting'], ['fainting', 'Fainting or loss of consciousness'], \
-                            ['feeling suicide murder', 'Feeling of committing suicide or murder'], ['next', 'See more options']])
-                            im.executeModality('ASR',['bleeding', 'breathing', 'unusual behavior', 'chest pain', 'choking', 'coughing', 'severe vomiting', 'fainting', 'feeling suicide murder','next'])
+                            ['next', 'See more options']])
+                            im.executeModality('ASR',['bleeding', 'breathing', 'unusual behavior', 'chest pain', 'choking', 'coughing', 'severe vomiting', 'fainting', 'next'])
                         else:
                             im.executeModality('BUTTONS',[['serious injury', 'Serious injury due to: 1) vehicle accident, 2) burns/smoke inhalation, 3) near drowning'], ['deep wound', 'Deep or large wound'], ['sudden severe pain', 'Sudden, severe pain anywhere in the body'], ['sudden dizziness', 'Sudden dizziness, weakness, or change in vision'], ['swallowing poisonous', 'Swallowing a poisonous substance'], \
-                            ['severe abdominal', 'Severe abdominal pain or pressure'], ['head spine', 'Head or spine injury'], ['done', 'Done, exit.']])
-                            im.executeModality('ASR',['serious injury', 'deep wound', 'sudden severe pain', 'sudden dizziness', 'swallowing poisonous', 'severe abdominal', 'head spine', 'done'])
+                            ['severe abdominal', 'Severe abdominal pain or pressure'], ['head spine', 'Head or spine injury'], ['feeling suicide murder', 'Feeling of committing suicide or murder'], ['done', 'Done, exit.']])
+                            im.executeModality('ASR',['serious injury', 'deep wound', 'sudden severe pain', 'sudden dizziness', 'swallowing poisonous', 'severe abdominal', 'head spine', 'feeling suicide murder', 'done'])
 
                         emergQ = im.ask(actionname=None, timeoutvalue=10000)
                         im.display.remove_buttons()
@@ -259,6 +259,7 @@ def i2():
                                 emerg2add = emergQ
                                 emer1 += 1
                             else: emerg2add = emerg2add + ',' + emergQ
+                            say('here', 'en')
                             RecordDict.update({"PastMedicalHistory" : emerg2add}) # Update data in record
                             im.executeModality('TEXT_default', RecordDict['Emergency Symptoms'])
                         elif emergQ == 'done': emergDone = False
