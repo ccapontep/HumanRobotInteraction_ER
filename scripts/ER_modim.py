@@ -163,6 +163,7 @@ def i2():
 
         if UserQues == 'done':
             im.executeModality('TEXT_default', 'Thank you for checking your record.')
+            im.executeModality('IMAGE', images/goodbye.jpg)
             say('Goodbye!', 'en')
             AskAgain = False
             i1()
@@ -180,11 +181,12 @@ def i2():
             remain_min = (round(remain_time_sec) // 60) % 60
             remain_hr = round(remain_time_sec) // 3600
             remain_str = str(int(remain_hr)) + 'h' + str(int(remain_min)) + 'm'
+            RecordDict["RemainingWaitTime"] = remain_str # update the info in the record
             # Remain_print = 'Your remaining wait time is: ' + remain_str
 
             urgencyStr = RecordDict["UrgencyLevel"]
-            Remain_print = 'Your emergency is a ' + urgencyStr + ' level. We will be with you shortly in ' + remain_str
-            Remain_say = 'Your emergency ' + urgencyStr + ' level. We will be with in ' + remain_str
+            Remain_print = 'Your emergency is a ' + urgencyStr + ' level. We will be with you shortly in ' + remain_hr ' hour(s) and ' + remain_min + ' minute(s)'
+            Remain_say = 'Your emergency ' + urgencyStr + ' level. We will be with in ' + remain_hr ' hour and ' + remain_min + ' minutes'
             im.executeModality('TEXT_default', Remain_print)
             say(Remain_say, 'en')
 
