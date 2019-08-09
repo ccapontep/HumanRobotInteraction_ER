@@ -261,7 +261,9 @@ def i2():
                             else: emerg2add = emerg2add + ',' + emergQ
                             say('here', 'en')
                             RecordDict.update({"PastMedicalHistory" : emerg2add}) # Update data in record
+                            say('here 22', 'en')
                             im.executeModality('TEXT_default', RecordDict['Emergency Symptoms'])
+                            say('here 33', 'en')
                         elif emergQ == 'done': emergDone = False
                         elif emergQ == 'next': nextEm = True
 
