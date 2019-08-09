@@ -240,7 +240,7 @@ def i3():
     im.executeModality('TEXT_default', 'What information are you searching for?')
     say('Hello there', 'en')
 
-mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
+mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER/HRIER')
 mc.store_interaction(i2)
 mc.store_interaction(i1)
 mc.store_interaction(i0)
