@@ -186,7 +186,7 @@ def i2():
             im.executeModality('TEXT_default', 'Thank you for checking your record.')
             say('Goodbye!', 'en')
             AskAgain = False
-            i1()
+
 
         # Get record of admit, wait and curr times. Caculate the new wait time.
         elif UserQues == 'waittime':
@@ -220,29 +220,36 @@ def i2():
 
         # If the user wants to update its information Record
         elif UserQues == 'update':
-            im.executeModality('TEXT_default', 'Which would you like to update?')
-            say('Pick the item you would like to change.', 'en')
+            updateD = True
+            while updateD == True:
+                im.executeModality('TEXT_default', 'Which would you like to update?')
+                say('Pick the item you would like to change.', 'en')
 
-            im.executeModality('BUTTONS',[['history','Past Medical History'],['emergency','Emergency Symptoms'], ['symptoms', 'Symptoms'], ['location', 'Location of Pain'], ['conscious', 'Level of Consciousness'], ['done', 'Done, exit.']])
-            im.executeModality('ASR',['history','emergency', 'symptoms', 'location', 'conscious', 'done'])
-            UserQues = im.ask(actionname=None, timeoutvalue=10000)
-            im.display.remove_buttons()
+                im.executeModality('BUTTONS',[['history','Past Medical History'],['emergency','Emergency Symptoms'], ['symptoms', 'Symptoms'], ['location', 'Location of Pain'], ['conscious', 'Level of Consciousness'], ['done', 'Done, exit.']])
+                im.executeModality('ASR',['history','emergency', 'symptoms', 'location', 'conscious', 'done'])
+                HistQues = im.ask(actionname=None, timeoutvalue=10000)
+                im.display.remove_buttons()
 
-            if UserQues == 'history':
-                im.executeModality('TEXT_default', 'Select again all that apply.')
-                hist2add = ''
-                histD = True
-                while histD == True:
-                    im.executeModality('BUTTONS',[['weight','Overweight/Obese'],['cigar','SmokeCigarettes'], ['chol', 'HighCholesterol'], ['hyper', 'Hypertension'], ['diabetes', 'Diabetes'], ['againSym', 'CurrentSymptomsRecurring'], ['done', 'Done, exit.']])
-                    im.executeModality('ASR',['weight','cigar', 'chol', 'hyper', 'diabetes', 'againSym', 'done'])
-                    histQ = im.ask(actionname=None, timeoutvalue=10000)
-                    im.display.remove_buttons()
+                if HistQues == 'done':
+                    im.executeModality('TEXT_default', 'Thank you for checking your record.')
+                    say('Goodbye!', 'en')
+                    updateD = False
 
-                    if not histQ == 'done':
-                        say('Item has been added', 'en')
-                        hist2add = hist2add + ',' + histQ
-                    else: histD = False
-                RecordDict.update({"PastMedicalHistory" : hist2add}) # Update data in record
+                if HistQues == 'history':
+                    im.executeModality('TEXT_default', 'Select again all that apply.')
+                    hist2add = ''
+                    histD = True
+                    while histD == True:
+                        im.executeModality('BUTTONS',[['weight','Overweight/Obese'],['cigar','SmokeCigarettes'], ['chol', 'HighCholesterol'], ['hyper', 'Hypertension'], ['diabetes', 'Diabetes'], ['againSym', 'CurrentSymptomsRecurring'], ['done', 'Done, exit.']])
+                        im.executeModality('ASR',['weight','cigar', 'chol', 'hyper', 'diabetes', 'againSym', 'done'])
+                        histQ = im.ask(actionname=None, timeoutvalue=10000)
+                        im.display.remove_buttons()
+
+                        if not histQ == 'done':
+                            say('Item has been added', 'en')
+                            hist2add = hist2add + ',' + histQ
+                        else: histD = False
+                    RecordDict.update({"PastMedicalHistory" : hist2add}) # Update data in record
 
 
 
