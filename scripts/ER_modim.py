@@ -240,7 +240,7 @@ def i2():
                     emergDone = True
                     emer1 = 0
                     nextEm = False
-                    while histDone == True:
+                    while emergDone == True:
                         if nextEm == False:
                             im.executeModality('BUTTONS',[['bleeding','Bleeding that will not stop'],['breathing','Breathing problems'], ['unusual behavior', 'Unusual behavior, confusion, difficulty arousing'], ['chest pain', 'Chest pain'], ['choking', 'Choking'], ['coughing', 'Coughing up or vomiting blood'], ['severe vomiting', 'Severe or persistent vomiting'], ['fainting', 'Fainting or loss of consciousness'], \
                             ['feeling suicide murder', 'Feeling of committing suicide or murder'], ['next', 'See more options']])
