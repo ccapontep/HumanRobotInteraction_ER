@@ -185,10 +185,16 @@ def i2():
             # Remain_print = 'Your remaining wait time is: ' + remain_str
 
             urgencyStr = RecordDict["UrgencyLevel"]
-            Remain_print = 'Your emergency is a ' + urgencyStr + ' level. We will be with you shortly in ' + str(remain_hr) + ' hour(s) and ' + str(remain_min) + ' minute(s)'
-            Remain_say = 'Your emergency ' + urgencyStr + ' level. We will be with in ' + str(remain_hr) + ' hour and ' + str(remain_min) + ' minutes'
-            im.executeModality('TEXT_default', Remain_print)
-            say(Remain_say, 'en')
+            if remain_min <= 0:
+                Remain_print = 'Your emergency is a ' + urgencyStr + ' level. We will be with you shortly in 0 min'
+                Remain_say = 'Your emergency ' + urgencyStr + ' level. No more wait time, someone will be with you shortly.'
+                im.executeModality('TEXT_default', Remain_print)
+                say(Remain_say, 'en')
+            else:
+                Remain_print = 'Your emergency is a ' + urgencyStr + ' level. We will be with you shortly in ' + str(int(remain_hr)) + ' hour(s) and ' + str(int(remain_min)) + ' minute(s)'
+                Remain_say = 'Your emergency ' + urgencyStr + ' level. We will be with in ' + str(int(remain_hr)) + ' hour and ' + str(int(remain_min)) + ' minutes'
+                im.executeModality('TEXT_default', Remain_print)
+                say(Remain_say, 'en')
 
         # If the user wants to update its information Record
         elif UserQues == 'update':
@@ -213,6 +219,7 @@ def i3():
 mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
 mc.store_interaction(i2)
 mc.store_interaction(i1)
+mc.store_interaction(i0)
 mc.run_interaction(i1)
 
 
