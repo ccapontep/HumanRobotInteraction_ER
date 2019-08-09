@@ -96,7 +96,7 @@ def i2():
     im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
 
     say('why is this not working', 'en')
-    im.display.loadUrl('ERindex.html')
+    im.display.loadUrl('HRIER/ERindex.html')
     im.executeModality('TEXT_default', 'Please enter the digits of your ticket number one by one.')
     say('Let me look for you in the database. Please enter your ticket number', 'en')
 
