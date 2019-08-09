@@ -94,7 +94,6 @@ def i2():
     import os, re, ast, time
     import numpy as np
 
-    say('why is this not working', 'en')
     im.display.loadUrl('ERindex.html')
     im.executeModality('TEXT_default', 'Please enter the digits of your ticket number one by one.')
     say('Let me look for you in the database. Please enter your ticket number', 'en')
@@ -180,7 +179,7 @@ def i2():
         # Ask what the user wants
         im.executeModality('BUTTONS',[['waittime','Get my Remaining Wait Time'],['update','Update my Records'], ['done', 'Done, exit.']])
         im.executeModality('ASR',['waittime','update', 'done'])
-        UserQues = im.ask(actionname=None, timeoutvalue=10000)
+        UserQues = im.ask(actionname=None, timeoutvalue=100000000)
         im.display.remove_buttons()
 
         if UserQues == 'done':
@@ -224,10 +223,26 @@ def i2():
             im.executeModality('TEXT_default', 'Which would you like to update?')
             say('Pick the item you would like to change.', 'en')
 
-            im.executeModality('BUTTONS',[['history','Past Medical History'],['emergency','Emergency Symptoms'], ['symptoms', 'Symptoms'], ['location', 'Location of Pain'], ['conscious', 'Level of Consciousness']])
-            im.executeModality('ASR',['history','emergency', 'symptoms', 'location', 'conscious'])
+            im.executeModality('BUTTONS',[['history','Past Medical History'],['emergency','Emergency Symptoms'], ['symptoms', 'Symptoms'], ['location', 'Location of Pain'], ['conscious', 'Level of Consciousness'], ['done', 'Done, exit.']])
+            im.executeModality('ASR',['history','emergency', 'symptoms', 'location', 'conscious', 'done'])
             UserQues = im.ask(actionname=None, timeoutvalue=10000)
             im.display.remove_buttons()
+
+            if UserQues == 'history':
+                im.executeModality('TEXT_default', 'Select again all that apply.')
+                hist2add = ''
+                while:
+                    im.executeModality('BUTTONS',[['weight','OverweightorObese'],['cigar','SmokeCigarettes'], ['chol', 'HighCholesterol'], ['hyper', 'Hypertension'], ['diabetes', 'Diabetes'], ['againSym', 'CurrentSymptomsRecurring'], ['done', 'Done, exit.']])
+                    im.executeModality('ASR',['weight','cigar', 'chol', 'hyper', 'diabetes', 'againSym', 'done'])
+                    histQ = im.ask(actionname=None, timeoutvalue=10000)
+                    im.display.remove_buttons()
+
+                    if not histQ == 'done':
+                        hist2add = hist2add + ',' + histQ
+                    else: break
+                RecordDict.update({"PastMedicalHistory" : hist2add}) # Update data in record
+
+
 
 
 
