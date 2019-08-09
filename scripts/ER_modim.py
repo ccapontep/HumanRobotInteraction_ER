@@ -241,8 +241,7 @@ def i2():
                     emer1 = 0
                     while histDone == True:
                         im.executeModality('BUTTONS',[['bleeding','Bleeding that will not stop'],['breathing','Breathing problems'], ['unusual behavior', 'Unusual behavior, confusion, difficulty arousing'], ['chest pain', 'Chest pain'], ['choking', 'Choking'], ['coughing', 'Coughing up or vomiting blood'], ['severe vomiting', 'Severe or persistent vomiting'], ['fainting', 'Fainting or loss of consciousness'], \
-                        ['feeling suicide murder', 'Feeling of committing suicide or murder'], ['serious injury', 'Serious injury due to: 1) motor vehicle accident, 2) burns or smoke inhalation, 3) near drowning'], ['deep wound', 'Deep or large wound'], ['sudden severe pain', 'Sudden, severe pain anywhere in the body'], ['sudden dizziness', 'Sudden dizziness, weakness, or change in vision'], \
-                        ['swallowing poisonous', 'Swallowing a poisonous substance'], ['severe abdominal', 'Severe abdominal pain or pressure'], ['head spine', 'Head or spine injury'], ['done', 'Done, exit.']])
+                        ['feeling suicide murder', 'Feeling of committing suicide or murder'], ['serious injury', 'Serious injury due to: 1) motor vehicle accident, 2) burns or smoke inhalation, 3) near drowning'], ['done', 'Done, exit.']])
                         im.executeModality('ASR',['bleeding', 'breathing', 'unusual behavior', 'chest pain', 'choking', 'coughing', 'severe vomiting', 'fainting', 'feeling suicide murder', 'serious injury', 'deep wound', 'sudden severe pain', 'sudden dizziness', 'swallowing poisonous', 'severe abdominal', 'head spine', 'done'])
                         emergQ = im.ask(actionname=None, timeoutvalue=10000)
                         im.display.remove_buttons()
@@ -257,6 +256,27 @@ def i2():
                             im.executeModality('TEXT_default', RecordDict['Emergency Symptoms'])
                         else: emergDone = False
 
+                # elif HistQues == 'symptoms':
+                #     im.executeModality('TEXT_default', 'Select again all that apply.')
+                #     emergDone = True
+                #     emer1 = 0
+                #     while histDone == True:
+                #         im.executeModality('BUTTONS',[['bleeding','Bleeding that will not stop'],['breathing','Breathing problems'], ['unusual behavior', 'Unusual behavior, confusion, difficulty arousing'], ['chest pain', 'Chest pain'], ['choking', 'Choking'], ['coughing', 'Coughing up or vomiting blood'], ['severe vomiting', 'Severe or persistent vomiting'], ['fainting', 'Fainting or loss of consciousness'], \
+                #         ['feeling suicide murder', 'Feeling of committing suicide or murder'], ['serious injury', 'Serious injury due to: 1) motor vehicle accident, 2) burns or smoke inhalation, 3) near drowning'], ['deep wound', 'Deep or large wound'], ['sudden severe pain', 'Sudden, severe pain anywhere in the body'], ['sudden dizziness', 'Sudden dizziness, weakness, or change in vision'], \
+                #         ['swallowing poisonous', 'Swallowing a poisonous substance'], ['severe abdominal', 'Severe abdominal pain or pressure'], ['head spine', 'Head or spine injury'], ['done', 'Done, exit.']])
+                #         im.executeModality('ASR',['bleeding', 'breathing', 'unusual behavior', 'chest pain', 'choking', 'coughing', 'severe vomiting', 'fainting', 'feeling suicide murder', 'serious injury', 'deep wound', 'sudden severe pain', 'sudden dizziness', 'swallowing poisonous', 'severe abdominal', 'head spine', 'done'])
+                #         emergQ = im.ask(actionname=None, timeoutvalue=10000)
+                #         im.display.remove_buttons()
+                #
+                #         if not emergQ == 'done':
+                #             say('Item added', 'en')
+                #             if emer1 == 0:
+                #                 emerg2add = emergQ
+                #                 emer1 += 1
+                #             else: emerg2add = emerg2add + ',' + emergQ
+                #             RecordDict.update({"PastMedicalHistory" : emerg2add}) # Update data in record
+                #             im.executeModality('TEXT_default', RecordDict['Emergency Symptoms'])
+                #         else: emergDone = False
 
 
 
