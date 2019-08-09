@@ -240,15 +240,20 @@ def i2():
                     emergDone = True
                     emer1 = 0
                     nextEm = False
+                    nextEm2 = False
                     while emergDone == True:
-                        if nextEm == False:
+                        if nextEm == False and nextEm2 == False:
                             im.executeModality('BUTTONS',[['bleeding','Bleeding that will not stop'],['breathing','Breathing problems'], ['unusual behavior', 'Unusual behavior, confusion, difficulty arousing'], ['chest pain', 'Chest pain'], ['choking', 'Choking'], ['coughing', 'Coughing up or vomiting blood'], ['severe vomiting', 'Severe or persistent vomiting'], ['fainting', 'Fainting or loss of consciousness'], \
                             ['next', 'See more options']])
                             im.executeModality('ASR',['bleeding', 'breathing', 'unusual behavior', 'chest pain', 'choking', 'coughing', 'severe vomiting', 'fainting', 'next'])
-                        else:
-                            im.executeModality('BUTTONS',[['serious injury', 'Serious injury due to: 1) vehicle accident, 2) burns/smoke inhalation, 3) near drowning'], ['deep wound', 'Deep or large wound'], ['sudden severe pain', 'Sudden, severe pain anywhere in the body'], ['sudden dizziness', 'Sudden dizziness, weakness, or change in vision'], ['swallowing poisonous', 'Swallowing a poisonous substance'], \
-                            ['severe abdominal', 'Severe abdominal pain or pressure'], ['head spine', 'Head or spine injury'], ['feeling suicide murder', 'Feeling of committing suicide or murder'], ['done', 'Done, exit.']])
-                            im.executeModality('ASR',['serious injury', 'deep wound', 'sudden severe pain', 'sudden dizziness', 'swallowing poisonous', 'severe abdominal', 'head spine', 'feeling suicide murder', 'done'])
+                        elif nextEm == True and nextEm2 == False:
+                            im.executeModality('BUTTONS',[['serious injury', 'Serious injury due to: 1) vehicle accident, 2) burns/smoke inhalation, 3) near drowning'], ['deep wound', 'Deep or large wound'], ['sudden severe pain', 'Sudden, severe pain anywhere in the body'], ['next', 'See more options']])
+                            im.executeModality('ASR',['serious injury', 'deep wound', 'sudden severe pain', 'next'])
+
+                        elif nextEm == True and nextEm2 == True:
+                            im.executeModality('BUTTONS',[ ['sudden dizziness', 'Sudden dizziness, weakness, or change in vision'], ['swallowing poisonous', 'Swallowing a poisonous substance'], ['severe abdominal', 'Severe abdominal pain or pressure'], ['head spine', 'Head or spine injury'], ['feeling suicide murder', 'Feeling of committing suicide or murder'], ['done', 'Done, exit.']])
+                            im.executeModality('ASR',['sudden dizziness', 'swallowing poisonous', 'severe abdominal', 'head spine', 'feeling suicide murder', 'done'])
+
 
                         emergQ = im.ask(actionname=None, timeoutvalue=10000)
                         im.display.remove_buttons()
@@ -263,6 +268,7 @@ def i2():
                             im.executeModality('TEXT_default', RecordDict['EmergencySymptoms'])
                         elif emergQ == 'done': emergDone = False
                         elif emergQ == 'next': nextEm = True
+                        elif emergQ == 'next': nextEm2 = True
 
                 # elif HistQues == 'symptoms':
                 #     im.executeModality('TEXT_default', 'Select again all that apply.')
