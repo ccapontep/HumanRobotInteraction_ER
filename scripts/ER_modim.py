@@ -148,7 +148,7 @@ def i2():
             line = line.replace('\n', '')
             item, info = line.split('=')
             RecordDict.update({item : info})
-    hello_say = 'Hello there ' + RecordDict["Name"]
+    hello_say = 'Hello, ' + RecordDict["Name"]
     say(hello_say, 'en')
     im.executeModality('TEXT_default', 'What information are you searching for?')
     say('What can I help you with?', 'en')
@@ -181,14 +181,12 @@ def i2():
             remain_min = (round(remain_time_sec) // 60) % 60
             remain_hr = round(remain_time_sec) // 3600
             remain_str = str(int(remain_hr)) + 'h' + str(int(remain_min)) + 'm'
-            say('yes', 'en')
             RecordDict.update({"RemainingWaitTime" : remain_str}) # update the info in the record
             # Remain_print = 'Your remaining wait time is: ' + remain_str
-            say('yes 2', 'en')
 
             urgencyStr = RecordDict["UrgencyLevel"]
-            Remain_print = 'Your emergency is a ' + urgencyStr + ' level. We will be with you shortly in ' + remain_hr + ' hour(s) and ' + remain_min + ' minute(s)'
-            Remain_say = 'Your emergency ' + urgencyStr + ' level. We will be with in ' + remain_hr + ' hour and ' + remain_min + ' minutes'
+            Remain_print = 'Your emergency is a ' + urgencyStr + ' level. We will be with you shortly in ' + str(remain_hr) + ' hour(s) and ' + str(remain_min) + ' minute(s)'
+            Remain_say = 'Your emergency ' + urgencyStr + ' level. We will be with in ' + str(remain_hr) + ' hour and ' + str(remain_min) + ' minutes'
             im.executeModality('TEXT_default', Remain_print)
             say(Remain_say, 'en')
 
