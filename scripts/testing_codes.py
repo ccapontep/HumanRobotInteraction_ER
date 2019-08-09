@@ -37,7 +37,6 @@ import time
 # From the code
 admit_time = float(RecordDict["TimeAdmitted"])
 curr_sec = time.time()
-# curr_time = time.localtime(curr_sec)
 
 waittingTime = RecordDict["WaitTime"]
 wHour, wMin = waittingTime.split(':')
@@ -46,6 +45,8 @@ waitTimeSec = int(wHour)*60*60 + int(wMin)*60
 remain_time_sec = waitTimeSec - (curr_sec - admit_time)
 remain_min = (round(remain_time_sec) // 60) % 60
 remain_hr = round(remain_time_sec) // 3600
-remain_str = str(int(remain_hr) + 'h' + int(remain_min) + 'm')
+if remain_min < 0 or remain_hr < 0: # if no more remaining time
+    remain_str = '0h0m'
+else:
+    remain_str = str(int(remain_hr)) + 'h' + str(int(remain_min)) + 'm'
 
-remain_time_hmin = time.localtime(remain_time_sec)

@@ -21,7 +21,7 @@ def i0():
     begin()
 
     im.display.remove_buttons()
-    im.display.loadUrl('HRIER/ERstart.html')
+    im.display.loadUrl('ERstart.html')
 
     im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
     say('Welcome to Wellness Hospital', 'en')
@@ -191,6 +191,7 @@ def i2():
 
         # Get record of admit, wait and curr times. Caculate the new wait time.
         elif UserQues == 'waittime':
+            urgencyStr = RecordDict["UrgencyLevel"]
             admit_time = float(RecordDict["TimeAdmitted"])
             curr_sec = time.time()
 
@@ -201,21 +202,22 @@ def i2():
             remain_time_sec = waitTimeSec - (curr_sec - admit_time)
             remain_min = (round(remain_time_sec) // 60) % 60
             remain_hr = round(remain_time_sec) // 3600
-            remain_str = str(int(remain_hr)) + 'h' + str(int(remain_min)) + 'm'
-            RecordDict.update({"RemainingWaitTime" : remain_str}) # update the info in the record
-            # Remain_print = 'Your remaining wait time is: ' + remain_str
-
-            urgencyStr = RecordDict["UrgencyLevel"]
-            if remain_min <= 0:
+            if remain_min <= 0 or remain_hr <= 0: # if no more remaining time
+                remain_str = '0h0m'
                 Remain_print = 'Your emergency is a ' + urgencyStr + ' level. We will be with you shortly in 0 min'
                 Remain_say = 'Your emergency ' + urgencyStr + ' level. No more wait time, someone will be with you shortly.'
                 im.executeModality('TEXT_default', Remain_print)
                 say(Remain_say, 'en')
+                time.sleep(5)
             else:
+                remain_str = str(int(remain_hr)) + 'h' + str(int(remain_min)) + 'm'
                 Remain_print = 'Your emergency is a ' + urgencyStr + ' level. We will be with you shortly in ' + str(int(remain_hr)) + ' hour(s) and ' + str(int(remain_min)) + ' minute(s)'
                 Remain_say = 'Your emergency ' + urgencyStr + ' level. We will be with in ' + str(int(remain_hr)) + ' hour and ' + str(int(remain_min)) + ' minutes'
                 im.executeModality('TEXT_default', Remain_print)
                 say(Remain_say, 'en')
+                time.sleep(5)
+
+            RecordDict.update({"RemainingWaitTime" : remain_str}) # update the info in the record
 
         # If the user wants to update its information Record
         elif UserQues == 'update':
