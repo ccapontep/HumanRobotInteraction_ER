@@ -42,11 +42,11 @@ def i0():
 # Interaction to welcome and start interaction
 def i1():
 
-    im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
+    # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
     # im.gitpull()
     begin()
     im.display.remove_buttons()
-    im.display.loadUrl('HRIER/ERslide.html')
+    im.display.loadUrl('ERslide.html')
 
     im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
     say('Welcome to Wellness Hospital', 'en')
