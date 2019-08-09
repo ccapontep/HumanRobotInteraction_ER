@@ -247,8 +247,8 @@ def i2():
                             ['next', 'See more options']])
                             im.executeModality('ASR',['bleeding', 'breathing', 'unusual behavior', 'chest pain', 'choking', 'coughing', 'severe vomiting', 'fainting', 'next'])
                         elif nextEm == True and nextEm2 == False:
-                            im.executeModality('BUTTONS',[['serious injury', 'Serious injury due to: 1) vehicle accident, 2) burns/smoke inhalation, 3) near drowning'], ['deep wound', 'Deep or large wound'], ['sudden severe pain', 'Sudden, severe pain anywhere in the body'], ['next', 'See more options']])
-                            im.executeModality('ASR',['serious injury', 'deep wound', 'sudden severe pain', 'next'])
+                            im.executeModality('BUTTONS',[['serious injury', 'Serious injury due to: 1) vehicle accident, 2) burns/smoke inhalation, 3) near drowning'], ['deep wound', 'Deep or large wound'], ['sudden severe pain', 'Sudden, severe pain anywhere in the body'], ['next2', 'See more options']])
+                            im.executeModality('ASR',['serious injury', 'deep wound', 'sudden severe pain', 'next2'])
 
                         elif nextEm == True and nextEm2 == True:
                             im.executeModality('BUTTONS',[ ['sudden dizziness', 'Sudden dizziness, weakness, or change in vision'], ['swallowing poisonous', 'Swallowing a poisonous substance'], ['severe abdominal', 'Severe abdominal pain or pressure'], ['head spine', 'Head or spine injury'], ['feeling suicide murder', 'Feeling of committing suicide or murder'], ['done', 'Done, exit.']])
@@ -268,7 +268,7 @@ def i2():
                             im.executeModality('TEXT_default', RecordDict['EmergencySymptoms'])
                         elif emergQ == 'done': emergDone = False
                         elif emergQ == 'next': nextEm = True
-                        elif emergQ == 'next': nextEm2 = True
+                        elif emergQ == 'next2': nextEm2 = True
 
                 # elif HistQues == 'symptoms':
                 #     im.executeModality('TEXT_default', 'Select again all that apply.')
