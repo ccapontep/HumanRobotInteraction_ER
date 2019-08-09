@@ -68,7 +68,7 @@ def i1():
     # if ('yes' in aa) or a == 'yes':
     if a == 'yes':
         im.executeModality('TEXT_default','You are a patient in the database.')
-        say('Welcome back')
+        say('Welcome back' 'en')
         time.sleep(1)
         i2()
 
@@ -93,7 +93,7 @@ def i2():
     begin()
     import os, re, ast, time
     import numpy as np
-
+    say('why is this not working', 'en')
     im.display.loadUrl('ERindex.html')
     im.executeModality('TEXT_default', 'Please enter the digits of your ticket number one by one.')
     say('Let me look for you in the database. Please enter your ticket number', 'en')
