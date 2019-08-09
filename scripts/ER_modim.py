@@ -69,7 +69,7 @@ def i1():
 # Interaction to check ticket info and retrieve info for the user
 def i2():
     begin()
-    import os, re, ast
+    import os, re, ast, time
     import numpy as np
 
     im.display.loadUrl('ERindex.html')
@@ -126,12 +126,6 @@ def i2():
         with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
             for ticket in patientTicketNums.readlines():
                 ticketNums.append(str(ticket))
-                # if int(ticketNumber) == int(ticket):
-                #     im.executeModality('TEXT_default', 'Your ticket has been found!')
-                #     say('Your ticket has been found in the database', 'en')
-                #     # indexTicket = len(ticketNums) -1
-                #     CorrTick == 'yes'
-                #     break
         if CorrTick == 'yes' and len(ticketNums) > 0 and int(ticketNumber) in (map(int, ticketNums)):
             im.executeModality('TEXT_default', 'Your ticket has been found!')
             say('Your ticket has been found in the database', 'en')
@@ -158,11 +152,6 @@ def i2():
     say(RecordDict["Name"], 'en')
     im.executeModality('TEXT_default', 'What information are you searching for?')
     say('What can I help you with?', 'en')
-    say('the current time is', 'en')
-    waittingTime = int(RecordDict["WaitTime"]) * 60
-    seconds = time.time()
-    im.executeModality('TEXT_default', str(time.localtime(seconds)))
-    time.sleep(3)
 
     # Ask what the user wants
     im.executeModality('BUTTONS',[['waittime','Get Remaining Wait Time'],['update','Update Records']])
@@ -170,8 +159,25 @@ def i2():
     UserQues = im.ask(actionname=None, timeoutvalue=100)
     im.display.remove_buttons()
 
+    # Get record of admit, wait and curr times. Caculate the new wait time.
     if UserQues == 'waittime':
-        old_wait = RecordDict["RemainingWaitTime"]
+        admit_time = float(RecordDict["TimeAdmitted"])
+        curr_sec = time.time()
+
+        waittingTime = RecordDict["WaitTime"]
+        wHour, wMin = waittingTime.split(':')
+        waitTimeSec = int(wHour)*60*60 + int(wMin)*60
+
+        remain_time_sec = waitTimeSec - (curr_sec - admit_time)
+        remain_min = (round(remain_time_sec) // 60) % 60
+        remain_hr = round(remain_time_sec) // 3600
+        remain_str = str(int(remain_hr)) + 'h' + str(int(remain_min)) + 'm'
+        Remain_print = 'Your remaining wait time is: ' + remain_str
+
+        im.executeModality('TEXT_default', Remain_print)
+        time.sleep(3)
+
+
 
     end()
 
