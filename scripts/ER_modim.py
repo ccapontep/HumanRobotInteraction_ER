@@ -93,10 +93,9 @@ def i2():
     begin()
     import os, re, ast, time
     import numpy as np
-    im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
 
     say('why is this not working', 'en')
-    im.display.loadUrl('HRIER/ERindex.html')
+    im.display.loadUrl('ERindex.html')
     im.executeModality('TEXT_default', 'Please enter the digits of your ticket number one by one.')
     say('Let me look for you in the database. Please enter your ticket number', 'en')
 
@@ -245,8 +244,8 @@ mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
 mc.store_interaction(i2)
 mc.store_interaction(i1)
 mc.store_interaction(i0)
-# mc.run_interaction(i1)
-mc.run_interaction(i0)
+mc.run_interaction(i1)
+# mc.run_interaction(i0)
 
 
 # mc.store_interaction(f)
