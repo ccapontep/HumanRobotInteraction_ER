@@ -68,7 +68,7 @@ def i1():
     # if ('yes' in aa) or a == 'yes':
     if a == 'yes':
         im.executeModality('TEXT_default','You are a patient in the database.')
-        say('Welcome back' 'en')
+        say('Welcome back', 'en')
         time.sleep(1)
         i2()
 
