@@ -153,29 +153,50 @@ def i2():
     im.executeModality('TEXT_default', 'What information are you searching for?')
     say('What can I help you with?', 'en')
 
-    # Ask what the user wants
-    im.executeModality('BUTTONS',[['waittime','Get Remaining Wait Time'],['update','Update Records']])
-    im.executeModality('ASR',['waittime','update'])
-    UserQues = im.ask(actionname=None, timeoutvalue=100)
-    im.display.remove_buttons()
+    AskAgain = True
+    while AskAgain == True:
+        # Ask what the user wants
+        im.executeModality('BUTTONS',[['waittime','Get my Remaining Wait Time'],['update','Update my Records'], ['done', 'Done, exit.']])
+        im.executeModality('ASR',['waittime','update', 'done'])
+        UserQues = im.ask(actionname=None, timeoutvalue=10000)
+        im.display.remove_buttons()
 
-    # Get record of admit, wait and curr times. Caculate the new wait time.
-    if UserQues == 'waittime':
-        admit_time = float(RecordDict["TimeAdmitted"])
-        curr_sec = time.time()
+        if UserQues == 'done':
+            im.executeModality('TEXT_default', 'Thank you for checking your record.')
+            say('Goodbye!', 'en')
+            AskAgain = False
+            i1()
 
-        waittingTime = RecordDict["WaitTime"]
-        wHour, wMin = waittingTime.split(':')
-        waitTimeSec = int(wHour)*60*60 + int(wMin)*60
+        # Get record of admit, wait and curr times. Caculate the new wait time.
+        elif UserQues == 'waittime':
+            admit_time = float(RecordDict["TimeAdmitted"])
+            curr_sec = time.time()
 
-        remain_time_sec = waitTimeSec - (curr_sec - admit_time)
-        remain_min = (round(remain_time_sec) // 60) % 60
-        remain_hr = round(remain_time_sec) // 3600
-        remain_str = str(int(remain_hr)) + 'h' + str(int(remain_min)) + 'm'
-        Remain_print = 'Your remaining wait time is: ' + remain_str
+            waittingTime = RecordDict["WaitTime"]
+            wHour, wMin = waittingTime.split(':')
+            waitTimeSec = int(wHour)*60*60 + int(wMin)*60
 
-        im.executeModality('TEXT_default', Remain_print)
-        time.sleep(3)
+            remain_time_sec = waitTimeSec - (curr_sec - admit_time)
+            remain_min = (round(remain_time_sec) // 60) % 60
+            remain_hr = round(remain_time_sec) // 3600
+            remain_str = str(int(remain_hr)) + 'h' + str(int(remain_min)) + 'm'
+            # Remain_print = 'Your remaining wait time is: ' + remain_str
+
+            urgencyStr = RecordDict["UrgencyLevel"]
+            Remain_print = 'Your emergency is a ' + urgencyStr + ' level. We will be with you shortly in ' + remain_str
+            Remain_say = 'Your emergency ' + urgencyStr + ' level. We will be with in ' + remain_str
+            im.executeModality('TEXT_default', Remain_print)
+            say(Remain_say, 'en')
+
+        # If the user wants to update its information Record
+        elif UserQues == 'update':
+            im.executeModality('TEXT_default', 'Which would you like to update?')
+            say('Pick the item you would like to change.', 'en')
+
+            im.executeModality('BUTTONS',[['history','Past Medical History'],['emergency','Emergency Symptoms'], ['symptoms', 'Symptoms'], ['location', 'Location of Pain'], ['conscious', 'Level of Consciousness']])
+            im.executeModality('ASR',['history','emergency', 'symptoms', 'location', 'conscious'])
+            UserQues = im.ask(actionname=None, timeoutvalue=10000)
+            im.display.remove_buttons()
 
 
 
