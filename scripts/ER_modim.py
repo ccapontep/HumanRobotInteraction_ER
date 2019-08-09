@@ -100,10 +100,9 @@ def i2():
     say('Let me look for you in the database. Please enter your ticket number', 'en')
 
     # There are three digits in the ticket number, check one by one with buttons
-    # First number:
     CorrTick = 'no'
     while CorrTick == 'no':
-
+        # First number:
         im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
         im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
         Num1 = im.ask(actionname=None, timeoutvalue=500)
@@ -205,14 +204,14 @@ def i2():
             remain_hr = round(remain_time_sec) // 3600
             if remain_min <= 0 or remain_hr <= 0: # if no more remaining time
                 remain_str = '0h0m'
-                Remain_print = 'Your emergency is a ' + urgencyStr + ' level. We will be with you shortly in 0 min'
+                Remain_print = 'Your emergency is a ' + urgencyStr + ' level. \nWe will be with you shortly in 0 min.'
                 Remain_say = 'Your emergency ' + urgencyStr + ' level. No more wait time, someone will be with you shortly.'
                 im.executeModality('TEXT_default', Remain_print)
                 say(Remain_say, 'en')
                 time.sleep(5)
             else:
                 remain_str = str(int(remain_hr)) + 'h' + str(int(remain_min)) + 'm'
-                Remain_print = 'Your emergency is a ' + urgencyStr + ' level. We will be with you shortly in ' + str(int(remain_hr)) + ' hour(s) and ' + str(int(remain_min)) + ' minute(s)'
+                Remain_print = 'Your emergency is a ' + urgencyStr + ' level. \nWe will be with you shortly in ' + str(int(remain_hr)) + ' hour(s) and ' + str(int(remain_min)) + ' minute(s)'
                 Remain_say = 'Your emergency ' + urgencyStr + ' level. We will be with in ' + str(int(remain_hr)) + ' hour and ' + str(int(remain_min)) + ' minutes'
                 im.executeModality('TEXT_default', Remain_print)
                 say(Remain_say, 'en')
