@@ -250,7 +250,7 @@ def i2():
                             hist2add = hist2add + ',' + histQ
                         else: histD = False
                     RecordDict.update({"PastMedicalHistory" : hist2add}) # Update data in record
-
+                    im.executeModality('TEXT_default', RecordDict['PastMedicalHistory'])
 
 
 
