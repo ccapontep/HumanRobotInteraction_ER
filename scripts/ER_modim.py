@@ -181,7 +181,7 @@ def i2():
             remain_min = (round(remain_time_sec) // 60) % 60
             remain_hr = round(remain_time_sec) // 3600
             remain_str = str(int(remain_hr)) + 'h' + str(int(remain_min)) + 'm'
-            RecordDict["RemainingWaitTime"] = remain_str # update the info in the record
+            RecordDict.update({"RemainingWaitTime" : remain_str}) # update the info in the record
             # Remain_print = 'Your remaining wait time is: ' + remain_str
 
             urgencyStr = RecordDict["UrgencyLevel"]
