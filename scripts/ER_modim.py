@@ -17,6 +17,28 @@ mc.setCmdServerAddr(cmdsever_ip, cmdserver_port)
 # def f():
 #     return 1
 
+def i0():
+    begin()
+
+    im.display.remove_buttons()
+    im.display.loadUrl('HRIER/ERstart.html')
+
+    im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
+    say('Welcome to Wellness Hospital', 'en')
+    im.executeModality('TEXT_default','Ready to start the interaction?')
+    say('Press or say start to begin the interaction with me.', 'en')
+
+    im.executeModality('BUTTONS',[['start','Start!']])
+    im.executeModality('ASR',['start'])
+
+    startQ = im.ask(actionname=None, timeoutvalue=100000000000)
+    im.display.remove_buttons()
+
+    if startQ == 'start':
+        i1()
+
+    end()
+
 # Interaction to welcome and start interaction
 def i1():
 
@@ -163,7 +185,6 @@ def i2():
 
         if UserQues == 'done':
             im.executeModality('TEXT_default', 'Thank you for checking your record.')
-            im.executeModality('IMAGE', images/goodbye.jpg)
             say('Goodbye!', 'en')
             AskAgain = False
             i1()
@@ -221,6 +242,7 @@ mc.store_interaction(i2)
 mc.store_interaction(i1)
 mc.store_interaction(i0)
 mc.run_interaction(i1)
+mc.run_interaction(i0)
 
 
 # mc.store_interaction(f)
