@@ -26,7 +26,7 @@ def i0():
     im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
     say('Welcome to Wellness Hospital', 'en')
     im.executeModality('TEXT_default','Ready to start the interaction?')
-    say('Press or say start to begin the interaction with me.', 'en')
+    say('Press start to begin the interaction with me.', 'en')
 
     im.executeModality('BUTTONS',[['start','Start!']])
     im.executeModality('ASR',['start'])
@@ -42,7 +42,7 @@ def i0():
 # Interaction to welcome and start interaction
 def i1():
 
-    # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
+    im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
     # im.gitpull()
     begin()
     im.display.remove_buttons()
