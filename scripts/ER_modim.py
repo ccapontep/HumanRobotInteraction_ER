@@ -185,8 +185,8 @@ def i2():
             # Remain_print = 'Your remaining wait time is: ' + remain_str
 
             urgencyStr = RecordDict["UrgencyLevel"]
-            Remain_print = 'Your emergency is a ' + urgencyStr + ' level. We will be with you shortly in ' + remain_hr ' hour(s) and ' + remain_min + ' minute(s)'
-            Remain_say = 'Your emergency ' + urgencyStr + ' level. We will be with in ' + remain_hr ' hour and ' + remain_min + ' minutes'
+            Remain_print = 'Your emergency is a ' + urgencyStr + ' level. We will be with you shortly in ' + remain_hr + ' hour(s) and ' + remain_min + ' minute(s)'
+            Remain_say = 'Your emergency ' + urgencyStr + ' level. We will be with in ' + remain_hr + ' hour and ' + remain_min + ' minutes'
             im.executeModality('TEXT_default', Remain_print)
             say(Remain_say, 'en')
 
