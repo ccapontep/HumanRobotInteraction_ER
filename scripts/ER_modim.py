@@ -326,47 +326,37 @@ def i2():
 
                 elif HistQues == 'conscious':
                     im.executeModality('TEXT_default', 'Select again all that apply.')
-                    consDone = True
                     cons1 = 0
-                    while consDone == True:
-                        im.executeModality('BUTTONS',[ ['fully', 'Fully (awake, aware)'], ['medium', 'Medium (some confusion)'], ['barely', 'Barely (feeling of sleeping or fainting)'], ['none', 'Unconscious (fainted)'], ['done', 'Done, exit.']])
-                        im.executeModality('ASR',['fully', 'medium', 'barely', 'none', 'done'])
+                    im.executeModality('BUTTONS',[ ['fully', 'Fully (awake, aware)'], ['medium', 'Medium (some confusion)'], ['barely', 'Barely (feeling of sleeping or fainting)'], ['none', 'Unconscious (fainted)'], ['done', 'Done, exit.']])
+                    im.executeModality('ASR',['fully', 'medium', 'barely', 'none', 'done'])
 
-                        consQ = im.ask(actionname=None, timeoutvalue=10000)
-                        im.display.remove_buttons()
+                    consQ = im.ask(actionname=None, timeoutvalue=10000)
+                    im.display.remove_buttons()
 
-                        if not consQ == 'done':
-                            say('Item added', 'en')
-                            if cons1 == 0:
-                                cons2add = consQ
-                                cons1 += 1
-                            else: cons2add = cons2add + ',' + consQ
-                            RecordDict.update({"LevelofConsciousness" : cons2add}) # Update data in record
-                            StrRecord = 'You picked: ' + RecordDict['LevelofConsciousness']
-                            im.executeModality('TEXT_default', StrRecord)
-                        elif consQ == 'done': consDone = False
+                    if cons1 == 0:
+                        cons2add = consQ
+                        cons1 += 1
+                    else: cons2add = cons2add + ',' + consQ
+                    RecordDict.update({"LevelofConsciousness" : cons2add}) # Update data in record
+                    StrRecord = 'Your consciousness level is: ' + RecordDict['LevelofConsciousness']
+                    im.executeModality('TEXT_default', StrRecord)
 
                 elif HistQues == 'painlevel':
                     im.executeModality('TEXT_default', 'Select again all that apply.')
-                    painDone = True
                     pain1 = 0
-                    while painDone == True:
-                        im.executeModality('BUTTONS',[ ['some', 'Some'], ['moderate', 'Moderate'], ['intense', 'Intense'], ['very intense', 'Very Intense'], ['excruciating', 'Excruciating'], ['done', 'Done, exit.']])
-                        im.executeModality('ASR',['some', 'moderate', 'intense', 'very intense', 'abdomen', 'excruciating', 'done'])
+                    im.executeModality('BUTTONS',[ ['some', 'Some'], ['moderate', 'Moderate'], ['intense', 'Intense'], ['very intense', 'Very Intense'], ['excruciating', 'Excruciating']])
+                    im.executeModality('ASR',['some', 'moderate', 'intense', 'very intense', 'abdomen', 'excruciating'])
 
-                        painQ = im.ask(actionname=None, timeoutvalue=10000)
-                        im.display.remove_buttons()
+                    painQ = im.ask(actionname=None, timeoutvalue=10000)
+                    im.display.remove_buttons()
 
-                        if not painQ == 'done':
-                            say('Item added', 'en')
-                            if pain1 == 0:
-                                pain2add = painQ
-                                pain1 += 1
-                            else: pain2add = pain2add + ',' + painQ
-                            RecordDict.update({"PainLevel" : pain2add}) # Update data in record
-                            StrRecord = 'You picked: ' + RecordDict['PainLevel']
-                            im.executeModality('TEXT_default', StrRecord)
-                        elif painQ == 'done': painDone = False
+                    if pain1 == 0:
+                        pain2add = painQ
+                        pain1 += 1
+                    else: pain2add = pain2add + ',' + painQ
+                    RecordDict.update({"PainLevel" : pain2add}) # Update data in record
+                    StrRecord = 'Your pain level is: ' + RecordDict['PainLevel']
+                    im.executeModality('TEXT_default', StrRecord)
 
 
 
