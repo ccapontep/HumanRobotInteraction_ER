@@ -327,8 +327,8 @@ def i2():
                 elif HistQues == 'conscious':
                     im.executeModality('TEXT_default', 'Select again all that apply.')
                     cons1 = 0
-                    im.executeModality('BUTTONS',[ ['fully', 'Fully (awake, aware)'], ['medium', 'Medium (some confusion)'], ['barely', 'Barely (feeling of sleeping or fainting)'], ['none', 'Unconscious (fainted)'], ['done', 'Done, exit.']])
-                    im.executeModality('ASR',['fully', 'medium', 'barely', 'none', 'done'])
+                    im.executeModality('BUTTONS',[ ['fully', 'Fully (awake, aware)'], ['medium', 'Medium (some confusion)'], ['barely', 'Barely (feeling of sleeping or fainting)'], ['none', 'Unconscious (fainted)']])
+                    im.executeModality('ASR',['fully', 'medium', 'barely', 'none'])
 
                     consQ = im.ask(actionname=None, timeoutvalue=10000)
                     im.display.remove_buttons()
@@ -340,6 +340,7 @@ def i2():
                     RecordDict.update({"LevelofConsciousness" : cons2add}) # Update data in record
                     StrRecord = 'Your consciousness level is: ' + RecordDict['LevelofConsciousness']
                     im.executeModality('TEXT_default', StrRecord)
+                    time.sleep(3)
 
                 elif HistQues == 'painlevel':
                     im.executeModality('TEXT_default', 'Select again all that apply.')
@@ -357,6 +358,7 @@ def i2():
                     RecordDict.update({"PainLevel" : pain2add}) # Update data in record
                     StrRecord = 'Your pain level is: ' + RecordDict['PainLevel']
                     im.executeModality('TEXT_default', StrRecord)
+                    time.sleep(3)
 
 
 
