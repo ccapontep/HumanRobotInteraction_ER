@@ -192,6 +192,7 @@ def i2():
         elif UserQues == 'waittime':
             urgencyStr = RecordDict["UrgencyLevel"]
             admit_time = float(RecordDict["TimeAdmitted"])
+            updatedT = RecordDict["ChangeinWaitTime"]
             curr_sec = time.time()
 
             waittingTime = RecordDict["WaitTime"]
@@ -203,14 +204,14 @@ def i2():
             remain_hr = round(remain_time_sec) // 3600
             if remain_min <= 0 or remain_hr <= 0: # if no more remaining time
                 remain_str = '0h0m'
-                Remain_print = 'Your emergency is a ' + urgencyStr + ' level. \nWe will be with you shortly in 0 min.'
+                Remain_print = 'Your emergency is a ' + urgencyStr + ' level. We will be with you shortly in 0 min.'
                 Remain_say = 'Your emergency ' + urgencyStr + ' level. No more wait time, someone will be with you shortly.'
                 im.executeModality('TEXT_default', Remain_print)
                 say(Remain_say, 'en')
                 time.sleep(5)
             else:
                 remain_str = str(int(remain_hr)) + 'h' + str(int(remain_min)) + 'm'
-                Remain_print = 'Your emergency is a ' + urgencyStr + ' level. \nWe will be with you shortly in ' + str(int(remain_hr)) + ' hour(s) and ' + str(int(remain_min)) + ' minute(s)'
+                Remain_print = 'Your emergency is a ' + urgencyStr + ' level. Your wait time ' + updatedT + 'been changed due to other higher emergency patients. We will be with you shortly in ' + str(int(remain_hr)) + ' hour(s) and ' + str(int(remain_min)) + ' minute(s)'
                 Remain_say = 'Your emergency ' + urgencyStr + ' level. We will be with in ' + str(int(remain_hr)) + ' hour and ' + str(int(remain_min)) + ' minutes'
                 im.executeModality('TEXT_default', Remain_print)
                 say(Remain_say, 'en')
@@ -323,6 +324,49 @@ def i2():
                             im.executeModality('TEXT_default', StrRecord)
                         elif locQ == 'done': locDone = False
 
+                elif HistQues == 'conscious':
+                    im.executeModality('TEXT_default', 'Select again all that apply.')
+                    consDone = True
+                    cons1 = 0
+                    while consDone == True:
+                        im.executeModality('BUTTONS',[ ['foot', 'Foot(x2)'], ['leg(s)', 'Leg(s)'], ['arm(s)', 'Arm(s)'], ['hand(s)', 'Hand(s)'], ['abdomen', 'Abdomen'], ['chest', 'Chest'], ['back', 'Back'], ['head/face', 'Head/Face'], ['done', 'Done, exit.']])
+                        im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
+
+                        consQ = im.ask(actionname=None, timeoutvalue=10000)
+                        im.display.remove_buttons()
+
+                        if not consQ == 'done':
+                            say('Item added', 'en')
+                            if cons1 == 0:
+                                cons2add = consQ
+                                cons1 += 1
+                            else: cons2add = cons2add + ',' + consQ
+                            RecordDict.update({"LevelofConsciousness" : cons2add}) # Update data in record
+                            StrRecord = 'You picked: ' + RecordDict['LevelofConsciousness']
+                            im.executeModality('TEXT_default', StrRecord)
+                        elif consQ == 'done': consDone = False
+
+                elif HistQues == 'painlevel':
+                    im.executeModality('TEXT_default', 'Select again all that apply.')
+                    painDone = True
+                    pain1 = 0
+                    while painDone == True:
+                        im.executeModality('BUTTONS',[ ['foot', 'Foot(x2)'], ['leg(s)', 'Leg(s)'], ['arm(s)', 'Arm(s)'], ['hand(s)', 'Hand(s)'], ['abdomen', 'Abdomen'], ['chest', 'Chest'], ['back', 'Back'], ['head/face', 'Head/Face'], ['done', 'Done, exit.']])
+                        im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
+
+                        painQ = im.ask(actionname=None, timeoutvalue=10000)
+                        im.display.remove_buttons()
+
+                        if not painQ == 'done':
+                            say('Item added', 'en')
+                            if pain1 == 0:
+                                pain2add = painQ
+                                pain1 += 1
+                            else: pain2add = pain2add + ',' + painQ
+                            RecordDict.update({"PainLevel" : pain2add}) # Update data in record
+                            StrRecord = 'You picked: ' + RecordDict['PainLevel']
+                            im.executeModality('TEXT_default', StrRecord)
+                        elif painQ == 'done': painDone = False
 
 
 

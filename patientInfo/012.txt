@@ -10,4 +10,4 @@ TimeAdmitted=1565337521.853802
 UrgencyLevel=High
 WaitTime=1:47
 RemainingWaitTime=0:05
-ChangeinWaitTime=no
+ChangeinWaitTime=has not
