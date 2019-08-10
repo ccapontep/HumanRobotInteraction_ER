@@ -265,12 +265,43 @@ def i2():
                                 emer1 += 1
                             else: emerg2add = emerg2add + ',' + emergQ
                             RecordDict.update({"EmergencySymptoms" : emerg2add}) # Update data in record
-                            im.executeModality('TEXT_default', RecordDict['EmergencySymptoms'])
+                            StrRecord = 'You picked: ' + RecordDict['EmergencySymptoms']
+                            im.executeModality('TEXT_default', StrRecord)
                         elif emergQ == 'done': emergDone = False
                         elif emergQ == 'next': nextEm = True
                         elif emergQ == 'next2': nextEm2 = True
 
-                # elif HistQues == 'symptoms':
+                elif HistQues == 'symptoms':
+                    im.executeModality('TEXT_default', 'Select again all that apply.')
+                    symDone = True
+                    symp1 = 0
+                    nextSy = False
+                    while symDone == True:
+                        if nextSy == False:
+                            im.executeModality('BUTTONS',[['fever/chills','Fever/Chills'],['nausea/vomit','Nausea/Vomit'], ['limited movement', 'Limited movement/Stiffness'], ['loss sense(s)', 'Loss of one or more: Sight, Hearing, Touch'], ['cut', 'Cut/Scrape'], ['next', 'See more options']])
+                            im.executeModality('ASR',['fever/chills', 'nausea/vomit', 'limited movement', 'loss sense(s)', 'cut', 'next'])
+
+                        else:
+                            im.executeModality('BUTTONS',[ ['pain', 'Pain'], ['infection', 'Infection'], ['inflammation', 'Swelling/inflammation '], ['dizzy', 'light-headed/dizzy'], ['recurring', 'One or more of these are Recurring'], ['done', 'Done, exit.']])
+                            im.executeModality('ASR',['pain', 'infection', 'inflammation', 'dizzy', 'recurring', 'done'])
+
+
+                        symQ = im.ask(actionname=None, timeoutvalue=10000)
+                        im.display.remove_buttons()
+
+                        if not symQ == 'done' and not symQ == 'next':
+                            say('Item added', 'en')
+                            if symp1 == 0:
+                                sym2add = symQ
+                                symp1 += 1
+                            else: sym2add = sym2add + ',' + symQ
+                            RecordDict.update({"Symptoms" : sym2add}) # Update data in record
+                            StrRecord = 'You picked: ' + RecordDict['Symptoms']
+                            im.executeModality('TEXT_default', StrRecord)
+                        elif symQ == 'done': symDone = False
+                        elif symQ == 'next': nextSy = True
+
+                # elif HistQues == 'location':
                 #     im.executeModality('TEXT_default', 'Select again all that apply.')
                 #     emergDone = True
                 #     emer1 = 0
