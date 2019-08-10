@@ -225,8 +225,8 @@ def i2():
                 im.executeModality('TEXT_default', 'Which would you like to update?')
                 say('Pick the item you would like to change.', 'en')
 
-                im.executeModality('BUTTONS',[['emergency','Emergency Symptoms'], ['symptoms', 'Symptoms'], ['location', 'Location of Pain'], ['conscious', 'Level of Consciousness'], ['done', 'Done, exit.']])
-                im.executeModality('ASR',['emergency', 'symptoms', 'location', 'conscious', 'done'])
+                im.executeModality('BUTTONS',[['emergency','Emergency Symptoms'], ['symptoms', 'Symptoms'], ['location', 'Location of Pain'], ['conscious', 'Level of Consciousness'], ['painlevel', 'Pain Level'], ['done', 'Done, exit.']])
+                im.executeModality('ASR',['emergency', 'symptoms', 'location', 'conscious', 'painlevel', 'done'])
                 HistQues = im.ask(actionname=None, timeoutvalue=10000)
                 im.display.remove_buttons()
 
@@ -301,27 +301,27 @@ def i2():
                         elif symQ == 'done': symDone = False
                         elif symQ == 'next': nextSy = True
 
-                # elif HistQues == 'location':
-                #     im.executeModality('TEXT_default', 'Select again all that apply.')
-                #     emergDone = True
-                #     emer1 = 0
-                #     while histDone == True:
-                #         im.executeModality('BUTTONS',[['bleeding','Bleeding that will not stop'],['breathing','Breathing problems'], ['unusual behavior', 'Unusual behavior, confusion, difficulty arousing'], ['chest pain', 'Chest pain'], ['choking', 'Choking'], ['coughing', 'Coughing up or vomiting blood'], ['severe vomiting', 'Severe or persistent vomiting'], ['fainting', 'Fainting or loss of consciousness'], \
-                #         ['feeling suicide murder', 'Feeling of committing suicide or murder'], ['serious injury', 'Serious injury due to: 1) motor vehicle accident, 2) burns or smoke inhalation, 3) near drowning'], ['deep wound', 'Deep or large wound'], ['sudden severe pain', 'Sudden, severe pain anywhere in the body'], ['sudden dizziness', 'Sudden dizziness, weakness, or change in vision'], \
-                #         ['swallowing poisonous', 'Swallowing a poisonous substance'], ['severe abdominal', 'Severe abdominal pain or pressure'], ['head spine', 'Head or spine injury'], ['done', 'Done, exit.']])
-                #         im.executeModality('ASR',['bleeding', 'breathing', 'unusual behavior', 'chest pain', 'choking', 'coughing', 'severe vomiting', 'fainting', 'feeling suicide murder', 'serious injury', 'deep wound', 'sudden severe pain', 'sudden dizziness', 'swallowing poisonous', 'severe abdominal', 'head spine', 'done'])
-                #         emergQ = im.ask(actionname=None, timeoutvalue=10000)
-                #         im.display.remove_buttons()
-                #
-                #         if not emergQ == 'done':
-                #             say('Item added', 'en')
-                #             if emer1 == 0:
-                #                 emerg2add = emergQ
-                #                 emer1 += 1
-                #             else: emerg2add = emerg2add + ',' + emergQ
-                #             RecordDict.update({"PastMedicalHistory" : emerg2add}) # Update data in record
-                #             im.executeModality('TEXT_default', RecordDict['Emergency Symptoms'])
-                #         else: emergDone = False
+                elif HistQues == 'location':
+                    im.executeModality('TEXT_default', 'Select again all that apply.')
+                    locDone = True
+                    loc1 = 0
+                    while locDone == True:
+                        im.executeModality('BUTTONS',[ ['pain', 'Pain'], ['infection', 'Infection'], ['inflammation', 'Swelling/inflammation '], ['dizzy', 'light-headed/dizzy'], ['recurring', 'One or more of these are Recurring'], ['done', 'Done, exit.']])
+                        im.executeModality('ASR',['pain', 'infection', 'inflammation', 'dizzy', 'recurring', 'done'])
+
+                        locQ = im.ask(actionname=None, timeoutvalue=10000)
+                        im.display.remove_buttons()
+
+                        if not locQ == 'done':
+                            say('Item added', 'en')
+                            if loc1 == 0:
+                                loc2add = locQ
+                                loc1 += 1
+                            else: loc2add = loc2add + ',' + locQ
+                            RecordDict.update({"LocationofPain" : loc2add}) # Update data in record
+                            StrRecord = 'You picked: ' + RecordDict['LocationofPain']
+                            im.executeModality('TEXT_default', StrRecord)
+                        elif locQ == 'done': locDone = False
 
 
 
