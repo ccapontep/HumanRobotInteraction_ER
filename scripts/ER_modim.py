@@ -329,8 +329,8 @@ def i2():
                     consDone = True
                     cons1 = 0
                     while consDone == True:
-                        im.executeModality('BUTTONS',[ ['foot', 'Foot(x2)'], ['leg(s)', 'Leg(s)'], ['arm(s)', 'Arm(s)'], ['hand(s)', 'Hand(s)'], ['abdomen', 'Abdomen'], ['chest', 'Chest'], ['back', 'Back'], ['head/face', 'Head/Face'], ['done', 'Done, exit.']])
-                        im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
+                        im.executeModality('BUTTONS',[ ['fully', 'Fully (awake, aware)'], ['medium', 'Medium (some confusion)'], ['barely', 'Barely (feeling of sleeping or fainting)'], ['none', 'Unconscious (fainted)'], ['done', 'Done, exit.']])
+                        im.executeModality('ASR',['fully', 'medium', 'barely', 'none', 'done'])
 
                         consQ = im.ask(actionname=None, timeoutvalue=10000)
                         im.display.remove_buttons()
@@ -351,8 +351,8 @@ def i2():
                     painDone = True
                     pain1 = 0
                     while painDone == True:
-                        im.executeModality('BUTTONS',[ ['foot', 'Foot(x2)'], ['leg(s)', 'Leg(s)'], ['arm(s)', 'Arm(s)'], ['hand(s)', 'Hand(s)'], ['abdomen', 'Abdomen'], ['chest', 'Chest'], ['back', 'Back'], ['head/face', 'Head/Face'], ['done', 'Done, exit.']])
-                        im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
+                        im.executeModality('BUTTONS',[ ['some', 'Some'], ['moderate', 'Moderate'], ['intense', 'Intense'], ['very intense', 'Very Intense'], ['excruciating', 'Excruciating'], ['done', 'Done, exit.']])
+                        im.executeModality('ASR',['some', 'moderate', 'intense', 'very intense', 'abdomen', 'excruciating', 'done'])
 
                         painQ = im.ask(actionname=None, timeoutvalue=10000)
                         im.display.remove_buttons()
