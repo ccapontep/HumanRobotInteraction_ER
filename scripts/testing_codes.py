@@ -39,7 +39,7 @@ admit_time = float(RecordDict["TimeAdmitted"])
 curr_sec = time.time()
 
 waittingTime = RecordDict["WaitTime"]
-wHour, wMin = waittingTime.split(':')
+wHour, wMin = waittingTime.split('-')
 waitTimeSec = int(wHour)*60*60 + int(wMin)*60
 
 remain_time_sec = waitTimeSec - (curr_sec - admit_time)
@@ -49,4 +49,6 @@ if remain_min < 0 or remain_hr < 0: # if no more remaining time
     remain_str = '0h0m'
 else:
     remain_str = str(int(remain_hr)) + 'h' + str(int(remain_min)) + 'm'
-
+    
+stringDic = str(RecordDict)
+stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': ','=')

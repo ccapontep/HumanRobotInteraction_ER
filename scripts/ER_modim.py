@@ -196,7 +196,7 @@ def i2():
             curr_sec = time.time()
 
             waittingTime = RecordDict["WaitTime"]
-            wHour, wMin = waittingTime.split(':')
+            wHour, wMin = waittingTime.split('-')
             waitTimeSec = int(wHour)*60*60 + int(wMin)*60
 
             remain_time_sec = waitTimeSec - (curr_sec - admit_time)
@@ -217,7 +217,10 @@ def i2():
                 say(Remain_say, 'en')
                 time.sleep(5)
 
-            RecordDict.update({"RemainingWaitTime" : remain_str}) # update the info in the record
+            # update the info in the record
+            RecordDict.update({"RemainingWaitTime" : remain_str})
+            RecordDict.update({"ChangeinWaitTime" : 'has not'})
+
 
         # If the user wants to update its information Record
         elif UserQues == 'update':
@@ -264,7 +267,7 @@ def i2():
                             if emer1 == 0:
                                 emerg2add = emergQ
                                 emer1 += 1
-                            else: emerg2add = emerg2add + ',' + emergQ
+                            else: emerg2add = emerg2add + '/' + emergQ
                             RecordDict.update({"EmergencySymptoms" : emerg2add}) # Update data in record
                             StrRecord = 'You picked: ' + RecordDict['EmergencySymptoms']
                             im.executeModality('TEXT_default', StrRecord)
@@ -295,7 +298,7 @@ def i2():
                             if symp1 == 0:
                                 sym2add = symQ
                                 symp1 += 1
-                            else: sym2add = sym2add + ',' + symQ
+                            else: sym2add = sym2add + '/' + symQ
                             RecordDict.update({"Symptoms" : sym2add}) # Update data in record
                             StrRecord = 'You picked: ' + RecordDict['Symptoms']
                             im.executeModality('TEXT_default', StrRecord)
@@ -318,7 +321,7 @@ def i2():
                             if loc1 == 0:
                                 loc2add = locQ
                                 loc1 += 1
-                            else: loc2add = loc2add + ',' + locQ
+                            else: loc2add = loc2add + '/' + locQ
                             RecordDict.update({"LocationofPain" : loc2add}) # Update data in record
                             StrRecord = 'You picked: ' + RecordDict['LocationofPain']
                             im.executeModality('TEXT_default', StrRecord)
@@ -336,7 +339,7 @@ def i2():
                     if cons1 == 0:
                         cons2add = consQ
                         cons1 += 1
-                    else: cons2add = cons2add + ',' + consQ
+                    else: cons2add = cons2add + '/' + consQ
                     RecordDict.update({"LevelofConsciousness" : cons2add}) # Update data in record
                     StrRecord = 'Your consciousness level is: ' + RecordDict['LevelofConsciousness']
                     im.executeModality('TEXT_default', StrRecord)
@@ -354,13 +357,18 @@ def i2():
                     if pain1 == 0:
                         pain2add = painQ
                         pain1 += 1
-                    else: pain2add = pain2add + ',' + painQ
+                    else: pain2add = pain2add + '/' + painQ
                     RecordDict.update({"PainLevel" : pain2add}) # Update data in record
                     StrRecord = 'Your pain level is: ' + RecordDict['PainLevel']
                     im.executeModality('TEXT_default', StrRecord)
                     time.sleep(3)
 
+    stringDic = str(RecordDict)
+    stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': ','=')
 
+    recFile = open(os.path.join(directory, RecordTxt), "w")
+    recFile.write(stringDic)
+    recFile.close()
 
     end()
 
