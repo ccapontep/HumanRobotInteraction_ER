@@ -52,3 +52,21 @@ else:
     
 stringDic = str(RecordDict)
 stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': ','=')
+
+recFile = open(os.path.join(directory, RecordTxt), "w")
+recFile.write(stringDic)
+recFile.close()
+
+
+# Add time admitted:
+curr_sec = time.time()
+loc_time = time.localtime(curr_sec)
+curr_date = ((time.ctime(curr_sec)).split(':')[0])[:-3]
+curr_time = str(loc_time.tm_hour) + ' hours and ' + str(loc_time.tm_min) + ' minutes'
+RecordDict.update({"TimeAdmitted" : curr_sec}) # Update data in record
+StrRecord = 'Your date admitted is: ' + curr_date
+StrRecord2 = 'Your time admitted is: ' + curr_time
+
+
+
+
