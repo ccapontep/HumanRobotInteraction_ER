@@ -396,7 +396,7 @@ def i3():
             if name1 == 0:
                 name2add = nameQ
                 name1 += 1
-            elif name1 != 0 and nameQ != ',' and nameQ != 'back': name2add = name2add + nameQ
+            elif name1 != 0 and nameQ != 'Space' and nameQ != 'back': name2add = name2add + nameQ
             elif nameQ == 'Space': name2add = name2add + ' '
             elif nameQ == 'back': name2add = name2add[:-1]
 
@@ -411,7 +411,7 @@ def i3():
     ageDone = True
     age1 = 0
     while ageDone == True:
-        im.executeModality('BUTTONS',[ ['0', 'zero'], ['1', 'one'], ['2', 'two'], ['3', 'three'], ['4', 'four'], ['5', 'five'], ['6', 'six'], ['7', 'seven'], ['8', 'eight'], ['9', 'nine'], ['back', 'backspace'], ['done', 'Done']])
+        im.executeModality('BUTTONS',[ ['0', '0'], ['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5'], ['6', '6'], ['7', '7'], ['8', '8'], ['9', '9'], ['back', 'backspace'], ['done', 'Done']])
         # im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
 
         ageQ = im.ask(actionname=None, timeoutvalue=10000)
