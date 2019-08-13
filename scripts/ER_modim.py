@@ -378,7 +378,8 @@ def i2():
 # Interaction to retrieve info for the user
 def i3():
     im.display.loadUrl('ERnewpatient.html')
-    im.executeModality('TEXT_default', 'Please answer the following:')
+    im.executeModality('TEXT_title','Add information to your Patient Record')
+    im.executeModality('TEXT_default', 'Please answer the following questions')
     say('Please enter the information being asked by pressing the corresponding buttons', 'en')
     RecordDict = dict()
 
@@ -450,7 +451,9 @@ def i3():
                 hist2add = histQ
                 hist1 += 1
             elif hist1 != 0 and histQ != 'remove': hist2add = hist2add + '/' + histQ
-            elif histQ == 'remove': hist2add = hist2add.split('/')[0]
+            elif histQ == 'remove':
+                hist2add = hist2add.split('/')[0]
+                hist2add = hist2add.split(':')[0]
 
             RecordDict.update({"PastMedicalHistory" : hist2add}) # Update data in record
             StrRecord = 'Your past history is: ' + RecordDict['PastMedicalHistory']
@@ -487,7 +490,9 @@ def i3():
                 emerg2add = emergQ
                 emer1 += 1
             elif emer1 != 0 and emergQ != 'remove': emerg2add = emerg2add + '/' + emergQ
-            elif emergQ == 'remove': emerg2add = emerg2add.split('/')[0]
+            elif emergQ == 'remove':
+                emerg2add = emerg2add.split('/')[0]
+                emerg2add = emerg2add.split(':')[0]
 
             RecordDict.update({"EmergencySymptoms" : emerg2add}) # Update data in record
             StrRecord = 'Your emergency symptoms are: ' + RecordDict['EmergencySymptoms']
@@ -521,7 +526,9 @@ def i3():
                 sym2add = symQ
                 symp1 += 1
             elif symp1 != 0 and symQ != 'remove': sym2add = sym2add + '/' + symQ
-            elif symQ == 'remove': sym2add = sym2add.split('/')[0]
+            elif symQ == 'remove':
+                sym2add = sym2add.split('/')[0]
+                sym2add = sym2add.split(':')[0]
 
             RecordDict.update({"Symptoms" : sym2add}) # Update data in record
             StrRecord = 'Your symptoms are: ' + RecordDict['Symptoms']
@@ -547,7 +554,9 @@ def i3():
                 loc2add = locQ
                 loc1 += 1
             elif loc1 != 0 and locQ != 'remove': loc2add = loc2add + '/' + locQ
-            elif locQ == 'remove': loc2add = loc2add.split('/')[0]
+            elif locQ == 'remove':
+                loc2add = loc2add.split('/')[0]
+                loc2add = loc2add.split(':')[0]
 
             RecordDict.update({"LocationofPain" : loc2add}) # Update data in record
             StrRecord = 'Your pain location are: ' + RecordDict['LocationofPain']
@@ -558,7 +567,7 @@ def i3():
     im.executeModality('TEXT_default', 'Pick your level of consciousness:')
     say('enter your level of consciousness', 'en')
     cons1 = 0
-    im.executeModality('BUTTONS',[ ['fully', 'Fully (awake, aware)'], ['medium', 'Medium (some confusion)'], ['barely', 'Barely (feeling of sleeping or fainting)'], ['none', 'Unconscious (fainted)']])
+    im.executeModality('BUTTONS',[ ['fully', 'Fully (awake, aware)'], ['medium', 'Medium (some confusion)'], ['barely', 'Barely (feeling of sleeping or fainting)'], ['unconscious', 'Unconscious (fainted)']])
     im.executeModality('ASR',['fully', 'medium', 'barely', 'none'])
 
     consQ = im.ask(actionname=None, timeoutvalue=100000)
@@ -595,7 +604,7 @@ def i3():
 
     # Add time admitted:
     curr_sec = time.time()
-    curr_time = time.ctime(curr_time)
+    curr_time = time.ctime(curr_sec)
     RecordDict.update({"TimeAdmitted" : curr_sec}) # Update data in record
     StrRecord = 'Your time admitted is: ' + curr_time
     im.executeModality('TEXT_default', StrRecord)
