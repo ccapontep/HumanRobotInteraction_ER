@@ -76,9 +76,9 @@ def i1():
     elif a == 'no':
         im.executeModality('TEXT_default','I am a new patient.')
         say('Welcome to Wellness Hospital. My name is Marrtino and I will help you setup your emergency in the database', 'en')
-        say('I will be asking some questions about your emergency and have you see a doctor as soon as possible, depending on the severity of your emergency', 'en')
-        say('I will also be doing routine checks to let you know your remaining wait time. If at any point you have questions, come ask', 'en')
-        say('We will take care of you. Thank you for visiting us.', 'en')
+        # say('I will be asking some questions about your emergency and have you see a doctor as soon as possible, depending on the severity of your emergency', 'en')
+        # say('I will also be doing routine checks to let you know your remaining wait time. If at any point you have questions, come ask', 'en')
+        # say('We will take care of you. Thank you for visiting us.', 'en')
         time.sleep(2)
         i3()
     # elif ('' in aa):
@@ -436,6 +436,7 @@ mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
 mc.store_interaction(i2)
 mc.store_interaction(i1)
 mc.store_interaction(i0)
+mc.store_interaction(i3)
 mc.run_interaction(i1)
 # mc.run_interaction(i0)
 
