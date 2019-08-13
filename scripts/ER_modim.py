@@ -337,6 +337,7 @@ def i2():
                     consQ = im.ask(actionname=None, timeoutvalue=10000)
                     im.display.remove_buttons()
 
+                    say(consQ, 'en')
                     if cons1 == 0:
                         cons2add = consQ
                         cons1 += 1
@@ -355,6 +356,7 @@ def i2():
                     painQ = im.ask(actionname=None, timeoutvalue=10000)
                     im.display.remove_buttons()
 
+                    say(painQ, 'en')
                     if pain1 == 0:
                         pain2add = painQ
                         pain1 += 1
@@ -380,6 +382,7 @@ def i3():
     say('Please enter the information being asked by pressing the corresponding buttons', 'en')
     RecordDict = dict()
 
+    # Add name:
     im.executeModality('TEXT_default', 'Enter your FIRST and LAST name:')
     say('Enter your name', 'en')
     nameDone = True
@@ -405,7 +408,7 @@ def i3():
             im.executeModality('TEXT_default', StrRecord)
         elif nameQ == 'done': nameDone = False
 
-
+    # Add age:
     im.executeModality('TEXT_default', 'Enter your current age:')
     say('enter your age', 'en')
     ageDone = True
@@ -430,7 +433,7 @@ def i3():
             im.executeModality('TEXT_default', StrRecord)
         elif ageQ == 'done': ageDone = False
 
-
+    # Add medical history:
     im.executeModality('TEXT_default', 'Enter your past medical history:')
     say('enter your history', 'en')
     histDone = True
@@ -455,7 +458,9 @@ def i3():
             im.executeModality('TEXT_default', StrRecord)
         elif histQ == 'done': histDone = False
 
+    # Add emergency symptoms:
     im.executeModality('TEXT_default', 'Enter any symptoms categorized as higher emergency:')
+    say('enter your emergency symptoms', 'en')
     emergDone = True
     emer1 = 0
     nextEm = False
@@ -478,7 +483,7 @@ def i3():
         im.display.remove_buttons()
 
         if not emergQ == 'done' and not emergQ == 'next' and not emergQ == 'next2':
-            say('Item added', 'en')
+            say(emergQ, 'en')
             if emer1 == 0:
                 emerg2add = emergQ
                 emer1 += 1
@@ -490,13 +495,15 @@ def i3():
         elif emergQ == 'next': nextEm = True
         elif emergQ == 'next2': nextEm2 = True
 
+    # Add symptoms:
     im.executeModality('TEXT_default', 'Enter your symptoms:')
+    say('enter your symptoms', 'en')
     symDone = True
     symp1 = 0
     nextSy = False
     while symDone == True:
         if nextSy == False:
-            im.executeModality('BUTTONS',[['fever/chills','Fever/Chills'],['nausea/vomit','Nausea/Vomit'], ['limited movement', 'Limited movement/Stiffness'], ['loss sense(s)', 'Loss of one or more: Sight, Hearing, Touch'], ['cut', 'Cut/Scrape'], ['next', 'See more options']])
+            im.executeModality('BUTTONS',[['fever or chills','Fever/Chills'],['nausea/vomit','Nausea/Vomit'], ['limited movement', 'Limited movement/Stiffness'], ['loss sense(s)', 'Loss of one or more: Sight, Hearing, Touch'], ['cut', 'Cut/Scrape'], ['next', 'See more options']])
             im.executeModality('ASR',['fever/chills', 'nausea/vomit', 'limited movement', 'loss sense(s)', 'cut', 'next'])
 
         else:
@@ -508,7 +515,7 @@ def i3():
         im.display.remove_buttons()
 
         if not symQ == 'done' and not symQ == 'next':
-            say('Item added', 'en')
+            say(symQ, 'en')
             if symp1 == 0:
                 sym2add = symQ
                 symp1 += 1
@@ -519,18 +526,20 @@ def i3():
         elif symQ == 'done': symDone = False
         elif symQ == 'next': nextSy = True
 
+    # Add location of pain:
     im.executeModality('TEXT_default', 'Enter the location of your pain(s):')
+    say('enter your pain locations', 'en')
     locDone = True
     loc1 = 0
     while locDone == True:
-        im.executeModality('BUTTONS',[ ['foot', 'Foot(x2)'], ['leg(s)', 'Leg(s)'], ['arm(s)', 'Arm(s)'], ['hand(s)', 'Hand(s)'], ['abdomen', 'Abdomen'], ['chest', 'Chest'], ['back', 'Back'], ['head/face', 'Head/Face'], ['done', 'Done, exit.']])
+        im.executeModality('BUTTONS',[ ['foot', 'Foot(x2)'], ['leg', 'Leg(s)'], ['arm', 'Arm(s)'], ['hand', 'Hand(s)'], ['abdomen', 'Abdomen'], ['chest', 'Chest'], ['back', 'Back'], ['head/face', 'Head/Face'], ['done', 'Done, exit.']])
         im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
 
         locQ = im.ask(actionname=None, timeoutvalue=10000)
         im.display.remove_buttons()
 
         if not locQ == 'done':
-            say('Item added', 'en')
+            say(locQ, 'en')
             if loc1 == 0:
                 loc2add = locQ
                 loc1 += 1
@@ -540,7 +549,9 @@ def i3():
             im.executeModality('TEXT_default', StrRecord)
         elif locQ == 'done': locDone = False
 
+    # Add level of consciousness:
     im.executeModality('TEXT_default', 'Pick your level of consciousness:')
+    say('enter your level of consciousness', 'en')
     cons1 = 0
     im.executeModality('BUTTONS',[ ['fully', 'Fully (awake, aware)'], ['medium', 'Medium (some confusion)'], ['barely', 'Barely (feeling of sleeping or fainting)'], ['none', 'Unconscious (fainted)']])
     im.executeModality('ASR',['fully', 'medium', 'barely', 'none'])
@@ -548,6 +559,7 @@ def i3():
     consQ = im.ask(actionname=None, timeoutvalue=10000)
     im.display.remove_buttons()
 
+    say(consQ, 'en')
     if cons1 == 0:
         cons2add = consQ
         cons1 += 1
@@ -557,6 +569,7 @@ def i3():
     im.executeModality('TEXT_default', StrRecord)
     time.sleep(3)
 
+    # Add pain lavel:
     im.executeModality('TEXT_default', 'Pick your pain level:')
     pain1 = 0
     im.executeModality('BUTTONS',[ ['some', 'Some'], ['moderate', 'Moderate'], ['intense', 'Intense'], ['very intense', 'Very Intense'], ['excruciating', 'Excruciating']])
@@ -565,6 +578,7 @@ def i3():
     painQ = im.ask(actionname=None, timeoutvalue=10000)
     im.display.remove_buttons()
 
+    say(painQ, 'en')
     if pain1 == 0:
         pain2add = painQ
         pain1 += 1
