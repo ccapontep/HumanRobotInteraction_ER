@@ -74,7 +74,7 @@ def i1():
 
     # elif ('no' in aa) or a == 'no':
     elif a == 'no':
-        im.executeModality('TEXT_default','I am a new patient.')
+        im.executeModality('TEXT_default','You are a new patient.')
         say('Welcome to Wellness Hospital. My name is Marrtino and I will help you setup your emergency in the database', 'en')
         # say('I will be asking some questions about your emergency and have you see a doctor as soon as possible, depending on the severity of your emergency', 'en')
         # say('I will also be doing routine checks to let you know your remaining wait time. If at any point you have questions, come ask', 'en')
@@ -384,7 +384,7 @@ def i3():
     nameDone = True
     name1 = 0
     while nameDone == True:
-        im.executeModality('BUTTONS',[ ['a', 'A'], ['b', 'B'], ['c', 'C'], ['d', 'D'], ['e', 'E'], ['f', 'F'], ['g', 'G'], ['h', 'H'], ['i', 'I'], ['j', 'J'], ['k', 'K'], ['l', 'L'], ['m', 'M'], ['n', 'N'], ['o', 'O'], ['p,', 'P'], ['q', 'Q'], ['r', 'R'], ['s', 'S'], ['t', 'T'], ['u', 'U'], ['v', 'V'], ['w', 'W'], ['x', 'X'], ['y', 'Y'], ['z', 'Z'], [',', 'space'], ['back', 'back']['done', 'Done, exit.']])
+        im.executeModality('BUTTONS',[ ['a', 'A'], ['b', 'B'], ['c', 'C'], ['d', 'D'], ['e', 'E'], ['f', 'F'], ['g', 'G'], ['h', 'H'], ['i', 'I'], ['j', 'J'], ['k', 'K'], ['l', 'L'], ['m', 'M'], ['n', 'N'], ['o', 'O'], ['p,', 'P'], ['q', 'Q'], ['r', 'R'], ['s', 'S'], ['t', 'T'], ['u', 'U'], ['v', 'V'], ['w', 'W'], ['x', 'X'], ['y', 'Y'], ['z', 'Z'], [',', 'space'], ['back', 'Back']['done', 'Done']])
         im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
 
         nameQ = im.ask(actionname=None, timeoutvalue=10000)
