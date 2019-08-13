@@ -380,12 +380,13 @@ def i3():
     say('Hello there, please enter the information being asked by pressing the corresponding buttons', 'en')
     RecordDict = dict()
 
-    im.executeModality('TEXT_default', 'Enter your FIRST and LAST name.')
+    im.executeModality('TEXT_default', 'Enter your FIRST and LAST name:')
+    say('Enter your name', 'en')
     nameDone = True
     name1 = 0
     while nameDone == True:
-        im.executeModality('BUTTONS',[ ['a', 'A'], ['b', 'B'], ['c', 'C'], ['d', 'D'], ['e', 'E'], ['f', 'F'], ['g', 'G'], ['h', 'H'], ['i', 'I'], ['j', 'J'], ['k', 'K'], ['l', 'L'], ['m', 'M'], ['n', 'N'], ['o', 'O'], ['p', 'P'], ['q', 'Q'], ['r', 'R'], ['s', 'S'], ['t', 'T'], ['u', 'U'], ['v', 'V'], ['w', 'W'], ['x', 'X'], ['y', 'Y'], ['z', 'Z'], [',', 'space'], ['back', 'backspace'], ['done', 'Done']])
-        im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
+        im.executeModality('BUTTONS',[ ['a', 'A'], ['b', 'B'], ['c', 'C'], ['d', 'D'], ['e', 'E'], ['f', 'F'], ['g', 'G'], ['h', 'H'], ['i', 'I'], ['j', 'J'], ['k', 'K'], ['l', 'L'], ['m', 'M'], ['n', 'N'], ['o', 'O'], ['p', 'P'], ['q', 'Q'], ['r', 'R'], ['s', 'S'], ['t', 'T'], ['u', 'U'], ['v', 'V'], ['w', 'W'], ['x', 'X'], ['y', 'Y'], ['z', 'Z'], ['Space', 'space'], ['back', 'backspace'], ['done', 'Done']])
+        # im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
 
         nameQ = im.ask(actionname=None, timeoutvalue=10000)
         im.display.remove_buttons()
@@ -396,7 +397,7 @@ def i3():
                 name2add = nameQ
                 name1 += 1
             elif name1 != 0 and nameQ != ',' and nameQ != 'back': name2add = name2add + nameQ
-            elif nameQ == ',': name2add = name2add + ' '
+            elif nameQ == 'Space': name2add = name2add + ' '
             elif nameQ == 'back': name2add = name2add[:-1]
 
             RecordDict.update({"Name" : name2add}) # Update data in record
@@ -405,12 +406,13 @@ def i3():
         elif nameQ == 'done': nameDone = False
 
 
-    im.executeModality('TEXT_default', 'Enter your current age.')
+    im.executeModality('TEXT_default', 'Enter your current age:')
+    say('enter your age', 'en')
     ageDone = True
     age1 = 0
     while ageDone == True:
-        im.executeModality('BUTTONS',[ ['zero', '0'], ['one', '1'], ['two', '2'], ['three', '3'], ['four', '4'], ['five', '5'], ['six', '6'], ['seven', '7'], ['eight', '8'], ['nine', '9'], ['back', 'backspace'], ['done', 'Done']])
-        im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
+        im.executeModality('BUTTONS',[ ['0', 'zero'], ['1', 'one'], ['2', 'two'], ['3', 'three'], ['4', 'four'], ['5', 'five'], ['6', 'six'], ['7', 'seven'], ['8', 'eight'], ['9', 'nine'], ['back', 'backspace'], ['done', 'Done']])
+        # im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
 
         ageQ = im.ask(actionname=None, timeoutvalue=10000)
         im.display.remove_buttons()
