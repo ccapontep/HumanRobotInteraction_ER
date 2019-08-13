@@ -606,8 +606,9 @@ def i3():
     curr_sec = time.time()
     curr_time = time.ctime(curr_sec)
     RecordDict.update({"TimeAdmitted" : curr_sec}) # Update data in record
-    StrRecord = 'Your time admitted is: ' + curr_time
+    StrRecord = 'Your date and time admitted is: ' + curr_time
     im.executeModality('TEXT_default', StrRecord)
+    say(StrRecord, 'en')
     time.sleep(3)
 
 
