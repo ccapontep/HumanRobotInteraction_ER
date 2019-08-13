@@ -436,7 +436,7 @@ def i3():
     histDone = True
     hist1 = 0
     while histDone == True:
-        im.executeModality('BUTTONS',[['overweight or obese','Overweight or Obese'],['smoke cigarettes','Smoke Cigarettes'], ['High Cholesterol', 'High Cholesterol'], ['hypertension', 'Hypertension'], ['diabetes', 'Diabetes'], ['current symptoms recurring', 'Current Symptoms Recurring'], ['back', 'Remove last item'], ['done', 'Done, exit.']])
+        im.executeModality('BUTTONS',[['overweight or obese','Overweight or Obese'],['smoke cigarettes','Smoke Cigarettes'], ['high cholesterol', 'High Cholesterol'], ['hypertension', 'Hypertension'], ['diabetes', 'Diabetes'], ['recurring symptoms', 'Current Symptoms Recurring'], ['back', 'Remove last item'], ['done', 'Done, exit.']])
         im.executeModality('ASR',['overweight or obese','smoke cigarettes', 'high cholesterol', 'hypertension', 'diabetes', 'current symptoms recurring', 'done'])
         histQ = im.ask(actionname=None, timeoutvalue=10000)
         im.display.remove_buttons()
@@ -455,7 +455,124 @@ def i3():
             im.executeModality('TEXT_default', StrRecord)
         elif histQ == 'done': histDone = False
 
+    im.executeModality('TEXT_default', 'Enter any symptoms categorized as higher emergency:')
+    emergDone = True
+    emer1 = 0
+    nextEm = False
+    nextEm2 = False
+    while emergDone == True:
+        if nextEm == False and nextEm2 == False:
+            im.executeModality('BUTTONS',[['bleeding','Bleeding that will not stop'],['breathing','Breathing problems'], ['unusual behavior', 'Unusual behavior, confusion, difficulty arousing'], ['chest pain', 'Chest pain'], ['choking', 'Choking'], ['coughing', 'Coughing up or vomiting blood'], ['severe vomiting', 'Severe or persistent vomiting'], ['fainting', 'Fainting or loss of consciousness'], \
+            ['next', 'See more options']])
+            im.executeModality('ASR',['bleeding', 'breathing', 'unusual behavior', 'chest pain', 'choking', 'coughing', 'severe vomiting', 'fainting', 'next'])
+        elif nextEm == True and nextEm2 == False:
+            im.executeModality('BUTTONS',[['serious injury', 'Serious injury due to: 1) vehicle accident, 2) burns/smoke inhalation, 3) near drowning'], ['deep wound', 'Deep or large wound'], ['sudden severe pain', 'Sudden, severe pain anywhere in the body'], ['next2', 'See more options']])
+            im.executeModality('ASR',['serious injury', 'deep wound', 'sudden severe pain', 'next2'])
 
+        elif nextEm == True and nextEm2 == True:
+            im.executeModality('BUTTONS',[ ['sudden dizziness', 'Sudden dizziness, weakness, or change in vision'], ['swallowing poisonous', 'Swallowing a poisonous substance'], ['severe abdominal', 'Severe abdominal pain or pressure'], ['head spine', 'Head or spine injury'], ['feeling suicide murder', 'Feeling of committing suicide or murder'], ['done', 'Done, exit.']])
+            im.executeModality('ASR',['sudden dizziness', 'swallowing poisonous', 'severe abdominal', 'head spine', 'feeling suicide murder', 'done'])
+
+
+        emergQ = im.ask(actionname=None, timeoutvalue=10000)
+        im.display.remove_buttons()
+
+        if not emergQ == 'done' and not emergQ == 'next' and not emergQ == 'next2':
+            say('Item added', 'en')
+            if emer1 == 0:
+                emerg2add = emergQ
+                emer1 += 1
+            else: emerg2add = emerg2add + '/' + emergQ
+            RecordDict.update({"EmergencySymptoms" : emerg2add}) # Update data in record
+            StrRecord = 'You picked: ' + RecordDict['EmergencySymptoms']
+            im.executeModality('TEXT_default', StrRecord)
+        elif emergQ == 'done': emergDone = False
+        elif emergQ == 'next': nextEm = True
+        elif emergQ == 'next2': nextEm2 = True
+
+    im.executeModality('TEXT_default', 'Enter your symptoms:')
+    symDone = True
+    symp1 = 0
+    nextSy = False
+    while symDone == True:
+        if nextSy == False:
+            im.executeModality('BUTTONS',[['fever/chills','Fever/Chills'],['nausea/vomit','Nausea/Vomit'], ['limited movement', 'Limited movement/Stiffness'], ['loss sense(s)', 'Loss of one or more: Sight, Hearing, Touch'], ['cut', 'Cut/Scrape'], ['next', 'See more options']])
+            im.executeModality('ASR',['fever/chills', 'nausea/vomit', 'limited movement', 'loss sense(s)', 'cut', 'next'])
+
+        else:
+            im.executeModality('BUTTONS',[ ['pain', 'Pain'], ['infection', 'Infection'], ['inflammation', 'Swelling/inflammation'], ['dizzy', 'light-headed/dizzy'], ['recurring', 'One or more of these are Recurring'], ['done', 'Done, exit.']])
+            im.executeModality('ASR',['pain', 'infection', 'inflammation', 'dizzy', 'recurring', 'done'])
+
+
+        symQ = im.ask(actionname=None, timeoutvalue=10000)
+        im.display.remove_buttons()
+
+        if not symQ == 'done' and not symQ == 'next':
+            say('Item added', 'en')
+            if symp1 == 0:
+                sym2add = symQ
+                symp1 += 1
+            else: sym2add = sym2add + '/' + symQ
+            RecordDict.update({"Symptoms" : sym2add}) # Update data in record
+            StrRecord = 'You picked: ' + RecordDict['Symptoms']
+            im.executeModality('TEXT_default', StrRecord)
+        elif symQ == 'done': symDone = False
+        elif symQ == 'next': nextSy = True
+
+    im.executeModality('TEXT_default', 'Enter the location of your pain(s):')
+    locDone = True
+    loc1 = 0
+    while locDone == True:
+        im.executeModality('BUTTONS',[ ['foot', 'Foot(x2)'], ['leg(s)', 'Leg(s)'], ['arm(s)', 'Arm(s)'], ['hand(s)', 'Hand(s)'], ['abdomen', 'Abdomen'], ['chest', 'Chest'], ['back', 'Back'], ['head/face', 'Head/Face'], ['done', 'Done, exit.']])
+        im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
+
+        locQ = im.ask(actionname=None, timeoutvalue=10000)
+        im.display.remove_buttons()
+
+        if not locQ == 'done':
+            say('Item added', 'en')
+            if loc1 == 0:
+                loc2add = locQ
+                loc1 += 1
+            else: loc2add = loc2add + '/' + locQ
+            RecordDict.update({"LocationofPain" : loc2add}) # Update data in record
+            StrRecord = 'You picked: ' + RecordDict['LocationofPain']
+            im.executeModality('TEXT_default', StrRecord)
+        elif locQ == 'done': locDone = False
+
+    im.executeModality('TEXT_default', 'Pick your level of consciousness:')
+    cons1 = 0
+    im.executeModality('BUTTONS',[ ['fully', 'Fully (awake, aware)'], ['medium', 'Medium (some confusion)'], ['barely', 'Barely (feeling of sleeping or fainting)'], ['none', 'Unconscious (fainted)']])
+    im.executeModality('ASR',['fully', 'medium', 'barely', 'none'])
+
+    consQ = im.ask(actionname=None, timeoutvalue=10000)
+    im.display.remove_buttons()
+
+    if cons1 == 0:
+        cons2add = consQ
+        cons1 += 1
+    else: cons2add = cons2add + '/' + consQ
+    RecordDict.update({"LevelofConsciousness" : cons2add}) # Update data in record
+    StrRecord = 'Your consciousness level is: ' + RecordDict['LevelofConsciousness']
+    im.executeModality('TEXT_default', StrRecord)
+    time.sleep(3)
+
+    im.executeModality('TEXT_default', 'Pick your pain level:')
+    pain1 = 0
+    im.executeModality('BUTTONS',[ ['some', 'Some'], ['moderate', 'Moderate'], ['intense', 'Intense'], ['very intense', 'Very Intense'], ['excruciating', 'Excruciating']])
+    im.executeModality('ASR',['some', 'moderate', 'intense', 'very intense', 'abdomen', 'excruciating'])
+
+    painQ = im.ask(actionname=None, timeoutvalue=10000)
+    im.display.remove_buttons()
+
+    if pain1 == 0:
+        pain2add = painQ
+        pain1 += 1
+    else: pain2add = pain2add + '/' + painQ
+    RecordDict.update({"PainLevel" : pain2add}) # Update data in record
+    StrRecord = 'Your pain level is: ' + RecordDict['PainLevel']
+    im.executeModality('TEXT_default', StrRecord)
+    time.sleep(3)
 
 
 
