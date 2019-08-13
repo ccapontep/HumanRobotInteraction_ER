@@ -604,12 +604,18 @@ def i3():
 
     # Add time admitted:
     curr_sec = time.time()
-    curr_time = (time.ctime(curr_sec)).split(':')[0]
+    loc_time = time.localtime(curr_sec)
+    curr_date = ((time.ctime(curr_sec)).split(':')[0]).split(' ', 1)[0]
+    curr_time = loc_time.tm_hour + 'hours and ' + loc_time.tm_min + 'minutes'
     RecordDict.update({"TimeAdmitted" : curr_sec}) # Update data in record
-    StrRecord = 'Your date and time admitted is: ' + curr_time
+    StrRecord = 'Your date admitted is: ' + curr_date
     im.executeModality('TEXT_default', StrRecord)
     say(StrRecord, 'en')
-    time.sleep(3)
+    time.sleep(2)
+    StrRecord = 'Your time admitted is: ' + curr_time
+    im.executeModality('TEXT_default', StrRecord)
+    say(StrRecord, 'en')
+    time.sleep(2)
 
 
 
