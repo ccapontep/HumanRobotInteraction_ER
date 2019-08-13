@@ -445,9 +445,8 @@ def i3():
         im.display.remove_buttons()
 
         if not histQ == 'done':
-            # say('Item added', 'en')
             say(histQ, 'en')
-            if hist1 == 0:
+            if hist1 == 0 and histQ != 'back':
                 hist2add = histQ
                 hist1 += 1
             elif hist1 != 0 and histQ != 'back': hist2add = hist2add + '/' + histQ
@@ -489,9 +488,9 @@ def i3():
                 emer1 += 1
             elif emer1 != 0 and emerQ != 'back': emerg2add = emerg2add + '/' + emergQ
             elif emerQ == 'back': emerg2add = emerg2add.split('/')[0]
-
+            say('here yes', 'en')
             RecordDict.update({"EmergencySymptoms" : emerg2add}) # Update data in record
-            StrRecord = 'You picked: ' + RecordDict['EmergencySymptoms']
+            StrRecord = 'Your emergency symptoms are: ' + RecordDict['EmergencySymptoms']
             im.executeModality('TEXT_default', StrRecord)
         elif emergQ == 'done': emergDone = False
         elif emergQ == 'next': nextEm = True
@@ -522,10 +521,10 @@ def i3():
                 sym2add = symQ
                 symp1 += 1
             elif symp1 != 0 and histQ != 'back': sym2add = sym2add + '/' + symQ
-            elif histQ == 'back': hist2add = hist2add.split('/')[0]
+            elif symQ == 'back': sym2add = sym2add.split('/')[0]
 
             RecordDict.update({"Symptoms" : sym2add}) # Update data in record
-            StrRecord = 'You picked: ' + RecordDict['Symptoms']
+            StrRecord = 'Your symptoms are: ' + RecordDict['Symptoms']
             im.executeModality('TEXT_default', StrRecord)
         elif symQ == 'done': symDone = False
         elif symQ == 'next': nextSy = True
@@ -548,10 +547,10 @@ def i3():
                 loc2add = locQ
                 loc1 += 1
             elif loc1 != 0 and histQ != 'back': loc2add = loc2add + '/' + locQ
-            elif histQ == 'back': hist2add = hist2add.split('/')[0]
+            elif locQ == 'back': loc2add = loc2add.split('/')[0]
 
             RecordDict.update({"LocationofPain" : loc2add}) # Update data in record
-            StrRecord = 'You picked: ' + RecordDict['LocationofPain']
+            StrRecord = 'Your pain location are: ' + RecordDict['LocationofPain']
             im.executeModality('TEXT_default', StrRecord)
         elif locQ == 'done': locDone = False
 
