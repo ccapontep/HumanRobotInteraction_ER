@@ -377,7 +377,7 @@ def i2():
 def i3():
     im.display.loadUrl('ERnewpatient.html')
     im.executeModality('TEXT_default', 'Please answer the following:')
-    say('Hello there, please enter the information being asked by pressing the corresponding buttons', 'en')
+    say('Please enter the information being asked by pressing the corresponding buttons', 'en')
     RecordDict = dict()
 
     im.executeModality('TEXT_default', 'Enter your FIRST and LAST name:')
@@ -431,35 +431,32 @@ def i3():
         elif ageQ == 'done': ageDone = False
 
 
+    im.executeModality('TEXT_default', 'Enter your past medical history:')
+    say('enter your history', 'en')
+    histDone = True
+    hist1 = 0
+    while histDone == True:
+        im.executeModality('BUTTONS',[['overweight or obese','Overweight or Obese'],['smoke cigarettes','Smoke Cigarettes'], ['High Cholesterol', 'High Cholesterol'], ['hypertension', 'Hypertension'], ['diabetes', 'Diabetes'], ['current symptoms recurring', 'Current Symptoms Recurring'], ['back', 'Remove last item']['done', 'Done, exit.']])
+        im.executeModality('ASR',['overweight or obese','smoke cigarettes', 'high cholesterol', 'hypertension', 'diabetes', 'current symptoms recurring', 'done'])
+        histQ = im.ask(actionname=None, timeoutvalue=10000)
+        im.display.remove_buttons()
 
-                    # im.executeModality('BUTTONS',[['history','Past Medical History'],['emergency','Emergency Symptoms'], ['symptoms', 'Symptoms'], ['location', 'Location of Pain'], ['conscious', 'Level of Consciousness'], ['done', 'Done, exit.']])
-                    # im.executeModality('ASR',['history','emergency', 'symptoms', 'location', 'conscious', 'done'])
-                    # HistQues = im.ask(actionname=None, timeoutvalue=10000)
-                    # im.display.remove_buttons()
-                    #
-                    # if HistQues == 'done':
-                    #     im.executeModality('TEXT_default', 'Thank you for checking your record.')
-                    #     say('Goodbye!', 'en')
-                    #     updateD = False
-                    #
-                    # elif HistQues == 'history':
-                    #     im.executeModality('TEXT_default', 'Select again all that apply.')
-                    #     hist2add = ''
-                    #     histDone = True
-                    #     while histDone == True:
-                    #         im.executeModality('BUTTONS',[['overweight or obese','Overweight or Obese'],['smoke cigarettes','Smoke Cigarettes'], ['High Cholesterol', 'High Cholesterol'], ['hypertension', 'Hypertension'], ['diabetes', 'Diabetes'], ['current symptoms recurring', 'Current Symptoms Recurring'], ['done', 'Done, exit.']])
-                    #         im.executeModality('ASR',['overweight or obese','smoke cigarettes', 'high cholesterol', 'hypertension', 'diabetes', 'current symptoms recurring', 'done'])
-                    #         histQ = im.ask(actionname=None, timeoutvalue=10000)
-                    #         im.display.remove_buttons()
-                    #
-                    #         if not histQ == 'done':
-                    #             say('Item added', 'en')
-                    #             hist2add = hist2add + histQ + ','
-                    #         else:
-                    #             hist2add = hist2add[:-1]
-                    #             histDone = False
-                    #     RecordDict.update({"PastMedicalHistory" : hist2add}) # Update data in record
-                    #     im.executeModality('TEXT_default', RecordDict['PastMedicalHistory'])
+        if not histQ == 'done':
+            say('Item added', 'en')
+            if hist1 == 0:
+                hist2add = histQ
+                hist1 += 1
+            elif hist1 != 0 and histQ != 'back': hist2add = hist2add + '/' + histQ
+            elif histQ == 'back': hist2add = hist2add.split('/')[0]
+
+            RecordDict.update({"PastMedicalHistory" : hist2add}) # Update data in record
+            StrRecord = 'Your past history is: ' + RecordDict['PastMedicalHistory']
+            im.executeModality('TEXT_default', StrRecord)
+        elif histQ == 'done': histDone = False
+
+
+
+
 
 mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
 mc.store_interaction(i2)
