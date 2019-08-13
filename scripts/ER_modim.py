@@ -436,7 +436,7 @@ def i3():
     histDone = True
     hist1 = 0
     while histDone == True:
-        im.executeModality('BUTTONS',[['overweight or obese','Overweight or Obese'],['smoke cigarettes','Smoke Cigarettes'], ['High Cholesterol', 'High Cholesterol'], ['hypertension', 'Hypertension'], ['diabetes', 'Diabetes'], ['current symptoms recurring', 'Current Symptoms Recurring'], ['back', 'Remove last item']['done', 'Done, exit.']])
+        im.executeModality('BUTTONS',[['overweight or obese','Overweight or Obese'],['smoke cigarettes','Smoke Cigarettes'], ['High Cholesterol', 'High Cholesterol'], ['hypertension', 'Hypertension'], ['diabetes', 'Diabetes'], ['current symptoms recurring', 'Current Symptoms Recurring'], ['back', 'Remove last item'], ['done', 'Done, exit.']])
         im.executeModality('ASR',['overweight or obese','smoke cigarettes', 'high cholesterol', 'hypertension', 'diabetes', 'current symptoms recurring', 'done'])
         histQ = im.ask(actionname=None, timeoutvalue=10000)
         im.display.remove_buttons()
