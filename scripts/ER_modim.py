@@ -484,8 +484,10 @@ def i3():
         if not emergQ == 'done' and emergQ != 'next' and emergQ != 'next2':
             say(emergQ, 'en')
             if emer1 == 0 and emerQ != 'back':
+                say('here 22', 'en')
                 emerg2add = emergQ
                 emer1 += 1
+                say('here 33', 'en')
             elif emer1 != 0 and emerQ != 'back': emerg2add = emerg2add + '/' + emergQ
             elif emerQ == 'back': emerg2add = emerg2add.split('/')[0]
             say('here yes', 'en')
