@@ -606,7 +606,7 @@ def i3():
     curr_sec = time.time()
     loc_time = time.localtime(curr_sec)
     curr_date = ((time.ctime(curr_sec)).split(':')[0]).split(' ', 1)[0]
-    say('here 1', 'en')
+    say(loc_time.tm_hour', 'en')
     curr_time = loc_time.tm_hour + 'hours and ' + loc_time.tm_min + 'minutes'
     say('here 2', 'en')
     RecordDict.update({"TimeAdmitted" : curr_sec}) # Update data in record
