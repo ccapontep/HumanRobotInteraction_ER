@@ -405,28 +405,28 @@ def i3():
         elif nameQ == 'done': nameDone = False
 
 
-        im.executeModality('TEXT_default', 'Enter your FIRST and LAST name.')
-        ageDone = True
-        age1 = 0
-        while ageDone == True:
-            im.executeModality('BUTTONS',[ ['zero', '0'], ['one', '1'], ['two', '2'], ['three', '3'], ['four', '4'], ['five', '5'], ['six', '6'], ['seven', '7'], ['eight', '8'], ['nine', '9'], ['back', 'backspace'], ['done', 'Done']])
-            im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
+    im.executeModality('TEXT_default', 'Enter your current age.')
+    ageDone = True
+    age1 = 0
+    while ageDone == True:
+        im.executeModality('BUTTONS',[ ['zero', '0'], ['one', '1'], ['two', '2'], ['three', '3'], ['four', '4'], ['five', '5'], ['six', '6'], ['seven', '7'], ['eight', '8'], ['nine', '9'], ['back', 'backspace'], ['done', 'Done']])
+        im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
 
-            ageQ = im.ask(actionname=None, timeoutvalue=10000)
-            im.display.remove_buttons()
+        ageQ = im.ask(actionname=None, timeoutvalue=10000)
+        im.display.remove_buttons()
 
-            if not ageQ == 'done':
-                say(ageQ, 'en')
-                if age1 == 0:
-                    age2add = ageQ
-                    age1 += 1
-                elif age1 != 0 and ageQ != 'back': age2add = age2add + ageQ
-                elif ageQ == 'back': age2add = age2add[:-1]
+        if not ageQ == 'done':
+            say(ageQ, 'en')
+            if age1 == 0:
+                age2add = ageQ
+                age1 += 1
+            elif age1 != 0 and ageQ != 'back': age2add = age2add + ageQ
+            elif ageQ == 'back': age2add = age2add[:-1]
 
-                RecordDict.update({"Age" : age2add}) # Update data in record
-                StrRecord = 'Your age is: ' + RecordDict['Age']
-                im.executeModality('TEXT_default', StrRecord)
-            elif ageQ == 'done': ageDone = False
+            RecordDict.update({"Age" : age2add}) # Update data in record
+            StrRecord = 'Your age is: ' + RecordDict['Age']
+            im.executeModality('TEXT_default', StrRecord)
+        elif ageQ == 'done': ageDone = False
 
 
 
