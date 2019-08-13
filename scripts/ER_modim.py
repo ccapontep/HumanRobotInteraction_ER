@@ -439,7 +439,7 @@ def i3():
     histDone = True
     hist1 = 0
     while histDone == True:
-        im.executeModality('BUTTONS',[['overweight or obese','Overweight or Obese'],['smoke cigarettes','Smoke Cigarettes'], ['high cholesterol', 'High Cholesterol'], ['hypertension', 'Hypertension'], ['diabetes', 'Diabetes'], ['recurring symptoms', 'Current Symptoms Recurring'], ['back', 'Remove last item'], ['done', 'Done, exit.']])
+        im.executeModality('BUTTONS',[['overweight or obese','Overweight or Obese'],['smoke cigarettes','Smoke Cigarettes'], ['high cholesterol', 'High Cholesterol'], ['hypertension', 'Hypertension'], ['diabetes', 'Diabetes'], ['recurring symptoms', 'Current Symptoms Recurring'], ['back', 'Remove last item'], ['done', 'Done']])
         im.executeModality('ASR',['overweight or obese','smoke cigarettes', 'high cholesterol', 'hypertension', 'diabetes', 'current symptoms recurring', 'done'])
         histQ = im.ask(actionname=None, timeoutvalue=10000)
         im.display.remove_buttons()
@@ -474,7 +474,7 @@ def i3():
             im.executeModality('ASR',['serious injury', 'deep wound', 'sudden severe pain', 'next2'])
 
         elif nextEm == True and nextEm2 == True:
-            im.executeModality('BUTTONS',[ ['sudden dizziness', 'Sudden dizziness, weakness, or change in vision'], ['swallowing poisonous', 'Swallowing a poisonous substance'], ['severe abdominal', 'Severe abdominal pain or pressure'], ['head spine', 'Head or spine injury'], ['feeling suicide murder', 'Feeling of committing suicide or murder'], ['back', 'Remove last item'], ['done', 'Done, exit.']])
+            im.executeModality('BUTTONS',[ ['sudden dizziness', 'Sudden dizziness, weakness, or change in vision'], ['swallowing poisonous', 'Swallowing a poisonous substance'], ['severe abdominal', 'Severe abdominal pain or pressure'], ['head spine', 'Head or spine injury'], ['feeling suicide murder', 'Feeling of committing suicide or murder'], ['back', 'Remove last item'], ['done', 'Done']])
             im.executeModality('ASR',['sudden dizziness', 'swallowing poisonous', 'severe abdominal', 'head spine', 'feeling suicide murder', 'done'])
 
 
@@ -508,7 +508,7 @@ def i3():
             im.executeModality('ASR',['fever/chills', 'nausea/vomit', 'limited movement', 'loss sense(s)', 'cut', 'next'])
 
         else:
-            im.executeModality('BUTTONS',[ ['pain', 'Pain'], ['infection', 'Infection'], ['inflammation', 'Swelling/inflammation'], ['dizzy', 'light-headed/dizzy'], ['recurring', 'One or more of these are Recurring'], ['back', 'Remove last item'], ['done', 'Done, exit.']])
+            im.executeModality('BUTTONS',[ ['pain', 'Pain'], ['infection', 'Infection'], ['inflammation', 'Swelling/inflammation'], ['dizzy', 'light-headed/dizzy'], ['recurring', 'One or more of these are Recurring'], ['back', 'Remove last item'], ['done', 'Done']])
             im.executeModality('ASR',['pain', 'infection', 'inflammation', 'dizzy', 'recurring', 'done'])
 
 
@@ -535,7 +535,7 @@ def i3():
     locDone = True
     loc1 = 0
     while locDone == True:
-        im.executeModality('BUTTONS',[ ['foot', 'Foot(x2)'], ['legs', 'Leg(s)'], ['arms', 'Arm(s)'], ['hands', 'Hand(s)'], ['abdomen', 'Abdomen'], ['chest', 'Chest'], ['back', 'Back'], ['head', 'Head/Face'], ['back', 'Remove last item'], ['done', 'Done, exit.']])
+        im.executeModality('BUTTONS',[ ['foot', 'Foot(x2)'], ['legs', 'Leg(s)'], ['arms', 'Arm(s)'], ['hands', 'Hand(s)'], ['abdomen', 'Abdomen'], ['chest', 'Chest'], ['back', 'Back'], ['head', 'Head/Face'], ['back', 'Remove last item'], ['done', 'Done']])
         im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
 
         locQ = im.ask(actionname=None, timeoutvalue=10000)
