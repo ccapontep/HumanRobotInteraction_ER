@@ -380,11 +380,11 @@ def i3():
     say('Hello there, please enter the information being asked by pressing the corresponding buttons', 'en')
     RecordDict = dict()
 
-    im.executeModality('TEXT_default', 'Enter your first and last names.')
+    im.executeModality('TEXT_default', 'Enter your LAST name followed by your FIRST name.')
     nameDone = True
     name1 = 0
     while nameDone == True:
-        im.executeModality('BUTTONS',[ ['a', 'A'], ['b', 'B'], ['c', 'C'], ['d', 'D'], ['e', 'E'], ['f', 'F'], ['g', 'G'], ['h', 'H'], ['i', 'I'], ['j', 'J'], ['k', 'K'], ['l', 'L'], ['m', 'M'], ['n', 'N'], ['o', 'O'], ['p,', 'P'], ['q', 'Q'], ['r', 'R'], ['s', 'S'], ['t', 'T'], ['u', 'U'], ['v', 'V'], ['w', 'W'], ['x', 'X'], ['y', 'Y'], ['z', 'Z'], [' ', '__space__'], ['done', 'Done, exit.']])
+        im.executeModality('BUTTONS',[ ['a', 'A'], ['b', 'B'], ['c', 'C'], ['d', 'D'], ['e', 'E'], ['f', 'F'], ['g', 'G'], ['h', 'H'], ['i', 'I'], ['j', 'J'], ['k', 'K'], ['l', 'L'], ['m', 'M'], ['n', 'N'], ['o', 'O'], ['p,', 'P'], ['q', 'Q'], ['r', 'R'], ['s', 'S'], ['t', 'T'], ['u', 'U'], ['v', 'V'], ['w', 'W'], ['x', 'X'], ['y', 'Y'], ['z', 'Z'], [',', '__space__'], ['back', '<- Backspace']['done', 'Done, exit.']])
         im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
 
         nameQ = im.ask(actionname=None, timeoutvalue=10000)
@@ -395,7 +395,10 @@ def i3():
             if name1 == 0:
                 name2add = nameQ
                 name1 += 1
-            else: name2add = name2add + nameQ
+            elif name1 != 0: name2add = name2add + nameQ
+            elif nameQ == ',': name2add = name2add + ' '
+            elif nameQ == 'back': name2add = name2add[:-1]
+
             RecordDict.update({"Name" : name2add}) # Update data in record
             StrRecord = 'Your name is: ' + RecordDict['Name']
             im.executeModality('TEXT_default', StrRecord)
