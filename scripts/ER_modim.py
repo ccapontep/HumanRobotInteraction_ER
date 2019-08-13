@@ -604,7 +604,7 @@ def i3():
 
     # Add time admitted:
     curr_sec = time.time()
-    curr_time = time.ctime(curr_sec)
+    curr_time = (time.ctime(curr_sec)).split(':')[0]
     RecordDict.update({"TimeAdmitted" : curr_sec}) # Update data in record
     StrRecord = 'Your date and time admitted is: ' + curr_time
     im.executeModality('TEXT_default', StrRecord)
