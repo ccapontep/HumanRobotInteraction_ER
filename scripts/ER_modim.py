@@ -395,7 +395,7 @@ def i3():
             if name1 == 0:
                 name2add = nameQ
                 name1 += 1
-            elif name1 != 0: name2add = name2add + nameQ
+            elif name1 != 0 and nameQ != ',' and nameQ != 'back': name2add = name2add + nameQ
             elif nameQ == ',': name2add = name2add + ' '
             elif nameQ == 'back': name2add = name2add[:-1]
 
