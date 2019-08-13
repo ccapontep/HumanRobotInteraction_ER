@@ -442,7 +442,8 @@ def i3():
         im.display.remove_buttons()
 
         if not histQ == 'done':
-            say('Item added', 'en')
+            # say('Item added', 'en')
+            say(histQ, 'en')
             if hist1 == 0:
                 hist2add = histQ
                 hist1 += 1
