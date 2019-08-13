@@ -439,18 +439,18 @@ def i3():
     histDone = True
     hist1 = 0
     while histDone == True:
-        im.executeModality('BUTTONS',[['overweight or obese','Overweight or Obese'],['smoke cigarettes','Smoke Cigarettes'], ['high cholesterol', 'High Cholesterol'], ['hypertension', 'Hypertension'], ['diabetes', 'Diabetes'], ['recurring symptoms', 'Current Symptoms Recurring'], ['back', 'Remove last item'], ['done', 'Done']])
-        im.executeModality('ASR',['overweight or obese','smoke cigarettes', 'high cholesterol', 'hypertension', 'diabetes', 'current symptoms recurring', 'done'])
+        im.executeModality('BUTTONS',[['overweight or obese','Overweight or Obese'],['smoke cigarettes','Smoke Cigarettes'], ['high cholesterol', 'High Cholesterol'], ['hypertension', 'Hypertension'], ['diabetes', 'Diabetes'], ['recurring symptoms', 'Current Symptoms Recurring'], ['remove', 'Remove last item'], ['done', 'Done']])
+        # im.executeModality('ASR',['overweight or obese','smoke cigarettes', 'high cholesterol', 'hypertension', 'diabetes', 'current symptoms recurring', 'done'])
         histQ = im.ask(actionname=None, timeoutvalue=10000)
         im.display.remove_buttons()
 
         if not histQ == 'done':
             say(histQ, 'en')
-            if hist1 == 0 and histQ != 'back':
+            if hist1 == 0 and histQ != 'remove':
                 hist2add = histQ
                 hist1 += 1
-            elif hist1 != 0 and histQ != 'back': hist2add = hist2add + '/' + histQ
-            elif histQ == 'back': hist2add = hist2add.split('/')[0]
+            elif hist1 != 0 and histQ != 'remove': hist2add = hist2add + '/' + histQ
+            elif histQ == 'remove': hist2add = hist2add.split('/')[0]
 
             RecordDict.update({"PastMedicalHistory" : hist2add}) # Update data in record
             StrRecord = 'Your past history is: ' + RecordDict['PastMedicalHistory']
@@ -474,7 +474,7 @@ def i3():
             im.executeModality('ASR',['serious injury', 'deep wound', 'sudden severe pain', 'next2'])
 
         elif nextEm == True and nextEm2 == True:
-            im.executeModality('BUTTONS',[ ['sudden dizziness', 'Sudden dizziness, weakness, or change in vision'], ['swallowing poisonous', 'Swallowing a poisonous substance'], ['severe abdominal', 'Severe abdominal pain or pressure'], ['head spine', 'Head or spine injury'], ['feeling suicide murder', 'Feeling of committing suicide or murder'], ['back', 'Remove last item'], ['done', 'Done']])
+            im.executeModality('BUTTONS',[ ['sudden dizziness', 'Sudden dizziness, weakness, or change in vision'], ['swallowing poisonous', 'Swallowing a poisonous substance'], ['severe abdominal', 'Severe abdominal pain or pressure'], ['head spine', 'Head or spine injury'], ['feeling suicide murder', 'Feeling of committing suicide or murder'], ['remove', 'Remove last item'], ['done', 'Done']])
             im.executeModality('ASR',['sudden dizziness', 'swallowing poisonous', 'severe abdominal', 'head spine', 'feeling suicide murder', 'done'])
 
 
@@ -483,14 +483,12 @@ def i3():
 
         if not emergQ == 'done' and emergQ != 'next' and emergQ != 'next2':
             say(emergQ, 'en')
-            if emer1 == 0 and emerQ != 'back':
-                say('here 22', 'en')
+            if emer1 == 0 and emergQ != 'remove':
                 emerg2add = emergQ
                 emer1 += 1
-                say('here 33', 'en')
-            elif emer1 != 0 and emerQ != 'back': emerg2add = emerg2add + '/' + emergQ
-            elif emerQ == 'back': emerg2add = emerg2add.split('/')[0]
-            say('here yes', 'en')
+            elif emer1 != 0 and emergQ != 'remove': emerg2add = emerg2add + '/' + emergQ
+            elif emergQ == 'remove': emerg2add = emerg2add.split('/')[0]
+
             RecordDict.update({"EmergencySymptoms" : emerg2add}) # Update data in record
             StrRecord = 'Your emergency symptoms are: ' + RecordDict['EmergencySymptoms']
             im.executeModality('TEXT_default', StrRecord)
@@ -506,24 +504,24 @@ def i3():
     nextSy = False
     while symDone == True:
         if nextSy == False:
-            im.executeModality('BUTTONS',[['fever or chills','Fever/Chills'],['nausea or vomit','Nausea/Vomit'], ['limited movement', 'Limited movement/Stiffness'], ['loss senses', 'Loss of one or more: Sight, Hearing, Touch'], ['cut', 'Cut/Scrape'], ['back', 'Remove last item'], ['next', 'See more options']])
+            im.executeModality('BUTTONS',[['fever or chills','Fever/Chills'],['nausea or vomit','Nausea/Vomit'], ['limited movement', 'Limited movement/Stiffness'], ['loss senses', 'Loss of one or more: Sight, Hearing, Touch'], ['cut', 'Cut/Scrape'], ['remove', 'Remove last item'], ['next', 'See more options']])
             im.executeModality('ASR',['fever/chills', 'nausea/vomit', 'limited movement', 'loss sense(s)', 'cut', 'next'])
 
         else:
-            im.executeModality('BUTTONS',[ ['pain', 'Pain'], ['infection', 'Infection'], ['inflammation', 'Swelling/inflammation'], ['dizzy', 'light-headed/dizzy'], ['recurring', 'One or more of these are Recurring'], ['back', 'Remove last item'], ['done', 'Done']])
+            im.executeModality('BUTTONS',[ ['pain', 'Pain'], ['infection', 'Infection'], ['inflammation', 'Swelling/inflammation'], ['dizzy', 'light-headed/dizzy'], ['recurring', 'One or more of these are Recurring'], ['remove', 'Remove last item'], ['done', 'Done']])
             im.executeModality('ASR',['pain', 'infection', 'inflammation', 'dizzy', 'recurring', 'done'])
 
 
         symQ = im.ask(actionname=None, timeoutvalue=10000)
         im.display.remove_buttons()
 
-        if not symQ == 'done' and not symQ == 'next':
+        if not symQ == 'done' and symQ != 'next':
             say(symQ, 'en')
-            if symp1 == 0 and histQ != 'back':
+            if symp1 == 0 and symQ != 'remove':
                 sym2add = symQ
                 symp1 += 1
-            elif symp1 != 0 and histQ != 'back': sym2add = sym2add + '/' + symQ
-            elif symQ == 'back': sym2add = sym2add.split('/')[0]
+            elif symp1 != 0 and symQ != 'remove': sym2add = sym2add + '/' + symQ
+            elif symQ == 'remove': sym2add = sym2add.split('/')[0]
 
             RecordDict.update({"Symptoms" : sym2add}) # Update data in record
             StrRecord = 'Your symptoms are: ' + RecordDict['Symptoms']
@@ -537,7 +535,7 @@ def i3():
     locDone = True
     loc1 = 0
     while locDone == True:
-        im.executeModality('BUTTONS',[ ['foot', 'Foot(x2)'], ['legs', 'Leg(s)'], ['arms', 'Arm(s)'], ['hands', 'Hand(s)'], ['abdomen', 'Abdomen'], ['chest', 'Chest'], ['back', 'Back'], ['head', 'Head/Face'], ['back', 'Remove last item'], ['done', 'Done']])
+        im.executeModality('BUTTONS',[ ['foot', 'Foot(x2)'], ['legs', 'Leg(s)'], ['arms', 'Arm(s)'], ['hands', 'Hand(s)'], ['abdomen', 'Abdomen'], ['chest', 'Chest'], ['back', 'Back'], ['head', 'Head/Face'], ['remove', 'Remove last item'], ['done', 'Done']])
         im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
 
         locQ = im.ask(actionname=None, timeoutvalue=10000)
@@ -545,11 +543,11 @@ def i3():
 
         if not locQ == 'done':
             say(locQ, 'en')
-            if loc1 == 0 and histQ != 'back':
+            if loc1 == 0 and locQ != 'remove':
                 loc2add = locQ
                 loc1 += 1
-            elif loc1 != 0 and histQ != 'back': loc2add = loc2add + '/' + locQ
-            elif locQ == 'back': loc2add = loc2add.split('/')[0]
+            elif loc1 != 0 and locQ != 'remove': loc2add = loc2add + '/' + locQ
+            elif locQ == 'remove': loc2add = loc2add.split('/')[0]
 
             RecordDict.update({"LocationofPain" : loc2add}) # Update data in record
             StrRecord = 'Your pain location are: ' + RecordDict['LocationofPain']
