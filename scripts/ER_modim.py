@@ -75,7 +75,7 @@ def i1():
     # elif ('no' in aa) or a == 'no':
     elif a == 'no':
         im.executeModality('TEXT_default','You are a new patient.')
-        say('Welcome to Wellness Hospital. My name is Marrtino and I will help you setup your emergency in the database', 'en')
+        say('Welcome to Wellness Hospital. I am a robot and my name is Marrtino. I will help you setup your emergency in the database', 'en')
         # say('I will be asking some questions about your emergency and have you see a doctor as soon as possible, depending on the severity of your emergency', 'en')
         # say('I will also be doing routine checks to let you know your remaining wait time. If at any point you have questions, come ask', 'en')
         # say('We will take care of you. Thank you for visiting us.', 'en')
@@ -380,11 +380,11 @@ def i3():
     say('Hello there, please enter the information being asked by pressing the corresponding buttons', 'en')
     RecordDict = dict()
 
-    im.executeModality('TEXT_default', 'Enter your LAST name followed by your FIRST name.')
+    im.executeModality('TEXT_default', 'Enter your FIRST and LAST name.')
     nameDone = True
     name1 = 0
     while nameDone == True:
-        im.executeModality('BUTTONS',[ ['a', 'A'], ['b', 'B'], ['c', 'C'], ['d', 'D'], ['e', 'E'], ['f', 'F'], ['g', 'G'], ['h', 'H'], ['i', 'I'], ['j', 'J'], ['k', 'K'], ['l', 'L'], ['m', 'M'], ['n', 'N'], ['o', 'O'], ['p,', 'P'], ['q', 'Q'], ['r', 'R'], ['s', 'S'], ['t', 'T'], ['u', 'U'], ['v', 'V'], ['w', 'W'], ['x', 'X'], ['y', 'Y'], ['z', 'Z'], [',', '_space_'], ['back', 'backspace'], ['done', 'Done']])
+        im.executeModality('BUTTONS',[ ['a', 'A'], ['b', 'B'], ['c', 'C'], ['d', 'D'], ['e', 'E'], ['f', 'F'], ['g', 'G'], ['h', 'H'], ['i', 'I'], ['j', 'J'], ['k', 'K'], ['l', 'L'], ['m', 'M'], ['n', 'N'], ['o', 'O'], ['p', 'P'], ['q', 'Q'], ['r', 'R'], ['s', 'S'], ['t', 'T'], ['u', 'U'], ['v', 'V'], ['w', 'W'], ['x', 'X'], ['y', 'Y'], ['z', 'Z'], [',', 'space'], ['back', 'backspace'], ['done', 'Done']])
         im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
 
         nameQ = im.ask(actionname=None, timeoutvalue=10000)
@@ -403,6 +403,30 @@ def i3():
             StrRecord = 'Your name is: ' + RecordDict['Name']
             im.executeModality('TEXT_default', StrRecord)
         elif nameQ == 'done': nameDone = False
+
+
+        im.executeModality('TEXT_default', 'Enter your FIRST and LAST name.')
+        ageDone = True
+        age1 = 0
+        while ageDone == True:
+            im.executeModality('BUTTONS',[ ['zero', '0'], ['one', '1'], ['two', '2'], ['three', '3'], ['four', '4'], ['five', '5'], ['six', '6'], ['seven', '7'], ['eight', '8'], ['nine', '9'], ['back', 'backspace'], ['done', 'Done']])
+            im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
+
+            ageQ = im.ask(actionname=None, timeoutvalue=10000)
+            im.display.remove_buttons()
+
+            if not ageQ == 'done':
+                say(ageQ, 'en')
+                if age1 == 0:
+                    age2add = ageQ
+                    age1 += 1
+                elif age1 != 0 and ageQ != 'back': age2add = age2add + ageQ
+                elif ageQ == 'back': age2add = age2add[:-1]
+
+                RecordDict.update({"Age" : age2add}) # Update data in record
+                StrRecord = 'Your age is: ' + RecordDict['Age']
+                im.executeModality('TEXT_default', StrRecord)
+            elif ageQ == 'done': ageDone = False
 
 
 
