@@ -482,7 +482,7 @@ def i3():
         emergQ = im.ask(actionname=None, timeoutvalue=10000)
         im.display.remove_buttons()
 
-        if not emergQ == 'done' and not emergQ == 'next' and not emergQ == 'next2':
+        if not emergQ == 'done' and emergQ != 'next' and emergQ != 'next2':
             say(emergQ, 'en')
             if emer1 == 0 and emerQ != 'back':
                 emerg2add = emergQ
