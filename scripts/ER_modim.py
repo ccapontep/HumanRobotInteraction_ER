@@ -470,7 +470,7 @@ def i3():
             ['back', 'Remove last item'], ['next', 'See more options']])
             im.executeModality('ASR',['bleeding', 'breathing', 'unusual behavior', 'chest pain', 'choking', 'coughing', 'severe vomiting', 'fainting', 'next'])
         elif nextEm == True and nextEm2 == False:
-            im.executeModality('BUTTONS',[['serious injury', 'Serious injury due to: 1) vehicle accident, 2) burns/smoke inhalation, 3) near drowning'], ['deep wound', 'Deep or large wound'], ['sudden severe pain', 'Sudden, severe pain anywhere in the body'], ['back', 'Remove last item'], ['next2', 'See more options']])
+            im.executeModality('BUTTONS',[['serious injury', 'Serious injury due to: 1) vehicle accident, 2) burns/smoke inhalation, 3) near drowning'], ['deep wound', 'Deep or large wound'], ['sudden severe pain', 'Sudden, severe pain anywhere in the body'], ['remove', 'Remove last item'], ['next2', 'See more options']])
             im.executeModality('ASR',['serious injury', 'deep wound', 'sudden severe pain', 'next2'])
 
         elif nextEm == True and nextEm2 == True:
