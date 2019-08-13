@@ -80,6 +80,7 @@ def i1():
         say('I will also be doing routine checks to let you know your remaining wait time. If at any point you have questions, come ask', 'en')
         say('We will take care of you. Thank you for visiting us.', 'en')
         time.sleep(2)
+        i3()
     # elif ('' in aa):
     else:
         im.executeModality('TEXT_default','No answer received')
@@ -364,7 +365,7 @@ def i2():
                     time.sleep(3)
 
     stringDic = str(RecordDict)
-    stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': u','=')
+    stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': u','=').replace(': ','=')
 
     recFile = open(os.path.join(directory, RecordTxt), "w")
     recFile.write(stringDic)
@@ -374,9 +375,32 @@ def i2():
 
 # Interaction to retrieve info for the user
 def i3():
-    im.display.loadUrl('ERretrieve.html')
-    im.executeModality('TEXT_default', 'What information are you searching for?')
-    say('Hello there', 'en')
+    im.display.loadUrl('ERnewpatient.html')
+    im.executeModality('TEXT_default', 'Please answer the following:')
+    say('Hello there, please enter the information being asked by pressing the corresponding buttons', 'en')
+    RecordDict = dict()
+
+    im.executeModality('TEXT_default', 'Enter your first and last names.')
+    nameDone = True
+    name1 = 0
+    while nameDone == True:
+        im.executeModality('BUTTONS',[ ['a', 'A'], ['b', 'B'], ['c', 'C'], ['d', 'D'], ['e', 'E'], ['f', 'F'], ['g', 'G'], ['h', 'H'], ['i', 'I'], ['j', 'J'], ['k', 'K'], ['l', 'L'], ['m', 'M'], ['n', 'N'], ['o', 'O'], ['p,', 'P'], ['q', 'Q'], ['r', 'R'], ['s', 'S'], ['t', 'T'], ['u', 'U'], ['v', 'V'], ['w', 'W'], ['x', 'X'], ['y', 'Y'], ['z', 'Z'], [' ', '__space__'], ['done', 'Done, exit.']])
+        im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
+
+        nameQ = im.ask(actionname=None, timeoutvalue=10000)
+        im.display.remove_buttons()
+
+        if not nameQ == 'done':
+            say(nameQ, 'en')
+            if name1 == 0:
+                name2add = nameQ
+                name1 += 1
+            else: name2add = name2add + nameQ
+            RecordDict.update({"Name" : name2add}) # Update data in record
+            StrRecord = 'Your name is: ' + RecordDict['Name']
+            im.executeModality('TEXT_default', StrRecord)
+        elif nameQ == 'done': nameDone = False
+
 
 
                     # im.executeModality('BUTTONS',[['history','Past Medical History'],['emergency','Emergency Symptoms'], ['symptoms', 'Symptoms'], ['location', 'Location of Pain'], ['conscious', 'Level of Consciousness'], ['done', 'Done, exit.']])
