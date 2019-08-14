@@ -68,5 +68,67 @@ StrRecord = 'Your date admitted is: ' + curr_date
 StrRecord2 = 'Your time admitted is: ' + curr_time
 
 
+# Calculate the urgency given the picked items of the patient
+agePoints = 0
+if int(RecordDict["Age"]) < 10: # if it is a young patient, higher urgency
+    agePoints += 3
+elif int(RecordDict["Age"]) > 70: # if it's an old patient, higher urgency
+    agePoints += 2
+else: agePoints += 1
+
+histPoints = 0
+if 'smoke cigarettes' in RecordDict['PastMedicalHistory']:
+    if 'chest' in RecordDict['LocationofPain'] or len([e for e in ['breathing', 'chest pain', 'coughing'] if e in RecordDict['EmergencySymptoms']]) > 0:
+        histPoints += 1.5
+    else: histPoints += 1
+
+checkHist = [e for e in ['overweight or obese', 'high cholesterol', 'hypertension', 'diabetes'] if e in RecordDict['PastMedicalHistory']]
+if len(checkHist) > 0:
+    histPoints += (1.5 * len(checkHist))
+if 'recurring symptoms' in RecordDict['PastMedicalHistory']: histPoints += 2
+
+painPoints = 0
+if 'some' in RecordDict['PainLevel']:
+    painPoints = 1
+elif 'moderate' in RecordDict['PainLevel']:
+    painPoints = 2
+elif 'intense' in RecordDict['PainLevel']:
+    painPoints = 3
+elif 'very intense' in RecordDict['PainLevel']:
+    painPoints = 5
+elif 'excruciating' in RecordDict['PainLevel']:
+    painPoints = 7
+
+emergPoints = 0
+listEmerg = ['bleeding','breathing','unusual behavior','chest pain','choking','coughing','severe vomiting','fainting','serious injury','deep wound','sudden severe pain','sudden dizziness','swallowing poisonous','severe abdominal','head spine','feeling suicide murder']    
+checkEmerg = [e for e in listEmerg if e in RecordDict['EmergencySymptoms']]
+if len(checkEmerg) > 0:
+    emergPoints += (10 * len(checkEmerg) * painPoints)
+
+symPoints = 0
+listSym = ['fever or chills','nausea or vomit','limited movement','loss senses','cut','pain','inflammation','dizzy','recurring']
+checkSym = [e for e in listSym if e in RecordDict['Symptoms']]
+if len(checkSym) > 0:
+    symPoints += (2 * len(checkSym) * painPoints)
+
+locPoints = 0
+listLoc = ['foot', 'legs', 'arms', 'hands', 'back']
+listLoc2 = ['abdomen', 'chest', 'head']
+checkLoc = [e for e in listLoc if e in RecordDict['LocationofPain']]
+checkLoc2 = [e for e in listLoc2 if e in RecordDict['LocationofPain']]
+if len(checkLoc) > 0:
+    locPoints += (1.5 * len(checkLoc))
+if len(checkLoc2) > 0:
+    locPoints += (2 * len(checkLoc2))
+
+conscPoints = 0
+if 'medium' in RecordDict['LevelofConsciousness']:
+     conscPoints += 2
+elif 'barely' in RecordDict['LevelofConsciousness']:
+    conscPoints += 7
+elif 'unconscious' in RecordDict['LevelofConsciousness']:
+    conscPoints += 15
+
+
 
 

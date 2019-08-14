@@ -1,11 +1,11 @@
 Name=John Parker
 Age=38
 PastMedicalHistory=smoking
-EmergencySymptoms=bleeding that will not stop
+EmergencySymptoms=bleeding
 Symptoms=fever/pain
-LocationofPain=face
-LevelofConsciousness=barely conscious
-PainLevel=High
+LocationofPain=head
+LevelofConsciousness=barely
+PainLevel=42.5-High
 ChangeinWaitTime=has not
 TimeAdmitted=1565337521.853802
 UrgencyLevel=High

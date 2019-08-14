@@ -88,6 +88,66 @@ def i1():
 
     end()
 
+# Function to get the ticket number
+def getTicket():
+    # First number:
+    im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
+    im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
+    Num1 = im.ask(actionname=None, timeoutvalue=1000)
+    say('number '+Num1)
+    im.display.remove_buttons()
+
+    # Second number:
+    im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
+    im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
+    Num2 = im.ask(actionname=None, timeoutvalue=200)
+    say('number'+Num2)
+    im.display.remove_buttons()
+
+    # Second number:
+    im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
+    im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
+    Num3 = im.ask(actionname=None, timeoutvalue=200)
+    say('number'+Num3)
+    im.display.remove_buttons()
+
+    # Final ticket number
+    ticketNumber = str(Num1 + Num2 + Num3)
+    time.sleep(1)
+    ticketStr = 'Your ticket number is: ' + ticketNumber
+    im.executeModality('TEXT_default', ticketStr)
+    say('Your ticket number is '+ticketNumber)
+
+    # Check if ticket was entered correctly
+    im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
+    im.executeModality('ASR',['yes','no'])
+    CorrTick = im.ask(actionname=None, timeoutvalue=100)
+    im.display.remove_buttons()
+    if CorrTick == 'yes':
+        say('Great! Let me look at your information')
+    elif CorrTick == 'no':
+        im.executeModality('TEXT_default', 'Please enter again the digits of your ticket number one by one.')
+        say('Sorry about that. Let us try again')
+
+    # Check the tickets in the system
+    directory = "/home/ubuntu/playground/HumanRobotInteraction_ER/patientInfo"
+
+    ticketNums = []
+    with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
+        for ticket in patientTicketNums.readlines():
+            ticketNums.append(str(ticket))
+    if CorrTick == 'yes' and len(ticketNums) > 0 and int(ticketNumber) in (map(int, ticketNums)):
+        im.executeModality('TEXT_default', 'Your ticket has been found!')
+        say('Your ticket has been found in the database', 'en')
+        CorrTick == 'yes'
+        # break
+    elif CorrTick == 'yes' and int(ticketNumber) not in (map(int, ticketNums)):
+        im.executeModality('TEXT_default', 'Sorry. Your ticket was not found.')
+        say('Your ticket was not found. Let us start again.', 'en')
+        im.executeModality('TEXT_default', 'Please enter again the digits of your ticket number one by one.')
+        CorrTick = 'no'
+
+    return(CorrTick, ticketNumber)
 
 # Interaction to check ticket info and retrieve info for the user
 def i2():
@@ -102,62 +162,63 @@ def i2():
     # There are three digits in the ticket number, check one by one with buttons
     CorrTick = 'no'
     while CorrTick == 'no':
-        # First number:
-        im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
-        im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
-        Num1 = im.ask(actionname=None, timeoutvalue=500)
-        say('number '+Num1)
-        im.display.remove_buttons()
-
-        # Second number:
-        im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
-        im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
-        Num2 = im.ask(actionname=None, timeoutvalue=200)
-        say('number'+Num2)
-        im.display.remove_buttons()
-
-        # Second number:
-        im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
-        im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
-        Num3 = im.ask(actionname=None, timeoutvalue=200)
-        say('number'+Num3)
-        im.display.remove_buttons()
-
-        # Final ticket number
-        ticketNumber = str(Num1 + Num2 + Num3)
-        time.sleep(1)
-        ticketStr = 'Your ticket number is: ' + ticketNumber
-        im.executeModality('TEXT_default', ticketStr)
-        say('Your ticket number is '+ticketNumber)
-
-        # Check if ticket was entered correctly
-        im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
-        im.executeModality('ASR',['yes','no'])
-        CorrTick = im.ask(actionname=None, timeoutvalue=100)
-        im.display.remove_buttons()
-        if CorrTick == 'yes':
-            say('Great! Let me look at your information')
-        elif CorrTick == 'no':
-            im.executeModality('TEXT_default', 'Please enter again the digits of your ticket number one by one.')
-            say('Sorry about that. Let us try again')
-
-        # Check the tickets in the system
-        directory = "/home/ubuntu/playground/HumanRobotInteraction_ER/patientInfo"
-
-        ticketNums = []
-        with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
-            for ticket in patientTicketNums.readlines():
-                ticketNums.append(str(ticket))
-        if CorrTick == 'yes' and len(ticketNums) > 0 and int(ticketNumber) in (map(int, ticketNums)):
-            im.executeModality('TEXT_default', 'Your ticket has been found!')
-            say('Your ticket has been found in the database', 'en')
-            CorrTick == 'yes'
-            # break
-        elif CorrTick == 'yes' and int(ticketNumber) not in (map(int, ticketNums)):
-            im.executeModality('TEXT_default', 'Sorry. Your ticket was not found.')
-            say('Your ticket was not found. Let us start again.', 'en')
-            im.executeModality('TEXT_default', 'Please enter again the digits of your ticket number one by one.')
-            CorrTick = 'no'
+        CorrTick, ticketNumber = getTicket()
+        # # First number:
+        # im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
+        # im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
+        # Num1 = im.ask(actionname=None, timeoutvalue=1000)
+        # say('number '+Num1)
+        # im.display.remove_buttons()
+        #
+        # # Second number:
+        # im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
+        # im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
+        # Num2 = im.ask(actionname=None, timeoutvalue=200)
+        # say('number'+Num2)
+        # im.display.remove_buttons()
+        #
+        # # Second number:
+        # im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
+        # im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
+        # Num3 = im.ask(actionname=None, timeoutvalue=200)
+        # say('number'+Num3)
+        # im.display.remove_buttons()
+        #
+        # # Final ticket number
+        # ticketNumber = str(Num1 + Num2 + Num3)
+        # time.sleep(1)
+        # ticketStr = 'Your ticket number is: ' + ticketNumber
+        # im.executeModality('TEXT_default', ticketStr)
+        # say('Your ticket number is '+ticketNumber)
+        #
+        # # Check if ticket was entered correctly
+        # im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
+        # im.executeModality('ASR',['yes','no'])
+        # CorrTick = im.ask(actionname=None, timeoutvalue=100)
+        # im.display.remove_buttons()
+        # if CorrTick == 'yes':
+        #     say('Great! Let me look at your information')
+        # elif CorrTick == 'no':
+        #     im.executeModality('TEXT_default', 'Please enter again the digits of your ticket number one by one.')
+        #     say('Sorry about that. Let us try again')
+        #
+        # # Check the tickets in the system
+        # directory = "/home/ubuntu/playground/HumanRobotInteraction_ER/patientInfo"
+        #
+        # ticketNums = []
+        # with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
+        #     for ticket in patientTicketNums.readlines():
+        #         ticketNums.append(str(ticket))
+        # if CorrTick == 'yes' and len(ticketNums) > 0 and int(ticketNumber) in (map(int, ticketNums)):
+        #     im.executeModality('TEXT_default', 'Your ticket has been found!')
+        #     say('Your ticket has been found in the database', 'en')
+        #     CorrTick == 'yes'
+        #     # break
+        # elif CorrTick == 'yes' and int(ticketNumber) not in (map(int, ticketNums)):
+        #     im.executeModality('TEXT_default', 'Sorry. Your ticket was not found.')
+        #     say('Your ticket was not found. Let us start again.', 'en')
+        #     im.executeModality('TEXT_default', 'Please enter again the digits of your ticket number one by one.')
+        #     CorrTick = 'no'
 
     # Retrieve the info of user in database
     RecordDict = dict()
@@ -191,7 +252,7 @@ def i2():
 
         # Get record of admit, wait and curr times. Caculate the new wait time.
         elif UserQues == 'waittime':
-            urgencyStr = RecordDict["UrgencyLevel"]
+            urgencyStr = RecordDict["UrgencyLevel"].split('-')[1]
             admit_time = float(RecordDict["TimeAdmitted"])
             updatedT = RecordDict["ChangeinWaitTime"]
             curr_sec = time.time()
@@ -377,6 +438,7 @@ def i2():
 
 # Interaction to retrieve info for the user
 def i3():
+    begin()
     im.display.loadUrl('ERnewpatient.html')
     im.executeModality('TEXT_title','Add information to your Patient Record')
     im.executeModality('TEXT_default', 'Please answer the following questions')
@@ -452,8 +514,8 @@ def i3():
                 hist1 += 1
             elif hist1 != 0 and histQ != 'remove': hist2add = hist2add + '/' + histQ
             elif histQ == 'remove':
-                hist2add = hist2add.split('/')[0]
-                hist2add = hist2add.split(':')[0]
+                if '/' in hist2add: hist2add = hist2add.split('/')[0]
+                else: hist2add = hist2add.split(':')[0]
 
             RecordDict.update({"PastMedicalHistory" : hist2add}) # Update data in record
             StrRecord = 'Your past history is: ' + RecordDict['PastMedicalHistory']
@@ -491,8 +553,8 @@ def i3():
                 emer1 += 1
             elif emer1 != 0 and emergQ != 'remove': emerg2add = emerg2add + '/' + emergQ
             elif emergQ == 'remove':
-                emerg2add = emerg2add.split('/')[0]
-                emerg2add = emerg2add.split(':')[0]
+                if '/' in emerg2add: emerg2add = emerg2add.split('/')[0]
+                else: emerg2add = emerg2add.split(':')[0]
 
             RecordDict.update({"EmergencySymptoms" : emerg2add}) # Update data in record
             StrRecord = 'Your emergency symptoms are: ' + RecordDict['EmergencySymptoms']
@@ -527,8 +589,8 @@ def i3():
                 symp1 += 1
             elif symp1 != 0 and symQ != 'remove': sym2add = sym2add + '/' + symQ
             elif symQ == 'remove':
-                sym2add = sym2add.split('/')[0]
-                sym2add = sym2add.split(':')[0]
+                if '/' in sym2add: sym2add = sym2add.split('/')[0]
+                else: sym2add = sym2add.split(':')[0]
 
             RecordDict.update({"Symptoms" : sym2add}) # Update data in record
             StrRecord = 'Your symptoms are: ' + RecordDict['Symptoms']
@@ -555,8 +617,8 @@ def i3():
                 loc1 += 1
             elif loc1 != 0 and locQ != 'remove': loc2add = loc2add + '/' + locQ
             elif locQ == 'remove':
-                loc2add = loc2add.split('/')[0]
-                loc2add = loc2add.split(':')[0]
+                if '/' in loc2add: loc2add = loc2add.split('/')[0]
+                else: loc2add = loc2add.split(':')[0]
 
             RecordDict.update({"LocationofPain" : loc2add}) # Update data in record
             StrRecord = 'Your pain location are: ' + RecordDict['LocationofPain']
@@ -618,9 +680,87 @@ def i3():
     time.sleep(2)
 
 
+    # Add info about urgency level and wait time for the patient
+
+    # Calculate the urgency given the picked items of the patient
+    agePoints = 0
+    if int(RecordDict["Age"]) < 10: # if it is a young patient, higher urgency
+        agePoints += 3
+    elif int(RecordDict["Age"]) > 70: # if it's an old patient, higher urgency
+        agePoints += 2
+    else: agePoints += 1
+
+    histPoints = 0
+    if 'smoke cigarettes' in RecordDict['PastMedicalHistory']:
+        if 'chest' in RecordDict['LocationofPain'] or len([e for e in ['breathing', 'chest pain', 'coughing'] if e in RecordDict['EmergencySymptoms']]) > 0:
+            histPoints += 1.5
+        else: histPoints += 1
+
+    checkHist = [e for e in ['overweight or obese', 'high cholesterol', 'hypertension', 'diabetes'] if e in RecordDict['PastMedicalHistory']]
+    if len(checkHist) > 0:
+        histPoints += (1.5 * len(checkHist))
+    if 'recurring symptoms' in RecordDict['PastMedicalHistory']: histPoints += 2
+
+    painPoints = 0
+    if 'some' in RecordDict['PainLevel']:
+        painPoints = 1
+    elif 'moderate' in RecordDict['PainLevel']:
+        painPoints = 2
+    elif 'intense' in RecordDict['PainLevel']:
+        painPoints = 3
+    elif 'very intense' in RecordDict['PainLevel']:
+        painPoints = 5
+    elif 'excruciating' in RecordDict['PainLevel']:
+        painPoints = 7
+
+    emergPoints = 0
+    listEmerg = ['bleeding','breathing','unusual behavior','chest pain','choking','coughing','severe vomiting','fainting','serious injury','deep wound','sudden severe pain','sudden dizziness','swallowing poisonous','severe abdominal','head spine','feeling suicide murder']
+    checkEmerg = [e for e in listEmerg if e in RecordDict['EmergencySymptoms']]
+    if len(checkEmerg) > 0:
+        emergPoints += (10 * len(checkEmerg) * painPoints)
+
+    symPoints = 0
+    listSym = ['fever or chills','nausea or vomit','limited movement','loss senses','cut','pain','inflammation','dizzy','recurring']
+    checkSym = [e for e in listSym if e in RecordDict['Symptoms']]
+    if len(checkSym) > 0:
+        symPoints += (2 * len(checkSym) * painPoints)
+
+    locPoints = 0
+    listLoc = ['foot', 'legs', 'arms', 'hands', 'back']
+    listLoc2 = ['abdomen', 'chest', 'head']
+    checkLoc = [e for e in listLoc if e in RecordDict['LocationofPain']]
+    checkLoc2 = [e for e in listLoc2 if e in RecordDict['LocationofPain']]
+    if len(checkLoc) > 0:
+        locPoints += (1.5 * len(checkLoc))
+    if len(checkLoc2) > 0:
+        locPoints += (2 * len(checkLoc2))
+
+    conscPoints = 0
+    if 'medium' in RecordDict['LevelofConsciousness']:
+         conscPoints += 2
+    elif 'barely' in RecordDict['LevelofConsciousness']:
+        conscPoints += 7
+    elif 'unconscious' in RecordDict['LevelofConsciousness']:
+        conscPoints += 15
+
+    totalPoints = agePoints + histPoints + emergPoints + symPoints + locPoints + conscPoints
+    RecordDict.update({"UrgencyLevel" : totalPoints}) # Update data in record
+
+    stringDic = str(RecordDict)
+    stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': u','=').replace(': ','=')
+
+    recFile = open(os.path.join(directory, RecordTxt), "w")
+    recFile.write(stringDic)
+    recFile.close()
+
+
+    end()
+
+
 
 mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
 mc.store_interaction(i2)
+mc.store_interaction(getTicket)
 mc.store_interaction(i1)
 mc.store_interaction(i0)
 mc.store_interaction(i3)
