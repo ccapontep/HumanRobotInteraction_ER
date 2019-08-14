@@ -620,24 +620,27 @@ def i3():
         elif locQ == 'done': locDone = False
 
     # Add level of consciousness:
-    im.executeModality('TEXT_default', 'Pick your level of consciousness:')
-    say('enter your level of consciousness', 'en')
+    im.executeModality('TEXT_default', 'Pick ONE of your level of consciousness:')
+    say('enter one of your level of consciousness', 'en')
     cons1 = 0
-    im.executeModality('BUTTONS',[ ['fully', 'Fully (awake, aware)'], ['medium', 'Medium (some confusion)'], ['barely', 'Barely (feeling of sleeping or fainting)'], ['unconscious', 'Unconscious (fainted)']])
-    im.executeModality('ASR',['fully', 'medium', 'barely', 'none'])
+    consDone = True
+    while consDone == True:
+        im.executeModality('BUTTONS',[ ['fully', 'Fully (awake, aware)'], ['medium', 'Medium (some confusion)'], ['barely', 'Barely (feeling of sleeping or fainting)'], ['unconscious', 'Unconscious (fainted)'], ['confirm', 'Confirm']])
+        im.executeModality('ASR',['fully', 'medium', 'barely', 'none'])
 
-    consQ = im.ask(actionname=None, timeoutvalue=100000)
-    im.display.remove_buttons()
+        consQ = im.ask(actionname=None, timeoutvalue=100000)
+        im.display.remove_buttons()
 
-    say(consQ, 'en')
-    if cons1 == 0:
-        cons2add = consQ
-        cons1 += 1
-    else: cons2add = cons2add + '/' + consQ
-    RecordDict.update({"LevelofConsciousness" : cons2add}) # Update data in record
-    StrRecord = 'Your consciousness level is: ' + RecordDict['LevelofConsciousness']
-    im.executeModality('TEXT_default', StrRecord)
-    time.sleep(3)
+        if consQ != 'confirm':
+            say(consQ, 'en')
+            if cons1 == 0:
+                cons2add = consQ
+                cons1 += 1
+            else: cons2add = cons2add + '/' + consQ
+            RecordDict.update({"LevelofConsciousness" : cons2add}) # Update data in record
+            StrRecord = 'Your consciousness level is: ' + RecordDict['LevelofConsciousness']
+            im.executeModality('TEXT_default', StrRecord)
+        elif consQ == 'confirm': consDone = False
 
     # Add pain lavel:
     im.executeModality('TEXT_default', 'Pick your pain level:')
