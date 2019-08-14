@@ -509,7 +509,7 @@ def i3():
             StrRecord = 'Your past history is: ' + RecordDict['PastMedicalHistory']
             im.executeModality('TEXT_default', StrRecord)
         elif histQ == 'done' and len(hist2add) > 0: histDone = False
-        elif len(hist2add) == 0: continue
+        elif histQ == 'done' and len(hist2add) == 0: histDone = True
 
     # Add emergency symptoms:
     im.executeModality('TEXT_default', 'Enter any symptoms categorized as higher emergency:')
