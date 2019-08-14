@@ -501,7 +501,7 @@ def i3():
             elif hist1 != 0 and histQ != 'remove': hist2add = hist2add + '/' + histQ
             elif histQ == 'remove':
                 if '/' in hist2add: hist2add = hist2add.split('/')[0]
-                else: hist2add = hist2add.split(':')[0]
+                else: hist2add = ''
 
             RecordDict.update({"PastMedicalHistory" : hist2add}) # Update data in record
             StrRecord = 'Your past history is: ' + RecordDict['PastMedicalHistory']
@@ -540,7 +540,7 @@ def i3():
             elif emer1 != 0 and emergQ != 'remove': emerg2add = emerg2add + '/' + emergQ
             elif emergQ == 'remove':
                 if '/' in emerg2add: emerg2add = emerg2add.split('/')[0]
-                else: emerg2add = emerg2add.split(':')[0]
+                else: emerg2add = ''
 
             RecordDict.update({"EmergencySymptoms" : emerg2add}) # Update data in record
             StrRecord = 'Your emergency symptoms are: ' + RecordDict['EmergencySymptoms']
@@ -576,7 +576,7 @@ def i3():
             elif symp1 != 0 and symQ != 'remove': sym2add = sym2add + '/' + symQ
             elif symQ == 'remove':
                 if '/' in sym2add: sym2add = sym2add.split('/')[0]
-                else: sym2add = sym2add.split(':')[0]
+                else: sym2add = ''
 
             RecordDict.update({"Symptoms" : sym2add}) # Update data in record
             StrRecord = 'Your symptoms are: ' + RecordDict['Symptoms']
@@ -604,7 +604,7 @@ def i3():
             elif loc1 != 0 and locQ != 'remove': loc2add = loc2add + '/' + locQ
             elif locQ == 'remove':
                 if '/' in loc2add: loc2add = loc2add.split('/')[0]
-                else: loc2add = loc2add.split(':')[0]
+                else: loc2add = ''
 
             RecordDict.update({"LocationofPain" : loc2add}) # Update data in record
             StrRecord = 'Your pain location are: ' + RecordDict['LocationofPain']
@@ -654,7 +654,7 @@ def i3():
     curr_sec = time.time()
     loc_time = time.localtime(curr_sec)
     curr_date = ((time.ctime(curr_sec)).split(':')[0])[:-3]
-    curr_time = str(loc_time.tm_hour) + ':' + str(loc_time.tm_min)
+    curr_time = str(loc_time.tm_hour) + 'h ' + str(loc_time.tm_min) + 'm'
     RecordDict.update({"TimeAdmitted" : curr_sec}) # Update data in record
     StrRecord = 'Your date admitted is: ' + curr_date + ', ' + str(loc_time.tm_year)
     im.executeModality('TEXT_default', StrRecord)
