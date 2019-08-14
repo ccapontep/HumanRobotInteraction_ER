@@ -1,0 +1,11 @@
+Symptoms=cut/pain
+TimeAdmitted=1565823521.543519
+EmergencySymptoms=bleeding/deep wound
+Name=ana johnson
+LevelofConsciousness=barely
+UrgencyLevel=83.5
+Age=8
+PainLevel=very intense
+LocationofPain=foot
+PastMedicalHistory=none
+
