@@ -493,7 +493,7 @@ def i3():
         histQ = im.ask(actionname=None, timeoutvalue=100000)
         im.display.remove_buttons()
 
-        if histQ != 'done' or len(hist2add) == 0:
+        if histQ != 'done':
             say(histQ, 'en')
             if hist1 == 0 and histQ != 'remove':
                 hist2add = histQ
@@ -509,6 +509,7 @@ def i3():
             StrRecord = 'Your past history is: ' + RecordDict['PastMedicalHistory']
             im.executeModality('TEXT_default', StrRecord)
         elif histQ == 'done' and len(hist2add) > 0: histDone = False
+        elif len(hist2add) == 0: continue
 
     # Add emergency symptoms:
     im.executeModality('TEXT_default', 'Enter any symptoms categorized as higher emergency:')
