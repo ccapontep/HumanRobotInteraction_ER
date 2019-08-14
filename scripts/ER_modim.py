@@ -622,7 +622,6 @@ def i3():
     # Add level of consciousness:
     im.executeModality('TEXT_default', 'Pick ONE of your level of consciousness:')
     say('enter one of your level of consciousness', 'en')
-    cons1 = 0
     consDone = True
     while consDone == True:
         im.executeModality('BUTTONS',[ ['fully', 'Fully (awake, aware)'], ['medium', 'Medium (some confusion)'], ['barely', 'Barely (feeling of sleeping or fainting)'], ['unconscious', 'Unconscious (fainted)'], ['confirm', 'Confirm']])
@@ -631,12 +630,11 @@ def i3():
         consQ = im.ask(actionname=None, timeoutvalue=100000)
         im.display.remove_buttons()
 
-        if consQ != 'confirm':
+        if consQ != 'confirm' :
             say(consQ, 'en')
-            if cons1 == 0:
+            if consQ != 'remove':
                 cons2add = consQ
-                cons1 += 1
-            else: cons2add = cons2add + '/' + consQ
+            elif consQ == 'remove': cons2add = ''
             RecordDict.update({"LevelofConsciousness" : cons2add}) # Update data in record
             StrRecord = 'Your consciousness level is: ' + RecordDict['LevelofConsciousness']
             im.executeModality('TEXT_default', StrRecord)
