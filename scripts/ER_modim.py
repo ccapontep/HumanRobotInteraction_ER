@@ -508,8 +508,7 @@ def i3():
             RecordDict.update({"PastMedicalHistory" : hist2add}) # Update data in record
             StrRecord = 'Your past history is: ' + RecordDict['PastMedicalHistory']
             im.executeModality('TEXT_default', StrRecord)
-        elif histQ == 'done' and len(hist2add) > 0: histDone = False
-        elif histQ == 'done' and len(hist2add) == 0: histDone = True
+        elif histQ == 'done': histDone = False
 
     # Add emergency symptoms:
     im.executeModality('TEXT_default', 'Enter any symptoms categorized as higher emergency:')
@@ -535,7 +534,7 @@ def i3():
         emergQ = im.ask(actionname=None, timeoutvalue=100000)
         im.display.remove_buttons()
 
-        if (emergQ != 'done' or len(emerg2add) == 0) and emergQ != 'next' and emergQ != 'next2':
+        if emergQ != 'done' and emergQ != 'next' and emergQ != 'next2':
             say(emergQ, 'en')
             if emer1 == 0 and emergQ != 'remove':
                 emerg2add = emergQ
@@ -550,7 +549,7 @@ def i3():
             RecordDict.update({"EmergencySymptoms" : emerg2add}) # Update data in record
             StrRecord = 'Your emergency symptoms are: ' + RecordDict['EmergencySymptoms']
             im.executeModality('TEXT_default', StrRecord)
-        elif emergQ == 'done' and len(emerg2add) > 0: emergDone = False
+        elif emergQ == 'done': emergDone = False
         elif emergQ == 'next': nextEm = True
         elif emergQ == 'next2': nextEm2 = True
 
@@ -573,7 +572,7 @@ def i3():
         symQ = im.ask(actionname=None, timeoutvalue=100000)
         im.display.remove_buttons()
 
-        if (symQ != 'done' or len(sym2add) == 0) and symQ != 'next':
+        if symQ != 'done' and symQ != 'next':
             say(symQ, 'en')
             if symp1 == 0 and symQ != 'remove':
                 sym2add = symQ
@@ -588,7 +587,7 @@ def i3():
             RecordDict.update({"Symptoms" : sym2add}) # Update data in record
             StrRecord = 'Your symptoms are: ' + RecordDict['Symptoms']
             im.executeModality('TEXT_default', StrRecord)
-        elif symQ == 'done' and len(sym2add) > 0: symDone = False
+        elif symQ == 'done': symDone = False
         elif symQ == 'next': nextSy = True
 
     # Add location of pain:
@@ -603,7 +602,7 @@ def i3():
         locQ = im.ask(actionname=None, timeoutvalue=100000)
         im.display.remove_buttons()
 
-        if not locQ == 'done' or len(loc2add) == 0:
+        if not locQ == 'done':
             say(locQ, 'en')
             if loc1 == 0 and locQ != 'remove':
                 loc2add = locQ
@@ -618,7 +617,7 @@ def i3():
             RecordDict.update({"LocationofPain" : loc2add}) # Update data in record
             StrRecord = 'Your pain location are: ' + RecordDict['LocationofPain']
             im.executeModality('TEXT_default', StrRecord)
-        elif locQ == 'done' and len(loc2add) > 0: locDone = False
+        elif locQ == 'done': locDone = False
 
     # Add level of consciousness:
     im.executeModality('TEXT_default', 'Pick ONE of your level of consciousness:')
