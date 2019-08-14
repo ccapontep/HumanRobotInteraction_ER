@@ -501,7 +501,9 @@ def i3():
             elif hist1 != 0 and histQ != 'remove': hist2add = hist2add + '/' + histQ
             elif histQ == 'remove':
                 if '/' in hist2add: hist2add = hist2add.split('/')[0]
-                else: hist2add = ''
+                else:
+                    hist2add = ''
+                    hist1 = 0
 
             RecordDict.update({"PastMedicalHistory" : hist2add}) # Update data in record
             StrRecord = 'Your past history is: ' + RecordDict['PastMedicalHistory']
@@ -540,7 +542,9 @@ def i3():
             elif emer1 != 0 and emergQ != 'remove': emerg2add = emerg2add + '/' + emergQ
             elif emergQ == 'remove':
                 if '/' in emerg2add: emerg2add = emerg2add.split('/')[0]
-                else: emerg2add = ''
+                else:
+                    emerg2add = ''
+                    emer1 = 0
 
             RecordDict.update({"EmergencySymptoms" : emerg2add}) # Update data in record
             StrRecord = 'Your emergency symptoms are: ' + RecordDict['EmergencySymptoms']
@@ -576,7 +580,9 @@ def i3():
             elif symp1 != 0 and symQ != 'remove': sym2add = sym2add + '/' + symQ
             elif symQ == 'remove':
                 if '/' in sym2add: sym2add = sym2add.split('/')[0]
-                else: sym2add = ''
+                else:
+                    sym2add = ''
+                    symp1 = 0
 
             RecordDict.update({"Symptoms" : sym2add}) # Update data in record
             StrRecord = 'Your symptoms are: ' + RecordDict['Symptoms']
@@ -604,7 +610,9 @@ def i3():
             elif loc1 != 0 and locQ != 'remove': loc2add = loc2add + '/' + locQ
             elif locQ == 'remove':
                 if '/' in loc2add: loc2add = loc2add.split('/')[0]
-                else: loc2add = ''
+                else:
+                    loc2add = ''
+                    loc1 = 0
 
             RecordDict.update({"LocationofPain" : loc2add}) # Update data in record
             StrRecord = 'Your pain location are: ' + RecordDict['LocationofPain']
@@ -669,22 +677,18 @@ def i3():
     # Add info about urgency level and wait time for the patient
 
     # Calculate the urgency given the picked items of the patient
-    say('here 00', 'en') # &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-
     agePoints = 0
     if int(RecordDict["Age"]) < 10: # if it is a young patient, higher urgency
         agePoints += 3
     elif int(RecordDict["Age"]) > 70: # if it's an old patient, higher urgency
         agePoints += 2
     else: agePoints += 1
-    say('here 01', 'en') # &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
     histPoints = 0
     if 'smoke cigarettes' in RecordDict['PastMedicalHistory']:
         if 'chest' in RecordDict['LocationofPain'] or len([e for e in ['breathing', 'chest pain', 'coughing'] if e in RecordDict['EmergencySymptoms']]) > 0:
             histPoints += 1.5
         else: histPoints += 1
-    say('here 11', 'en') # &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
     checkHist = [e for e in ['overweight or obese', 'high cholesterol', 'hypertension', 'diabetes'] if e in RecordDict['PastMedicalHistory']]
     if len(checkHist) > 0:
         histPoints += (1.5 * len(checkHist))
@@ -701,7 +705,6 @@ def i3():
         painPoints = 5
     elif 'excruciating' in RecordDict['PainLevel']:
         painPoints = 7
-    say('here 22', 'en') # &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
     emergPoints = 0
     listEmerg = ['bleeding','breathing','unusual behavior','chest pain','choking','coughing','severe vomiting','fainting','serious injury','deep wound','sudden severe pain','sudden dizziness','swallowing poisonous','severe abdominal','head spine','feeling suicide murder']
@@ -724,7 +727,6 @@ def i3():
         locPoints += (1.5 * len(checkLoc))
     if len(checkLoc2) > 0:
         locPoints += (2 * len(checkLoc2))
-    say('here 33', 'en') # &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
     conscPoints = 0
     if 'medium' in RecordDict['LevelofConsciousness']:
@@ -733,11 +735,9 @@ def i3():
         conscPoints += 7
     elif 'unconscious' in RecordDict['LevelofConsciousness']:
         conscPoints += 15
-    say('here 44', 'en') # &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
     totalPoints = agePoints + histPoints + emergPoints + symPoints + locPoints + conscPoints
     RecordDict.update({"UrgencyLevel" : str(totalPoints)}) # Update data in record
-    say('here 55', 'en') # &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
     StrRecord = 'Your total urgency score is: ' + str(totalPoints)
     im.executeModality('TEXT_default', StrRecord)
@@ -753,6 +753,10 @@ def i3():
     recFile = open(os.path.join(directory, RecordTxt), "w+")
     recFile.write(stringDic)
     recFile.close()
+
+    im.executeModality('TEXT_default', 'Your record has been saved in the database')
+    say('Thank you for adding the information. Please now wait for your turn', 'en')
+
 
 
     end()
