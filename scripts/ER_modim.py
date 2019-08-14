@@ -755,7 +755,7 @@ def i3():
 
     ticketFile = open(os.path.join(directory, "PatientTicketNum.txt"), "r")
     ticketStr = ticketFile.read()
-    ticketStr = ticketStr + '\n' + ticketNumber
+    ticketStr = ticketStr + ticketNumber
 
     recFile = open(os.path.join(directory, "PatientTicketNum.txt"), "w+")
     recFile.write(ticketStr)

@@ -129,6 +129,16 @@ elif 'barely' in RecordDict['LevelofConsciousness']:
 elif 'unconscious' in RecordDict['LevelofConsciousness']:
     conscPoints += 15
 
+totalPoints = agePoints + histPoints + emergPoints + symPoints + locPoints + conscPoints
 
+emerg2add = 'your bla bla: 7/pain/breathing'
+if '/' in emerg2add: emerg2add = emerg2add.rpartition('/')[0]
+else: emerg2add = emerg2add.split(':')[0]
 
+ticketFile = open(os.path.join(directory, "PatientTicketNum.txt"), "r")
+ticketStr = ticketFile.read()
+ticketStr = ticketStr + ticketNumber
 
+recFile = open(os.path.join(directory, "PatientTicketNum.txt"), "w+")
+recFile.write(ticketStr)
+recFile.close()
