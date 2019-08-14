@@ -493,7 +493,7 @@ def i3():
         histQ = im.ask(actionname=None, timeoutvalue=100000)
         im.display.remove_buttons()
 
-        if not histQ == 'done':
+        if histQ != 'done' or len(hist2add) == 0:
             say(histQ, 'en')
             if hist1 == 0 and histQ != 'remove':
                 hist2add = histQ
@@ -534,7 +534,7 @@ def i3():
         emergQ = im.ask(actionname=None, timeoutvalue=100000)
         im.display.remove_buttons()
 
-        if not emergQ == 'done' and emergQ != 'next' and emergQ != 'next2':
+        if (emergQ != 'done' or len(emerg2add) == 0) and emergQ != 'next' and emergQ != 'next2':
             say(emergQ, 'en')
             if emer1 == 0 and emergQ != 'remove':
                 emerg2add = emergQ
@@ -572,7 +572,7 @@ def i3():
         symQ = im.ask(actionname=None, timeoutvalue=100000)
         im.display.remove_buttons()
 
-        if not symQ == 'done' and symQ != 'next':
+        if (symQ != 'done' or len(sym2add) == 0) and symQ != 'next':
             say(symQ, 'en')
             if symp1 == 0 and symQ != 'remove':
                 sym2add = symQ
@@ -602,7 +602,7 @@ def i3():
         locQ = im.ask(actionname=None, timeoutvalue=100000)
         im.display.remove_buttons()
 
-        if not locQ == 'done':
+        if not locQ == 'done' or len(loc2add) == 0:
             say(locQ, 'en')
             if loc1 == 0 and locQ != 'remove':
                 loc2add = locQ
