@@ -654,7 +654,7 @@ def i3():
     curr_sec = time.time()
     loc_time = time.localtime(curr_sec)
     curr_date = ((time.ctime(curr_sec)).split(':')[0])[:-3]
-    curr_time = str(loc_time.tm_hour) + ' hours and ' + str(loc_time.tm_min) + ' minutes'
+    curr_time = str(loc_time.tm_hour) + ':' + str(loc_time.tm_min)
     RecordDict.update({"TimeAdmitted" : curr_sec}) # Update data in record
     StrRecord = 'Your date admitted is: ' + curr_date + ', ' + str(loc_time.tm_year)
     im.executeModality('TEXT_default', StrRecord)
@@ -746,10 +746,6 @@ def i3():
 
     stringDic = str(RecordDict)
     stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': u','=').replace(': ','=')
-
-    recFile = open(os.path.join(directory, RecordTxt), "w")
-    recFile.write(stringDic)
-    recFile.close()
 
     # Check the tickets in the system
     directory = "/home/ubuntu/playground/HumanRobotInteraction_ER/patientInfo"
