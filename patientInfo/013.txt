@@ -1,0 +1,11 @@
+Symptoms=cut/pain/dizzy
+TimeAdmitted=1565821935.246468
+EmergencySymptoms=bleeding/deep wound
+Name=ana johnson
+LevelofConsciousness=barely
+UrgencyLevel=89.5
+Age=8
+PainLevel=very intense
+LocationofPain=arms
+PastMedicalHistory=none
+

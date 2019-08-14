@@ -753,6 +753,14 @@ def i3():
     recFile.write(stringDic)
     recFile.close()
 
+    ticketFile = open(os.path.join(directory, "PatientTicketNum.txt"), "r")
+    ticketStr = ticketFile.read()
+    ticketStr = ticketStr + '\n' + ticketNumber
+
+    recFile = open(os.path.join(directory, "PatientTicketNum.txt"), "w+")
+    recFile.write(ticketStr)
+    recFile.close()
+
     im.executeModality('TEXT_default', 'Your record has been saved in the database')
     say('Thank you for adding the information. Please now wait for your turn', 'en')
 
