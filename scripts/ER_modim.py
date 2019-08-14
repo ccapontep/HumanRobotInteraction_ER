@@ -681,7 +681,7 @@ def i3():
         if 'chest' in RecordDict['LocationofPain'] or len([e for e in ['breathing', 'chest pain', 'coughing'] if e in RecordDict['EmergencySymptoms']]) > 0:
             histPoints += 1.5
         else: histPoints += 1
-
+    say('here 11', 'en') # &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
     checkHist = [e for e in ['overweight or obese', 'high cholesterol', 'hypertension', 'diabetes'] if e in RecordDict['PastMedicalHistory']]
     if len(checkHist) > 0:
         histPoints += (1.5 * len(checkHist))
@@ -698,6 +698,7 @@ def i3():
         painPoints = 5
     elif 'excruciating' in RecordDict['PainLevel']:
         painPoints = 7
+    say('here 22', 'en') # &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
     emergPoints = 0
     listEmerg = ['bleeding','breathing','unusual behavior','chest pain','choking','coughing','severe vomiting','fainting','serious injury','deep wound','sudden severe pain','sudden dizziness','swallowing poisonous','severe abdominal','head spine','feeling suicide murder']
@@ -720,6 +721,7 @@ def i3():
         locPoints += (1.5 * len(checkLoc))
     if len(checkLoc2) > 0:
         locPoints += (2 * len(checkLoc2))
+    say('here 33', 'en') # &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
     conscPoints = 0
     if 'medium' in RecordDict['LevelofConsciousness']:
@@ -728,9 +730,11 @@ def i3():
         conscPoints += 7
     elif 'unconscious' in RecordDict['LevelofConsciousness']:
         conscPoints += 15
+    say('here 44', 'en') # &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
     totalPoints = agePoints + histPoints + emergPoints + symPoints + locPoints + conscPoints
     RecordDict.update({"UrgencyLevel" : str(totalPoints)}) # Update data in record
+    say('here 55', 'en') # &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
     StrRecord = 'Your total urgency score is: ' + str(totalPoints)
     im.executeModality('TEXT_default', StrRecord)
