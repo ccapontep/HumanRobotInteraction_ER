@@ -630,34 +630,32 @@ def i3():
         consQ = im.ask(actionname=None, timeoutvalue=100000)
         im.display.remove_buttons()
 
-        if consQ != 'confirm' :
+        if consQ != 'confirm':
             say(consQ, 'en')
-            if consQ != 'remove':
-                cons2add = consQ
-            elif consQ == 'remove': cons2add = ''
+            cons2add = consQ
             RecordDict.update({"LevelofConsciousness" : cons2add}) # Update data in record
             StrRecord = 'Your consciousness level is: ' + RecordDict['LevelofConsciousness']
             im.executeModality('TEXT_default', StrRecord)
-        elif consQ == 'confirm': consDone = False
+        else: consDone = False
 
     # Add pain lavel:
-    im.executeModality('TEXT_default', 'Pick your pain level:')
-    pain1 = 0
-    im.executeModality('BUTTONS',[ ['some', 'Some'], ['moderate', 'Moderate'], ['intense', 'Intense'], ['very intense', 'Very Intense'], ['excruciating', 'Excruciating']])
-    im.executeModality('ASR',['some', 'moderate', 'intense', 'very intense', 'abdomen', 'excruciating'])
+    im.executeModality('TEXT_default', 'Pick ONE to descrive your pain level:')
+    say('pick one of your pain level', 'en')
+    painDone = True
+    while painDone == True:
+        im.executeModality('BUTTONS',[ ['some', 'Some'], ['moderate', 'Moderate'], ['intense', 'Intense'], ['very intense', 'Very Intense'], ['excruciating', 'Excruciating'], ['confirm', 'Confirm']])
+        im.executeModality('ASR',['some', 'moderate', 'intense', 'very intense', 'abdomen', 'excruciating'])
 
-    painQ = im.ask(actionname=None, timeoutvalue=100000)
-    im.display.remove_buttons()
+        painQ = im.ask(actionname=None, timeoutvalue=100000)
+        im.display.remove_buttons()
 
-    say(painQ, 'en')
-    if pain1 == 0:
-        pain2add = painQ
-        pain1 += 1
-    else: pain2add = pain2add + '/' + painQ
-    RecordDict.update({"PainLevel" : pain2add}) # Update data in record
-    StrRecord = 'Your pain level is: ' + RecordDict['PainLevel']
-    im.executeModality('TEXT_default', StrRecord)
-    time.sleep(3)
+        if painQ != 'confirm':
+            say(painQ, 'en')
+            pain2add = painQ
+            RecordDict.update({"PainLevel" : pain2add}) # Update data in record
+            StrRecord = 'Your pain level is: ' + RecordDict['PainLevel']
+            im.executeModality('TEXT_default', StrRecord)
+        else: painDone = False
 
     # Add time admitted:
     curr_sec = time.time()
