@@ -381,7 +381,7 @@ def i3():
     im.display.loadUrl('ERnewpatient.html')
 
     im.executeModality('TEXT_default', 'Please enter the digits of your ticket number one by one.')
-    say('Let me look for you in the database. Please enter your ticket number', 'en')
+    say('Please enter the ticket number given to you', 'en')
 
     # There are three digits in the ticket number, check one by one with buttons
     CorrTick = 'no'
@@ -669,12 +669,15 @@ def i3():
     # Add info about urgency level and wait time for the patient
 
     # Calculate the urgency given the picked items of the patient
+    say('here 00', 'en') # &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
     agePoints = 0
     if int(RecordDict["Age"]) < 10: # if it is a young patient, higher urgency
         agePoints += 3
     elif int(RecordDict["Age"]) > 70: # if it's an old patient, higher urgency
         agePoints += 2
     else: agePoints += 1
+    say('here 01', 'en') # &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
     histPoints = 0
     if 'smoke cigarettes' in RecordDict['PastMedicalHistory']:
