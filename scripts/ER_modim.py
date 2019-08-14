@@ -730,7 +730,12 @@ def i3():
         conscPoints += 15
 
     totalPoints = agePoints + histPoints + emergPoints + symPoints + locPoints + conscPoints
-    RecordDict.update({"UrgencyLevel" : totalPoints}) # Update data in record
+    RecordDict.update({"UrgencyLevel" : str(totalPoints)}) # Update data in record
+
+    StrRecord = 'Your total urgency score is: ' + str(totalPoints)
+    im.executeModality('TEXT_default', StrRecord)
+    say(StrRecord, 'en')
+    time.sleep(2)
 
     stringDic = str(RecordDict)
     stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': u','=').replace(': ','=')
