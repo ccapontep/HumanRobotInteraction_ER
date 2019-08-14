@@ -508,7 +508,7 @@ def i3():
             RecordDict.update({"PastMedicalHistory" : hist2add}) # Update data in record
             StrRecord = 'Your past history is: ' + RecordDict['PastMedicalHistory']
             im.executeModality('TEXT_default', StrRecord)
-        elif histQ == 'done' and hist2add: histDone = False
+        elif histQ == 'done' and len(hist2add) > 0: histDone = False
 
     # Add emergency symptoms:
     im.executeModality('TEXT_default', 'Enter any symptoms categorized as higher emergency:')
@@ -549,7 +549,7 @@ def i3():
             RecordDict.update({"EmergencySymptoms" : emerg2add}) # Update data in record
             StrRecord = 'Your emergency symptoms are: ' + RecordDict['EmergencySymptoms']
             im.executeModality('TEXT_default', StrRecord)
-        elif emergQ == 'done' and emerg2add: emergDone = False
+        elif emergQ == 'done' and len(emerg2add) > 0: emergDone = False
         elif emergQ == 'next': nextEm = True
         elif emergQ == 'next2': nextEm2 = True
 
@@ -587,7 +587,7 @@ def i3():
             RecordDict.update({"Symptoms" : sym2add}) # Update data in record
             StrRecord = 'Your symptoms are: ' + RecordDict['Symptoms']
             im.executeModality('TEXT_default', StrRecord)
-        elif symQ == 'done' and sym2add: symDone = False
+        elif symQ == 'done' and len(sym2add) > 0: symDone = False
         elif symQ == 'next': nextSy = True
 
     # Add location of pain:
@@ -617,7 +617,7 @@ def i3():
             RecordDict.update({"LocationofPain" : loc2add}) # Update data in record
             StrRecord = 'Your pain location are: ' + RecordDict['LocationofPain']
             im.executeModality('TEXT_default', StrRecord)
-        elif locQ == 'done' and loc2add: locDone = False
+        elif locQ == 'done' and len(loc2add) > 0: locDone = False
 
     # Add level of consciousness:
     im.executeModality('TEXT_default', 'Pick ONE of your level of consciousness:')
