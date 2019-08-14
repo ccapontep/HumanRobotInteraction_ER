@@ -661,7 +661,7 @@ def i3():
     curr_sec = time.time()
     loc_time = time.localtime(curr_sec)
     curr_date = ((time.ctime(curr_sec)).split(':')[0])[:-3]
-    curr_time = str(loc_time.tm_hour) + 'hr ' + str(loc_time.tm_min) + 'min'
+    curr_time = str(loc_time.tm_hour) + 'h ' + str(loc_time.tm_min) + 'm'
     RecordDict.update({"TimeAdmitted" : curr_sec}) # Update data in record
     StrRecord = 'Your date admitted is: ' + curr_date + ', ' + str(loc_time.tm_year)
     im.executeModality('TEXT_default', StrRecord)
