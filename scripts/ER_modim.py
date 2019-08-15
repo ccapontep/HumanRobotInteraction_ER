@@ -779,25 +779,27 @@ def i3():
 
     # Check if order of patients has to change (total points has to be 10 points greater
     # than another patient and at least a medium-high to change the patient's order)
-    for index, level in enumerate(levelList):
+    orderedLevel = sorted(levelList, reverse=True)
+    for level in orderedLevel:
         if totalPoints > level + 10 and totalPoints > 45:
+            index = levelList.index(level)
             newOrder = []
             newWait = []
             orderOld = orderList[index]
-            orderNew = orderOld + 1
             for indexO, orders in enumerate(orderList):
-                if orders > orderOld:
+                if orders >= orderOld:
                     orders += 1
                 newOrder.append(orders)
                 newWait.append(orders*drAppointTime)
+            break
     # update info about new patient
-    waitPat = orderNew*drAppointTime
+    waitPat = orderOld*drAppointTime
     remain_min = round(waitPat) % 60
     remain_hr = round(waitPat) // 60
     remain_str = str(int(remain_hr)) + '-' + str(int(remain_min))
 
     RecordDict.update({"WaitTime" : remain_str})
-    RecordDict.update({"OrderNum" : str(orderNew)})
+    RecordDict.update({"OrderNum" : str(orderOld)})
 
     stringDic = str(RecordDict)
     stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': u','=').replace(': ','=')

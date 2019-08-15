@@ -147,7 +147,6 @@ recFile.close()
 # Calculate wait time for patient
 files = os.listdir(directory)
 
-WaitDict = dict()
 NameList = []
 levelList = []
 waitList = []
@@ -155,46 +154,42 @@ orderList = []
 for file in files:
     if file[0].isdigit():
         NameList.append(file)
-        # RecordTxt = ticketNumber + ".txt"
         with open(os.path.join(directory, file), "r") as record:
-#            datalist = []
             for line in record.readlines():
                 if line.startswith('UrgencyLevel'):
-#                    datalist.append(float(line.split('=')[1].split('-')[0]))
                     levelList.append(float(line.split('=')[1].split('-')[0]))
                 elif line.startswith('WaitTime'):
                     hr, minute = line.split('=')[1].split('-')
                     waitMin = 60*int(hr) + int(minute)
-#                    datalist.append(waitMin)
                     waitList.append(waitMin)
                 elif line.startswith('OrderNum'):
-#                    datalist.append(int(line.split('=')[1]))
                     orderList.append(int(line.split('=')[1]))
-#                WaitDict.update({file : datalist})
 
 drAppointTime = 15 # Time for a Dr to check each patient
-totalPoints = 55 # temp
+totalPoints = 105 # temp
 
-for index, level in enumerate(levelList):
-    if totalPoints > level + 10:
+orderedLevel = sorted(levelList, reverse=True)
+for level in orderedLevel:
+    if totalPoints > level + 10 and totalPoints > 45:
+        index = levelList.index(level)
         newOrder = []
         newWait = []
         orderOld = orderList[index]
-        orderNew = orderOld + 1
         for indexO, orders in enumerate(orderList):
-            if orders > orderOld:
+            if orders >= orderOld:
                 orders += 1
             newOrder.append(orders)
             newWait.append(orders*drAppointTime)
+        break
             
-waitPat = orderNew*drAppointTime
+waitPat = orderOld*drAppointTime
 
 remain_min = round(waitPat) % 60
 remain_hr = round(waitPat) // 60
 remain_str = str(int(remain_hr)) + '-' + str(int(remain_min))
 
 RecordDict.update({"WaitTime" : remain_str}) 
-RecordDict.update({"OrderNum" : str(orderNew)})
+RecordDict.update({"OrderNum" : str(orderOld)})
 
 
 for file in files:
