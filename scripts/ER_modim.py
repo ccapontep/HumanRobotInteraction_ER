@@ -824,6 +824,7 @@ def i3():
     with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
         for ticket in patientTicketNums.readlines():
             ticketNums.append(str(ticket))
+    im.executeModality('TEXT_default', str(ticketNums))
     if len(ticketNums) > 0 and int(ticketNumber) in (map(int, ticketNums)):
         im.executeModality('TEXT_default', 'Your record has been saved in the database')
         say('Thank you for adding the information.', 'en')
