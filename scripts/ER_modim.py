@@ -823,6 +823,7 @@ def i3():
     ticketNums = []
     with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
         for ticket in patientTicketNums.readlines():
+            ticket = ticket.split('\n')[0]
             ticketNums.append(str(ticket))
     im.executeModality('TEXT_default', str(ticketNums))
     if len(ticketNums) > 0 and int(ticketNumber) in (map(int, ticketNums)):
