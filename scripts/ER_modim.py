@@ -752,6 +752,7 @@ def i3():
     StrRecord = 'Calculating your wait time based on your urgency level and other patients waiting'
     im.executeModality('TEXT_default', StrRecord)
     say(StrRecord, 'en')
+    time.sleep(1)
 
     directory = "/home/ubuntu/playground/HumanRobotInteraction_ER/patientInfo"
     files = os.listdir(directory)
@@ -843,9 +844,16 @@ def i3():
                 recFile.write(stringDic)
                 recFile.close()
 
-
-    im.executeModality('TEXT_default', 'Your record has been saved in the database')
-    say('Thank you for adding the information. Please now wait for your turn', 'en')
+    ticketNums = []
+    with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
+        for ticket in patientTicketNums.readlines():
+            ticketNums.append(str(ticket))
+    if len(ticketNums) > 0 and int(ticketNumber) in (map(int, ticketNums)):
+        im.executeModality('TEXT_default', 'Your record has been saved in the database')
+        say('Thank you for adding the information. Please now wait for your turn', 'en')
+    else:
+        im.executeModality('TEXT_default', 'Sorry an error occured, please re-enter your information.')
+        say('Sorry some of the information you entered is incorrect, please enter them again carefully', 'en')
 
 
 
