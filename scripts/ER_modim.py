@@ -781,7 +781,7 @@ def i3():
     # than another patient and at least a medium-high to change the patient's order)
     orderedLevel = sorted(levelList, reverse=True)
     for level in orderedLevel:
-        if totalPoints > level + 10 and totalPoints > 45:
+        if totalPoints > level + 10 and totalPoints > 50:
             index = levelList.index(level)
             newOrder = []
             newWait = []
