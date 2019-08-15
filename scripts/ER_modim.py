@@ -736,18 +736,73 @@ def i3():
         conscPoints += 15
 
     totalPoints = agePoints + histPoints + emergPoints + symPoints + locPoints + conscPoints
-    RecordDict.update({"UrgencyLevel" : str(totalPoints)}) # Update data in record
+    if totalPoints < 30: stringPoints = str(totalPoints) + '-low'
+    if totalPoints > 30 and totalPoints < 70:: stringPoints = str(totalPoints) + '-medium'
+    if totalPoints > 70: stringPoints = str(totalPoints) + '-high'
+
+    RecordDict.update({"UrgencyLevel" : stringPoints}) # Update data in record
+    RecordDict.update({"ChangeinWaitTime" : 'has not'}) # Update data in record
 
     StrRecord = 'Your total urgency score is: ' + str(totalPoints)
     im.executeModality('TEXT_default', StrRecord)
     say(StrRecord, 'en')
     time.sleep(2)
 
+    # Calculate wait time for patient
+    StrRecord = 'Calculating your wait time based on your urgency level and other patients waiting'
+    im.executeModality('TEXT_default', StrRecord)
+    say(StrRecord, 'en')
+
+    directory = "/home/ubuntu/playground/HumanRobotInteraction_ER/patientInfo"
+    files = os.listdir(directory)
+    drAppointTime = 15 # Time for a Dr to check each patient
+
+
+    # Get wait, order, and urgency level from each patient to see if any change is necessary
+    NameList = []
+    levelList = []
+    waitList = []
+    orderList = []
+    for file in files:
+        if file[0].isdigit():
+            NameList.append(file)
+            with open(os.path.join(directory, file), "r") as record:
+                for line in record.readlines():
+                    if line.startswith('UrgencyLevel'):
+                        levelList.append(float(line.split('=')[1].split('-')[0]))
+                    elif line.startswith('WaitTime'):
+                        hr, minute = line.split('=')[1].split('-')
+                        waitMin = 60*int(hr) + int(minute)
+                        waitList.append(waitMin)
+                    elif line.startswith('OrderNum'):
+                        orderList.append(int(line.split('=')[1]))
+
+    # Check if order of patients has to change (total points has to be 10 points greater
+    # than another patient and at least a medium-high to change the patient's order)
+    for index, level in enumerate(levelList):
+        if totalPoints > level + 10 and totalPoints > 45:
+            newOrder = []
+            newWait = []
+            orderOld = orderList[index]
+            orderNew = orderOld + 1
+            for indexO, orders in enumerate(orderList):
+                if orders > orderOld:
+                    orders += 1
+                newOrder.append(orders)
+                newWait.append(orders*drAppointTime)
+    # update info about new patient
+    waitPat = orderNew*drAppointTime
+    remain_min = round(waitPat) % 60
+    remain_hr = round(waitPat) // 60
+    remain_str = str(int(remain_hr)) + '-' + str(int(remain_min))
+
+    RecordDict.update({"WaitTime" : remain_str})
+    RecordDict.update({"OrderNum" : str(orderNew)})
+
     stringDic = str(RecordDict)
     stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': u','=').replace(': ','=')
 
     # Check the tickets in the system
-    directory = "/home/ubuntu/playground/HumanRobotInteraction_ER/patientInfo"
     RecordTxt = ticketNumber + ".txt"
     recFile = open(os.path.join(directory, RecordTxt), "w+")
     recFile.write(stringDic)
@@ -760,6 +815,32 @@ def i3():
     recFile = open(os.path.join(directory, "PatientTicketNum.txt"), "w+")
     recFile.write(ticketStr)
     recFile.close()
+
+    # Add other patient's information to their record
+    for file in files:
+        for index, name in enumerate(NameList):
+            if file == name:
+                with open(os.path.join(directory, file), "r") as record:
+                    TempDic = dict()
+                    for line in record.readlines():
+                        line = line.replace('\n', '')
+                        item, info = line.split('=')
+                        TempDic.update({item : info})
+                    remain_min = round(newWait[index]) % 60
+                    remain_hr = round(newWait[index]) // 60
+                    remain_str = str(int(remain_hr)) + '-' + str(int(remain_min))
+                    TempDic.update({'WaitTime' : remain_str})
+                    TempDic.update({'OrderNum' : str(newOrder[index])})
+                    if orderList[index] != newOrder[index]:
+                        TempDic.update({'ChangeinWaitTime' : 'has'})
+
+                stringDic = str(TempDic)
+                stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': u','=').replace(': ','=')
+
+                recFile = open(os.path.join(directory, file), "w")
+                recFile.write(stringDic)
+                recFile.close()
+
 
     im.executeModality('TEXT_default', 'Your record has been saved in the database')
     say('Thank you for adding the information. Please now wait for your turn', 'en')

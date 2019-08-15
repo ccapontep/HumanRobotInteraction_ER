@@ -1,12 +1,13 @@
-Symptoms=pain
-TimeAdmitted=1565823082.409951
+PastMedicalHistory=diabetes/yes
+WaitTime=0-30
 EmergencySymptoms=severe abdominal
 Name=tom miller
-LevelofConsciousness=medium
-UrgencyLevel=42.5
 Age=46
 PainLevel=intense
 LocationofPain=abdomen
-PastMedicalHistory=diabetes/yes
-
-
+Symptoms=pain
+TimeAdmitted=1565823082.409951
+OrderNum=2
+LevelofConsciousness=medium
+ChangeinWaitTime=has not
+UrgencyLevel=42.5-medium

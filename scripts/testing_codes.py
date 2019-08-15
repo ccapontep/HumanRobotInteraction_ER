@@ -142,3 +142,85 @@ ticketStr = ticketStr + ticketNumber
 recFile = open(os.path.join(directory, "PatientTicketNum.txt"), "w+")
 recFile.write(ticketStr)
 recFile.close()
+
+
+# Calculate wait time for patient
+files = os.listdir(directory)
+
+WaitDict = dict()
+NameList = []
+levelList = []
+waitList = []
+orderList = []
+for file in files:
+    if file[0].isdigit():
+        NameList.append(file)
+        # RecordTxt = ticketNumber + ".txt"
+        with open(os.path.join(directory, file), "r") as record:
+#            datalist = []
+            for line in record.readlines():
+                if line.startswith('UrgencyLevel'):
+#                    datalist.append(float(line.split('=')[1].split('-')[0]))
+                    levelList.append(float(line.split('=')[1].split('-')[0]))
+                elif line.startswith('WaitTime'):
+                    hr, minute = line.split('=')[1].split('-')
+                    waitMin = 60*int(hr) + int(minute)
+#                    datalist.append(waitMin)
+                    waitList.append(waitMin)
+                elif line.startswith('OrderNum'):
+#                    datalist.append(int(line.split('=')[1]))
+                    orderList.append(int(line.split('=')[1]))
+#                WaitDict.update({file : datalist})
+
+drAppointTime = 15 # Time for a Dr to check each patient
+totalPoints = 55 # temp
+
+for index, level in enumerate(levelList):
+    if totalPoints > level + 10:
+        newOrder = []
+        newWait = []
+        orderOld = orderList[index]
+        orderNew = orderOld + 1
+        for indexO, orders in enumerate(orderList):
+            if orders > orderOld:
+                orders += 1
+            newOrder.append(orders)
+            newWait.append(orders*drAppointTime)
+            
+waitPat = orderNew*drAppointTime
+
+remain_min = round(waitPat) % 60
+remain_hr = round(waitPat) // 60
+remain_str = str(int(remain_hr)) + '-' + str(int(remain_min))
+
+RecordDict.update({"WaitTime" : remain_str}) 
+RecordDict.update({"OrderNum" : str(orderNew)})
+
+
+for file in files:
+    for index, name in enumerate(NameList):
+        if file == name:
+            with open(os.path.join(directory, file), "r") as record:
+                TempDic = dict()
+                for line in record.readlines():
+                    line = line.replace('\n', '')
+                    item, info = line.split('=')
+                    TempDic.update({item : info})
+                remain_min = round(newWait[index]) % 60
+                remain_hr = round(newWait[index]) // 60
+                remain_str = str(int(remain_hr)) + '-' + str(int(remain_min))
+                TempDic.update({'WaitTime' : remain_str})
+                TempDic.update({'OrderNum' : str(newOrder[index])})
+                if orderList[index] != newOrder[index]:
+                    TempDic.update({'ChangeinWaitTime' : 'has'})
+    
+            stringDic = str(TempDic)
+            stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': u','=').replace(': ','=')
+        
+            recFile = open(os.path.join(directory, file), "w")
+            recFile.write(stringDic)
+            recFile.close()
+
+
+
+
