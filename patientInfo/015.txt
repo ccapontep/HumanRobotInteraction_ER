@@ -1,0 +1,14 @@
+Symptoms=dizzy
+EmergencySymptoms=chest pain/coughing/sudden dizziness
+PastMedicalHistory=no/hypertension
+UrgencyLevel=104.5-high
+Age=67
+PainLevel=intense
+LocationofPain=abdomen/head
+WaitTime=1-0
+TimeAdmitted=1565876979.301099
+OrderNum=4
+LevelofConsciousness=medium
+ChangeinWaitTime=has
+Name=dan scott
+

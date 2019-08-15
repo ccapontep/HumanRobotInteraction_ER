@@ -758,7 +758,7 @@ def i3():
     files = os.listdir(directory)
     drAppointTime = 15 # Time for a Dr to check each patient
 
-
+    say('here 11', 'en')
     # Get wait, order, and urgency level from each patient to see if any change is necessary
     NameList = []
     levelList = []
@@ -777,7 +777,7 @@ def i3():
                         waitList.append(waitMin)
                     elif line.startswith('OrderNum'):
                         orderList.append(int(line.split('=')[1]))
-
+    say('here 22', 'en')
     # Check if order of patients has to change (total points has to be 10 points greater
     # than another patient and at least a medium-high to change the patient's order)
     orderedLevel = sorted(levelList, reverse=True)
@@ -787,12 +787,13 @@ def i3():
             newOrder = []
             newWait = []
             orderOld = orderList[index]
-            for indexO, orders in enumerate(orderList):
+            for orders in orderList:
                 if orders >= orderOld:
                     orders += 1
                 newOrder.append(orders)
                 newWait.append(orders*drAppointTime)
             break
+    say('here 33', 'en')
     # update info about new patient
     waitPat = orderOld*drAppointTime
     remain_min = round(waitPat) % 60
@@ -804,13 +805,13 @@ def i3():
 
     stringDic = str(RecordDict)
     stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': u','=').replace(': ','=')
-
+    say('here 44', 'en')
     # Check the tickets in the system
     RecordTxt = ticketNumber + ".txt"
     recFile = open(os.path.join(directory, RecordTxt), "w+")
     recFile.write(stringDic)
     recFile.close()
-
+    say('here 55', 'en')
     ticketFile = open(os.path.join(directory, "PatientTicketNum.txt"), "r")
     ticketStr = ticketFile.read()
     ticketStr = ticketStr + '\n' + ticketNumber
@@ -818,7 +819,7 @@ def i3():
     recFile = open(os.path.join(directory, "PatientTicketNum.txt"), "w+")
     recFile.write(ticketStr)
     recFile.close()
-
+    say('here 66', 'en')
     ticketNums = []
     with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
         for ticket in patientTicketNums.readlines():
@@ -829,7 +830,7 @@ def i3():
     else:
         im.executeModality('TEXT_default', 'Sorry an error occured, please re-enter your information.')
         say('Sorry some of the information you entered is incorrect, please enter them again carefully', 'en')
-
+    say('here 77', 'en')
     # Add other patient's information to their record
     for file in files:
         for index, name in enumerate(NameList):
