@@ -819,6 +819,17 @@ def i3():
     recFile.write(ticketStr)
     recFile.close()
 
+    ticketNums = []
+    with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
+        for ticket in patientTicketNums.readlines():
+            ticketNums.append(str(ticket))
+    if len(ticketNums) > 0 and int(ticketNumber) in (map(int, ticketNums)):
+        im.executeModality('TEXT_default', 'Your record has been saved in the database')
+        say('Thank you for adding the information.', 'en')
+    else:
+        im.executeModality('TEXT_default', 'Sorry an error occured, please re-enter your information.')
+        say('Sorry some of the information you entered is incorrect, please enter them again carefully', 'en')
+
     # Add other patient's information to their record
     for file in files:
         for index, name in enumerate(NameList):
@@ -844,17 +855,8 @@ def i3():
                 recFile.write(stringDic)
                 recFile.close()
 
-    ticketNums = []
-    with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
-        for ticket in patientTicketNums.readlines():
-            ticketNums.append(str(ticket))
-    if len(ticketNums) > 0 and int(ticketNumber) in (map(int, ticketNums)):
-        im.executeModality('TEXT_default', 'Your record has been saved in the database')
-        say('Thank you for adding the information. Please now wait for your turn', 'en')
-    else:
-        im.executeModality('TEXT_default', 'Sorry an error occured, please re-enter your information.')
-        say('Sorry some of the information you entered is incorrect, please enter them again carefully', 'en')
-
+    im.executeModality('TEXT_default', 'All records are updated, please wait for your turn.')
+    say('Thank you, please now wait for your turn', 'en')
 
 
     end()
