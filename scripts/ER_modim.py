@@ -737,7 +737,7 @@ def i3():
 
     totalPoints = agePoints + histPoints + emergPoints + symPoints + locPoints + conscPoints
     if totalPoints < 30: stringPoints = str(totalPoints) + '-low'
-    if totalPoints > 30 and totalPoints < 70:: stringPoints = str(totalPoints) + '-medium'
+    if totalPoints > 30 and totalPoints < 70: stringPoints = str(totalPoints) + '-medium'
     if totalPoints > 70: stringPoints = str(totalPoints) + '-high'
 
     RecordDict.update({"UrgencyLevel" : stringPoints}) # Update data in record
