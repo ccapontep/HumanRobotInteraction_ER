@@ -250,6 +250,8 @@ def i2():
         elif UserQues == 'update':
             updateD = True
             while updateD == True:
+                urgencyOld = float(RecordDict["UrgencyLevel"].split('-')[1])
+                
                 im.executeModality('TEXT_default', 'Which would you like to update?')
                 say('Pick the item you would like to change.', 'en')
 
@@ -258,200 +260,206 @@ def i2():
                 HistQues = im.ask(actionname=None, timeoutvalue=10000)
                 im.display.remove_buttons()
 
-                # Calculate the urgency given the picked items of the patient
-                agePoints = 0
-                if int(RecordDict["Age"]) < 10: # if it is a young patient, higher urgency
-                    agePoints += 3
-                elif int(RecordDict["Age"]) > 70: # if it's an old patient, higher urgency
-                    agePoints += 2
-                else: agePoints += 1
+                if HistQues == 'done':
+                    im.executeModality('TEXT_default', 'Thank you for checking your record.')
+                    say('Goodbye!', 'en')
 
-                histPoints = 0
-                if 'smoke cigarettes' in RecordDict['PastMedicalHistory']:
-                    if 'chest' in RecordDict['LocationofPain'] or len([e for e in ['breathing', 'chest pain', 'coughing'] if e in RecordDict['EmergencySymptoms']]) > 0:
-                        histPoints += 1.5
-                    else: histPoints += 1
-                checkHist = [e for e in ['overweight or obese', 'high cholesterol', 'hypertension', 'diabetes'] if e in RecordDict['PastMedicalHistory']]
-                if len(checkHist) > 0:
-                    histPoints += (1.5 * len(checkHist))
-                if 'recurring symptoms' in RecordDict['PastMedicalHistory']: histPoints += 2
+                    # Calculate the urgency given the picked items of the patient
+                    agePoints = 0
+                    if int(RecordDict["Age"]) < 10: # if it is a young patient, higher urgency
+                        agePoints += 3
+                    elif int(RecordDict["Age"]) > 70: # if it's an old patient, higher urgency
+                        agePoints += 2
+                    else: agePoints += 1
 
-                painPoints = 0
-                if 'some' in RecordDict['PainLevel']:
-                    painPoints = 1
-                elif 'moderate' in RecordDict['PainLevel']:
-                    painPoints = 2
-                elif 'intense' in RecordDict['PainLevel']:
-                    painPoints = 3
-                elif 'very intense' in RecordDict['PainLevel']:
-                    painPoints = 5
-                elif 'excruciating' in RecordDict['PainLevel']:
-                    painPoints = 7
+                    histPoints = 0
+                    if 'smoke cigarettes' in RecordDict['PastMedicalHistory']:
+                        if 'chest' in RecordDict['LocationofPain'] or len([e for e in ['breathing', 'chest pain', 'coughing'] if e in RecordDict['EmergencySymptoms']]) > 0:
+                            histPoints += 1.5
+                        else: histPoints += 1
+                    checkHist = [e for e in ['overweight or obese', 'high cholesterol', 'hypertension', 'diabetes'] if e in RecordDict['PastMedicalHistory']]
+                    if len(checkHist) > 0:
+                        histPoints += (1.5 * len(checkHist))
+                    if 'recurring symptoms' in RecordDict['PastMedicalHistory']: histPoints += 2
 
-                emergPoints = 0
-                listEmerg = ['bleeding','breathing','unusual behavior','chest pain','choking','coughing','severe vomiting','fainting','serious injury','deep wound','sudden severe pain','sudden dizziness','swallowing poisonous','severe abdominal','head spine','feeling suicide murder']
-                checkEmerg = [e for e in listEmerg if e in RecordDict['EmergencySymptoms']]
-                if len(checkEmerg) > 0:
-                    emergPoints += (10 * len(checkEmerg) * painPoints)
+                    painPoints = 0
+                    if 'some' in RecordDict['PainLevel']:
+                        painPoints = 1
+                    elif 'moderate' in RecordDict['PainLevel']:
+                        painPoints = 2
+                    elif 'intense' in RecordDict['PainLevel']:
+                        painPoints = 3
+                    elif 'very intense' in RecordDict['PainLevel']:
+                        painPoints = 5
+                    elif 'excruciating' in RecordDict['PainLevel']:
+                        painPoints = 7
 
-                symPoints = 0
-                listSym = ['fever or chills','nausea or vomit','limited movement','loss senses','cut','pain','inflammation','dizzy','recurring']
-                checkSym = [e for e in listSym if e in RecordDict['Symptoms']]
-                if len(checkSym) > 0:
-                    symPoints += (2 * len(checkSym) * painPoints)
+                    emergPoints = 0
+                    listEmerg = ['bleeding','breathing','unusual behavior','chest pain','choking','coughing','severe vomiting','fainting','serious injury','deep wound','sudden severe pain','sudden dizziness','swallowing poisonous','severe abdominal','head spine','feeling suicide murder']
+                    checkEmerg = [e for e in listEmerg if e in RecordDict['EmergencySymptoms']]
+                    if len(checkEmerg) > 0:
+                        emergPoints += (10 * len(checkEmerg) * painPoints)
 
-                locPoints = 0
-                listLoc = ['foot', 'legs', 'arms', 'hands', 'back']
-                listLoc2 = ['abdomen', 'chest', 'head']
-                checkLoc = [e for e in listLoc if e in RecordDict['LocationofPain']]
-                checkLoc2 = [e for e in listLoc2 if e in RecordDict['LocationofPain']]
-                if len(checkLoc) > 0:
-                    locPoints += (1.5 * len(checkLoc))
-                if len(checkLoc2) > 0:
-                    locPoints += (2 * len(checkLoc2))
+                    symPoints = 0
+                    listSym = ['fever or chills','nausea or vomit','limited movement','loss senses','cut','pain','inflammation','dizzy','recurring']
+                    checkSym = [e for e in listSym if e in RecordDict['Symptoms']]
+                    if len(checkSym) > 0:
+                        symPoints += (2 * len(checkSym) * painPoints)
 
-                conscPoints = 0
-                if 'medium' in RecordDict['LevelofConsciousness']:
-                     conscPoints += 2
-                elif 'barely' in RecordDict['LevelofConsciousness']:
-                    conscPoints += 7
-                elif 'unconscious' in RecordDict['LevelofConsciousness']:
-                    conscPoints += 15
+                    locPoints = 0
+                    listLoc = ['foot', 'legs', 'arms', 'hands', 'back']
+                    listLoc2 = ['abdomen', 'chest', 'head']
+                    checkLoc = [e for e in listLoc if e in RecordDict['LocationofPain']]
+                    checkLoc2 = [e for e in listLoc2 if e in RecordDict['LocationofPain']]
+                    if len(checkLoc) > 0:
+                        locPoints += (1.5 * len(checkLoc))
+                    if len(checkLoc2) > 0:
+                        locPoints += (2 * len(checkLoc2))
 
-                totalPoints = agePoints + histPoints + emergPoints + symPoints + locPoints + conscPoints
-                if totalPoints < 30: stringPoints = str(totalPoints) + '-low'
-                if totalPoints > 30 and totalPoints < 70: stringPoints = str(totalPoints) + '-medium'
-                if totalPoints > 70: stringPoints = str(totalPoints) + '-high'
+                    conscPoints = 0
+                    if 'medium' in RecordDict['LevelofConsciousness']:
+                         conscPoints += 2
+                    elif 'barely' in RecordDict['LevelofConsciousness']:
+                        conscPoints += 7
+                    elif 'unconscious' in RecordDict['LevelofConsciousness']:
+                        conscPoints += 15
 
-                urgencyNum = float(RecordDict["UrgencyLevel"].split('-')[1])
+                    totalPoints = agePoints + histPoints + emergPoints + symPoints + locPoints + conscPoints
+                    if totalPoints < 30: stringPoints = str(totalPoints) + '-low'
+                    if totalPoints > 30 and totalPoints < 70: stringPoints = str(totalPoints) + '-medium'
+                    if totalPoints > 70: stringPoints = str(totalPoints) + '-high'
 
-                if totalPoints + 10 > urgencyNum and totalPoints > 70:
-                    RecordDict.update({"UrgencyLevel" : stringPoints}) # Update data in record
-                    RecordDict.update({"ChangeinWaitTime" : 'has not'}) # Update data in record
 
-                    StrRecord = 'Your new total urgency score is: ' + str(totalPoints)
-                    im.executeModality('TEXT_default', StrRecord)
-                    say(StrRecord, 'en')
-                    time.sleep(2)
 
-                    # Calculate wait time for patient
-                    StrRecord = 'Calculating your wait time based on your urgency level and other patients waiting'
-                    im.executeModality('TEXT_default', StrRecord)
-                    say(StrRecord, 'en')
-                    time.sleep(1)
+                    if totalPoints + 10 > urgencyOld and totalPoints > 70:
+                        RecordDict.update({"UrgencyLevel" : stringPoints}) # Update data in record
+                        RecordDict.update({"ChangeinWaitTime" : 'has not'}) # Update data in record
 
-                    files = os.listdir(directory)
-                    drAppointTime = 15 # Time for a Dr to check each patient
+                        StrRecord = 'Your new total urgency score is: ' + str(totalPoints)
+                        im.executeModality('TEXT_default', StrRecord)
+                        say(StrRecord, 'en')
+                        time.sleep(2)
 
-                    # Get wait, order, and urgency level from each patient to see if any change is necessary
-                    NameList = []
-                    levelList = []
-                    waitList = []
-                    orderList = []
-                    for file in files:
-                        if file[0].isdigit():
-                            NameList.append(file)
-                            with open(os.path.join(directory, file), "r") as record:
-                                for line in record.readlines():
-                                    if line[-1:] == '\n':
-                                        line = line[:-1]
-                                    if line.startswith('UrgencyLevel'):
-                                        levelList.append(float(line.split('=')[1].split('-')[0]))
-                                    elif line.startswith('WaitTime'):
-                                        hr, minute = line.split('=')[1].split('-')
-                                        waitMin = 60*int(hr) + int(minute)
-                                        waitList.append(waitMin)
-                                    elif line.startswith('OrderNum'):
-                                        orderList.append(int(line.split('=')[1]))
-                    # Check if order of patients has to change (total points has to be 10 points greater
-                    # than another patient and at least a medium-high to change the patient's order)
-                    orderedLevel = sorted(levelList, reverse=True)
-                    for level in orderedLevel:
-                        if totalPoints > level + 10 and totalPoints > 50:
-                            index = levelList.index(level)
-                            newOrder = []
-                            newWait = []
-                            orderOld = orderList[index]
-                            for orders in orderList:
-                                if orders >= orderOld:
-                                    orders += 1
-                                newOrder.append(orders)
-                                newWait.append(orders*drAppointTime)
-                            break
-                        else:
-                            orderOld = len(orderList) + 1
-                            NoChange = True
+                        # Calculate wait time for patient
+                        StrRecord = 'Calculating your wait time based on your urgency level and other patients waiting'
+                        im.executeModality('TEXT_default', StrRecord)
+                        say(StrRecord, 'en')
+                        time.sleep(1)
 
-                    # update info about new patient
-                    waitPat = orderOld*drAppointTime
-                    remain_min = round(waitPat) % 60
-                    remain_hr = round(waitPat) // 60
-                    remain_str = str(int(remain_hr)) + '-' + str(int(remain_min))
+                        files = os.listdir(directory)
+                        drAppointTime = 15 # Time for a Dr to check each patient
 
-                    RecordDict.update({"WaitTime" : remain_str})
-                    RecordDict.update({"OrderNum" : str(orderOld)})
-
-                    stringDic = str(RecordDict)
-                    stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': u','=').replace(': ','=')
-
-                    # Check the tickets in the system
-                    RecordTxt = ticketNumber + ".txt"
-                    recFile = open(os.path.join(directory, RecordTxt), "w+")
-                    recFile.write(stringDic)
-                    recFile.close()
-
-                    ticketFile = open(os.path.join(directory, "PatientTicketNum.txt"), "r")
-                    ticketStr = ticketFile.read()
-                    if ticketStr[-1:] == '\n':
-                        ticketStr = ticketStr[:-1]
-                    ticketStr = ticketStr + '\n' + ticketNumber
-
-                    recFile = open(os.path.join(directory, "PatientTicketNum.txt"), "w")
-                    recFile.write(ticketStr)
-                    recFile.close()
-
-                    ticketNums = []
-                    with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
-                        for ticket in patientTicketNums.readlines():
-                            ticket = ticket.split('\n')[0]
-                            ticketNums.append(ticket)
-                    im.executeModality('TEXT_default', str(ticketNums))
-                    if len(ticketNums) > 0 and ticketNumber in ticketNums:
-                        im.executeModality('TEXT_default', 'Your record has been saved in the database')
-                        say('Thank you for adding the information.', 'en')
-                    elif ticketNumber not in ticketNums:
-                        im.executeModality('TEXT_default', 'Sorry an error occured, please re-enter your information.')
-                        say('Sorry some of the information you entered is incorrect, please enter them again carefully', 'en')
-
-                    # Add other patient's information to their record
-                    if NoChange == True:
+                        # Get wait, order, and urgency level from each patient to see if any change is necessary
+                        NameList = []
+                        levelList = []
+                        waitList = []
+                        orderList = []
                         for file in files:
-                            for index, name in enumerate(NameList):
-                                if file == name:
-                                    with open(os.path.join(directory, file), "r") as record:
-                                        TempDic = dict()
-                                        for line in record.readlines():
-                                            line = line.replace('\n', '')
-                                            item, info = line.split('=')
-                                            TempDic.update({item : info})
-                                        remain_min = round(newWait[index]) % 60
-                                        remain_hr = round(newWait[index]) // 60
-                                        remain_str = str(int(remain_hr)) + '-' + str(int(remain_min))
-                                        TempDic.update({'WaitTime' : remain_str})
-                                        TempDic.update({'OrderNum' : str(newOrder[index])})
-                                        if orderList[index] != newOrder[index]:
-                                            TempDic.update({'ChangeinWaitTime' : 'has'})
+                            if file[0].isdigit():
+                                NameList.append(file)
+                                with open(os.path.join(directory, file), "r") as record:
+                                    for line in record.readlines():
+                                        if line[-1:] == '\n':
+                                            line = line[:-1]
+                                        if line.startswith('UrgencyLevel'):
+                                            levelList.append(float(line.split('=')[1].split('-')[0]))
+                                        elif line.startswith('WaitTime'):
+                                            hr, minute = line.split('=')[1].split('-')
+                                            waitMin = 60*int(hr) + int(minute)
+                                            waitList.append(waitMin)
+                                        elif line.startswith('OrderNum'):
+                                            orderList.append(int(line.split('=')[1]))
+                        # Check if order of patients has to change (total points has to be 10 points greater
+                        # than another patient and at least a medium-high to change the patient's order)
+                        orderedLevel = sorted(levelList, reverse=True)
+                        for level in orderedLevel:
+                            if totalPoints > level + 10 and totalPoints > 50:
+                                index = levelList.index(level)
+                                newOrder = []
+                                newWait = []
+                                orderOld = orderList[index]
+                                for orders in orderList:
+                                    if orders >= orderOld:
+                                        orders += 1
+                                    newOrder.append(orders)
+                                    newWait.append(orders*drAppointTime)
+                                break
+                            else:
+                                orderOld = len(orderList) + 1
+                                NoChange = True
 
-                                    stringDic = str(TempDic)
-                                    stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': u','=').replace(': ','=')
+                        # update info about new patient
+                        waitPat = orderOld*drAppointTime
+                        remain_min = round(waitPat) % 60
+                        remain_hr = round(waitPat) // 60
+                        remain_str = str(int(remain_hr)) + '-' + str(int(remain_min))
 
-                                    recFile = open(os.path.join(directory, file), "w")
-                                    recFile.write(stringDic)
-                                    recFile.close()
+                        RecordDict.update({"WaitTime" : remain_str})
+                        RecordDict.update({"OrderNum" : str(orderOld)})
 
-                    im.display.loadUrl('ERstart.html')
-                    im.executeModality('TEXT_default', 'All records are updated, please wait for your turn.')
-                    say('Thank you, please now wait for your turn', 'en')
+                        stringDic = str(RecordDict)
+                        stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': u','=').replace(': ','=')
+
+                        # Check the tickets in the system
+                        RecordTxt = ticketNumber + ".txt"
+                        recFile = open(os.path.join(directory, RecordTxt), "w+")
+                        recFile.write(stringDic)
+                        recFile.close()
+
+                        ticketFile = open(os.path.join(directory, "PatientTicketNum.txt"), "r")
+                        ticketStr = ticketFile.read()
+                        if ticketStr[-1:] == '\n':
+                            ticketStr = ticketStr[:-1]
+                        ticketStr = ticketStr + '\n' + ticketNumber
+
+                        recFile = open(os.path.join(directory, "PatientTicketNum.txt"), "w")
+                        recFile.write(ticketStr)
+                        recFile.close()
+
+                        ticketNums = []
+                        with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
+                            for ticket in patientTicketNums.readlines():
+                                ticket = ticket.split('\n')[0]
+                                ticketNums.append(ticket)
+                        im.executeModality('TEXT_default', str(ticketNums))
+                        if len(ticketNums) > 0 and ticketNumber in ticketNums:
+                            im.executeModality('TEXT_default', 'Your record has been saved in the database')
+                            say('Thank you for adding the information.', 'en')
+                        elif ticketNumber not in ticketNums:
+                            im.executeModality('TEXT_default', 'Sorry an error occured, please re-enter your information.')
+                            say('Sorry some of the information you entered is incorrect, please enter them again carefully', 'en')
+
+                        # Add other patient's information to their record
+                        if NoChange == True:
+                            for file in files:
+                                for index, name in enumerate(NameList):
+                                    if file == name:
+                                        with open(os.path.join(directory, file), "r") as record:
+                                            TempDic = dict()
+                                            for line in record.readlines():
+                                                line = line.replace('\n', '')
+                                                item, info = line.split('=')
+                                                TempDic.update({item : info})
+                                            remain_min = round(newWait[index]) % 60
+                                            remain_hr = round(newWait[index]) // 60
+                                            remain_str = str(int(remain_hr)) + '-' + str(int(remain_min))
+                                            TempDic.update({'WaitTime' : remain_str})
+                                            TempDic.update({'OrderNum' : str(newOrder[index])})
+                                            if orderList[index] != newOrder[index]:
+                                                TempDic.update({'ChangeinWaitTime' : 'has'})
+
+                                        stringDic = str(TempDic)
+                                        stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': u','=').replace(': ','=')
+
+                                        recFile = open(os.path.join(directory, file), "w")
+                                        recFile.write(stringDic)
+                                        recFile.close()
+
+                        im.display.loadUrl('ERstart.html')
+                        im.executeModality('TEXT_default', 'All records are updated, please wait for your turn.')
+                        say('Thank you, please now wait for your turn', 'en')
+
+
 
                     updateD = False
 
