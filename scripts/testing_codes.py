@@ -137,7 +137,9 @@ else: emerg2add = emerg2add.split(':')[0]
 
 ticketFile = open(os.path.join(directory, "PatientTicketNum.txt"), "r")
 ticketStr = ticketFile.read()
-ticketStr = ticketStr + ticketNumber
+if ticketStr[-1:] == '\n':
+    ticketStr = ticketStr[:-1]
+ticketStr = ticketStr + '\n' + ticketNumber
 
 recFile = open(os.path.join(directory, "PatientTicketNum.txt"), "w+")
 recFile.write(ticketStr)
@@ -175,7 +177,7 @@ for file in files:
                     orderList.append(int(line.split('=')[1]))
 
 drAppointTime = 15 # Time for a Dr to check each patient
-totalPoints = 105 # temp
+totalPoints = 50 # temp
 
 orderedLevel = sorted(levelList, reverse=True)
 for level in orderedLevel:
@@ -216,7 +218,9 @@ for file in files:
                 TempDic.update({'WaitTime' : remain_str})
                 TempDic.update({'OrderNum' : str(newOrder[index])})
                 if orderList[index] != newOrder[index]:
+                    print('before', TempDic['ChangeinWaitTime'])
                     TempDic.update({'ChangeinWaitTime' : 'has'})
+                    print(TempDic['ChangeinWaitTime'])
     
             stringDic = str(TempDic)
             stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': u','=').replace(': ','=')

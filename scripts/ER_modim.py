@@ -213,8 +213,12 @@ def i2():
                 time.sleep(5)
             else:
                 remain_str = str(int(remain_hr)) + 'h' + str(int(remain_min)) + 'm'
-                Remain_print = 'Your emergency is a ' + urgencyStr + ' level. Your wait time ' + updatedT + 'been changed due to other higher emergency patients. We will be with you shortly in ' + str(int(remain_hr)) + ' hour(s) and ' + str(int(remain_min)) + ' minute(s)'
-                Remain_say = 'Your emergency is ' + urgencyStr + ' level. We will be with in ' + str(int(remain_hr)) + ' hour and ' + str(int(remain_min)) + ' minutes'
+                if updatedT == 'has':
+                    Remain_print = 'Your emergency is a ' + urgencyStr + ' level. Your wait time ' + updatedT + ' been changed due to other higher emergency patients. We will be with you shortly in ' + str(int(remain_hr)) + ' hour(s) and ' + str(int(remain_min)) + ' minute(s)'
+                    Remain_say = 'Your emergency is ' + urgencyStr + ' level. We will be with in ' + str(int(remain_hr)) + ' hour and ' + str(int(remain_min)) + ' minutes'
+                else:
+                    Remain_print = 'Your emergency is a ' + urgencyStr + ' level. Your wait time ' + updatedT + ' been changed. We will be with you shortly in ' + str(int(remain_hr)) + ' hour(s) and ' + str(int(remain_min)) + ' minute(s)'
+                    Remain_say = 'Your emergency is ' + urgencyStr + ' level. We will be with in ' + str(int(remain_hr)) + ' hour and ' + str(int(remain_min)) + ' minutes'
                 im.executeModality('TEXT_default', Remain_print)
                 say(Remain_say, 'en')
                 time.sleep(5)
@@ -668,7 +672,7 @@ def i3():
     im.executeModality('TEXT_default', StrRecord)
     say(StrRecord, 'en')
     time.sleep(2)
-    StrRecord = 'Your time admitted is: ' + str(loc_time.tm_hour) + ':' + str(loc_time.tm_min)
+    StrRecord = 'Your time admitted is: ' + str(loc_time.tm_hour) + 'h:' + str(loc_time.tm_min) + 'm'
     StrSay = 'Your time admitted is: ' + str(loc_time.tm_hour) + 'hours ' + str(loc_time.tm_min) + 'minutes'
     im.executeModality('TEXT_default', StrRecord)
     say(StrRecord, 'en')
