@@ -19,23 +19,30 @@ mc.setCmdServerAddr(cmdsever_ip, cmdserver_port)
 
 def i0():
     begin()
-    im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
-    im.display.remove_buttons()
-    im.display.loadUrl('HRIER/ERstart.html')
+    # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
 
-    im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
-    say('Welcome to Wellness Hospital', 'en')
-    im.executeModality('TEXT_default','Ready to start the interaction?')
-    say('Press start to begin the interaction with me.', 'en')
+    FinishRuns = False
+    epoch = 0
+    max_epoch = 5
+    while FinishRuns == False:
+        im.display.remove_buttons()
+        im.display.loadUrl('HRIER/ERstart.html')
 
-    im.executeModality('BUTTONS',[['start','Start!']])
-    im.executeModality('ASR',['start'])
+        im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
+        say('Welcome to Wellness Hospital', 'en')
+        im.executeModality('TEXT_default','Ready to start the interaction?')
+        say('Press start to begin the interaction with me.', 'en')
 
-    startQ = im.ask(actionname=None, timeoutvalue=100000)
-    im.display.remove_buttons()
+        im.executeModality('BUTTONS',[['start','Start!']])
+        im.executeModality('ASR',['start'])
 
-    if startQ == 'start':
-        i1()
+        startQ = im.ask(actionname=None, timeoutvalue=100000)
+        im.display.remove_buttons()
+        if startQ == 'start':
+            i1()
+        if epoch == max_epoch:
+            FinishRuns = True
+        epoch += 1
 
     end()
 
@@ -885,23 +892,21 @@ def i3():
     end()
 
 
-import os
 mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
 mc.store_interaction(i2)
 mc.store_interaction(i1)
 mc.store_interaction(i0)
 mc.store_interaction(i3)
-FinishRuns = False
-epoch = 0
-max_epoch = 5
-while FinishRuns == False:
-    mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
-    mc.run_interaction(i1)
-    if epoch == max_epoch:
-        FinishRuns = True
-    epoch += 1
-    os.chdir("..")
-# mc.run_interaction(i0)
+# FinishRuns = False
+# epoch = 0
+# max_epoch = 5
+# while FinishRuns == False:
+#     mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
+#     mc.run_interaction(i1)
+#     if epoch == max_epoch:
+#         FinishRuns = True
+#     epoch += 1
+mc.run_interaction(i0)
 
 
 # mc.store_interaction(f)
