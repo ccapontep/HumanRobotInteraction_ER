@@ -675,7 +675,7 @@ def i3():
     StrRecord = 'Your time admitted is: ' + str(loc_time.tm_hour) + 'h:' + str(loc_time.tm_min) + 'm'
     StrSay = 'Your time admitted is: ' + str(loc_time.tm_hour) + 'hours ' + str(loc_time.tm_min) + 'minutes'
     im.executeModality('TEXT_default', StrRecord)
-    say(StrRecord, 'en')
+    say(StrSay, 'en')
     time.sleep(2)
 
 
@@ -801,6 +801,7 @@ def i3():
                 newOrder.append(orders)
                 newWait.append(orders*drAppointTime)
             break
+        else: orderOld = len(orderList) + 1
     say('here 33', 'en')
     im.executeModality('TEXT_default', str(orderOld))
     time.sleep(2)
