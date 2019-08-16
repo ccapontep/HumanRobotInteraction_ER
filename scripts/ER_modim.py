@@ -794,6 +794,10 @@ def i3():
                 newWait.append(orders*drAppointTime)
             break
     say('here 33', 'en')
+    im.executeModality('TEXT_default', orderOld)
+    time.sleep(2)
+    im.executeModality('TEXT_default', (orderOld*drAppointTime))
+    time.sleep(2)
     # update info about new patient
     waitPat = orderOld*drAppointTime
     remain_min = round(waitPat) % 60
