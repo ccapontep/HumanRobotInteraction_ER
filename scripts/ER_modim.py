@@ -75,7 +75,7 @@ def i1():
     # elif ('no' in aa) or a == 'no':
     elif a == 'no':
         im.executeModality('TEXT_default','You are a new patient.')
-        say('Welcome to Wellness Hospital. I am a robot and my name is Marrtino. I will help you setup your emergency in the database', 'en')
+        # say('Welcome to Wellness Hospital. I am a robot and my name is Marrtino. I will help you setup your emergency in the database', 'en')
         # say('I will be asking some questions about your emergency and have you see a doctor as soon as possible, depending on the severity of your emergency', 'en')
         # say('I will also be doing routine checks to let you know your remaining wait time. If at any point you have questions, come ask', 'en')
         # say('We will take care of you. Thank you for visiting us.', 'en')
@@ -794,9 +794,9 @@ def i3():
                 newWait.append(orders*drAppointTime)
             break
     say('here 33', 'en')
-    im.executeModality('TEXT_default', orderOld)
+    im.executeModality('TEXT_default', str(orderOld))
     time.sleep(2)
-    im.executeModality('TEXT_default', (orderOld*drAppointTime))
+    im.executeModality('TEXT_default', str(orderOld*drAppointTime))
     time.sleep(2)
     # update info about new patient
     waitPat = orderOld*drAppointTime
