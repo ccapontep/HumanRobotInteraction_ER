@@ -801,7 +801,9 @@ def i3():
                 newOrder.append(orders)
                 newWait.append(orders*drAppointTime)
             break
-        else: orderOld = len(orderList) + 1
+        else:
+            orderOld = len(orderList) + 1
+            NoChange = True
     say('here 33', 'en')
     im.executeModality('TEXT_default', str(orderOld))
     time.sleep(2)
@@ -851,29 +853,30 @@ def i3():
         say('Sorry some of the information you entered is incorrect, please enter them again carefully', 'en')
     say('here 77', 'en')
     # Add other patient's information to their record
-    for file in files:
-        for index, name in enumerate(NameList):
-            if file == name:
-                with open(os.path.join(directory, file), "r") as record:
-                    TempDic = dict()
-                    for line in record.readlines():
-                        line = line.replace('\n', '')
-                        item, info = line.split('=')
-                        TempDic.update({item : info})
-                    remain_min = round(newWait[index]) % 60
-                    remain_hr = round(newWait[index]) // 60
-                    remain_str = str(int(remain_hr)) + '-' + str(int(remain_min))
-                    TempDic.update({'WaitTime' : remain_str})
-                    TempDic.update({'OrderNum' : str(newOrder[index])})
-                    if orderList[index] != newOrder[index]:
-                        TempDic.update({'ChangeinWaitTime' : 'has'})
+    if NoChange == True:
+        for file in files:
+            for index, name in enumerate(NameList):
+                if file == name:
+                    with open(os.path.join(directory, file), "r") as record:
+                        TempDic = dict()
+                        for line in record.readlines():
+                            line = line.replace('\n', '')
+                            item, info = line.split('=')
+                            TempDic.update({item : info})
+                        remain_min = round(newWait[index]) % 60
+                        remain_hr = round(newWait[index]) // 60
+                        remain_str = str(int(remain_hr)) + '-' + str(int(remain_min))
+                        TempDic.update({'WaitTime' : remain_str})
+                        TempDic.update({'OrderNum' : str(newOrder[index])})
+                        if orderList[index] != newOrder[index]:
+                            TempDic.update({'ChangeinWaitTime' : 'has'})
 
-                stringDic = str(TempDic)
-                stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': u','=').replace(': ','=')
+                    stringDic = str(TempDic)
+                    stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': u','=').replace(': ','=')
 
-                recFile = open(os.path.join(directory, file), "w")
-                recFile.write(stringDic)
-                recFile.close()
+                    recFile = open(os.path.join(directory, file), "w")
+                    recFile.write(stringDic)
+                    recFile.close()
 
     im.executeModality('TEXT_default', 'All records are updated, please wait for your turn.')
     say('Thank you, please now wait for your turn', 'en')
