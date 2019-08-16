@@ -147,7 +147,8 @@ def i2():
         ticketNums = []
         with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
             for ticket in patientTicketNums.readlines():
-                ticketNums.append(str(ticket))
+                ticket = ticket.split('\n')[0]
+                ticketNums.append(ticket)
         if CorrTick == 'yes' and len(ticketNums) > 0 and ticketNumber in ticketNums:
             im.executeModality('TEXT_default', 'Your ticket has been found!')
             say('Your ticket has been found in the database', 'en')
@@ -667,7 +668,7 @@ def i3():
     im.executeModality('TEXT_default', StrRecord)
     say(StrRecord, 'en')
     time.sleep(2)
-    StrRecord = 'Your time admitted is: ' + curr_time
+    StrRecord = 'Your time admitted is: ' + str(loc_time.tm_hour) + 'hours ' + str(loc_time.tm_min) + 'minutes'
     im.executeModality('TEXT_default', StrRecord)
     say(StrRecord, 'en')
     time.sleep(2)
