@@ -59,7 +59,7 @@ def i1():
     max_epoch = 5
     while FinishRuns == False:
         im.display.remove_buttons()
-        if epoch > 0: im.display.loadUrl('..')
+        if epoch > 0: im.display.loadUrl('../layout1.html')
         im.display.loadUrl('HRIER/ERslide.html')
 
         im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
@@ -70,7 +70,7 @@ def i1():
         im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
         im.executeModality('ASR',['yes','no'])
 
-        a = im.ask(actionname=None, timeoutvalue=10)
+        a = im.ask(actionname=None, timeoutvalue=10000)
         im.display.remove_buttons()
 
         # run = True
