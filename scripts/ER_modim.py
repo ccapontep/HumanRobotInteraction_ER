@@ -895,6 +895,7 @@ FinishRuns = False
 epoch = 0
 max_epoch = 5
 while FinishRuns == False:
+    mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
     mc.run_interaction(i1)
     if epoch == max_epoch:
         FinishRuns = True
