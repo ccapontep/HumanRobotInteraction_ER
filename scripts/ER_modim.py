@@ -39,6 +39,7 @@ def i0():
         startQ = im.ask(actionname=None, timeoutvalue=100000)
         im.display.remove_buttons()
         if startQ == 'start':
+            im.executeModality('TEXT_default','Starting the interaction..')
             i1()
         if epoch == max_epoch:
             FinishRuns = True
