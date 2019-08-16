@@ -53,48 +53,56 @@ def i1():
     # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
     # im.gitpull()
     begin()
-    im.display.remove_buttons()
-    im.display.loadUrl('..')
-    im.display.loadUrl('HRIER/ERslide.html')
 
-    im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
-    say('Welcome to Wellness Hospital', 'en')
-    im.executeModality('TEXT_default','Have you been helped previously?')
-    say('Have you been helped previously?','en')
+    FinishRuns = False
+    epoch = 0
+    max_epoch = 5
+    while FinishRuns == False:
+        im.display.remove_buttons()
+        if epoch > 0: im.display.loadUrl('..')
+        im.display.loadUrl('HRIER/ERslide.html')
 
-    im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
-    im.executeModality('ASR',['yes','no'])
+        im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
+        say('Welcome to Wellness Hospital', 'en')
+        im.executeModality('TEXT_default','Have you been helped previously?')
+        say('Have you been helped previously?','en')
 
-    a = im.ask(actionname=None, timeoutvalue=10)
-    im.display.remove_buttons()
+        im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
+        im.executeModality('ASR',['yes','no'])
 
-    # run = True
-    #
-    # while run:
-    # aa = asr()
-    # say('the answer given is '+a)
+        a = im.ask(actionname=None, timeoutvalue=10)
+        im.display.remove_buttons()
 
-    # if ('yes' in aa) or a == 'yes':
-    if a == 'yes':
-        im.executeModality('TEXT_default','You are a patient in the database.')
-        say('Welcome back', 'en')
-        time.sleep(1)
-        i2()
+        # run = True
+        #
+        # while run:
+        # aa = asr()
+        # say('the answer given is '+a)
 
-    # elif ('no' in aa) or a == 'no':
-    elif a == 'no':
-        im.executeModality('TEXT_default','You are a new patient.')
-        # say('Welcome to Wellness Hospital. I am a robot and my name is Marrtino. I will help you setup your emergency in the database', 'en')
-        # say('I will be asking some questions about your emergency and have you see a doctor as soon as possible, depending on the severity of your emergency', 'en')
-        # say('I will also be doing routine checks to let you know your remaining wait time. If at any point you have questions, come ask', 'en')
-        # say('We will take care of you. Thank you for visiting us.', 'en')
-        time.sleep(2)
-        i3()
-    # elif ('' in aa):
-    else:
-        im.executeModality('TEXT_default','No answer received')
-        time.sleep(3)
+        # if ('yes' in aa) or a == 'yes':
+        if a == 'yes':
+            im.executeModality('TEXT_default','You are a patient in the database.')
+            say('Welcome back', 'en')
+            time.sleep(1)
+            i2()
 
+        # elif ('no' in aa) or a == 'no':
+        elif a == 'no':
+            im.executeModality('TEXT_default','You are a new patient.')
+            # say('Welcome to Wellness Hospital. I am a robot and my name is Marrtino. I will help you setup your emergency in the database', 'en')
+            # say('I will be asking some questions about your emergency and have you see a doctor as soon as possible, depending on the severity of your emergency', 'en')
+            # say('I will also be doing routine checks to let you know your remaining wait time. If at any point you have questions, come ask', 'en')
+            # say('We will take care of you. Thank you for visiting us.', 'en')
+            time.sleep(2)
+            i3()
+        # elif ('' in aa):
+        else:
+            im.executeModality('TEXT_default','No answer received')
+            time.sleep(3)
+
+        if epoch == max_epoch:
+            FinishRuns = True
+        epoch += 1
     end()
 
 
@@ -899,17 +907,17 @@ mc.store_interaction(i2)
 mc.store_interaction(i1)
 mc.store_interaction(i0)
 mc.store_interaction(i3)
-FinishRuns = False
-epoch = 0
-max_epoch = 5
-while FinishRuns == False:
-    mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
-    mc.run_interaction(i1)
-    if epoch == max_epoch:
-        FinishRuns = True
-    epoch += 1
+# FinishRuns = False
+# epoch = 0
+# max_epoch = 5
+# while FinishRuns == False:
+#     mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
+#     mc.run_interaction(i1)
+#     if epoch == max_epoch:
+#         FinishRuns = True
+#     epoch += 1
     # mc.run_interaction(i00)
-# mc.run_interaction(i0)
+mc.run_interaction(i1)
 
 
 # mc.store_interaction(f)
