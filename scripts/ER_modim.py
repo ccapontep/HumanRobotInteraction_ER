@@ -148,12 +148,12 @@ def i2():
         with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
             for ticket in patientTicketNums.readlines():
                 ticketNums.append(str(ticket))
-        if CorrTick == 'yes' and len(ticketNums) > 0 and int(ticketNumber) in (map(int, ticketNums)):
+        if CorrTick == 'yes' and len(ticketNums) > 0 and ticketNumber in ticketNums:
             im.executeModality('TEXT_default', 'Your ticket has been found!')
             say('Your ticket has been found in the database', 'en')
             CorrTick == 'yes'
             # break
-        elif CorrTick == 'yes' and int(ticketNumber) not in (map(int, ticketNums)):
+        elif CorrTick == 'yes' and ticketNumber not in ticketNums:
             im.executeModality('TEXT_default', 'Sorry. Your ticket was not found.')
             say('Your ticket was not found. Let us start again.', 'en')
             im.executeModality('TEXT_default', 'Please enter again the digits of your ticket number one by one.')
@@ -820,7 +820,7 @@ def i3():
     say('here 55', 'en')
     ticketFile = open(os.path.join(directory, "PatientTicketNum.txt"), "r")
     ticketStr = ticketFile.read()
-    ticketStr = ticketStr + '\n' + ticketNumber
+    ticketStr = ticketStr + ticketNumber
 
     recFile = open(os.path.join(directory, "PatientTicketNum.txt"), "w")
     recFile.write(ticketStr)
@@ -830,12 +830,12 @@ def i3():
     with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
         for ticket in patientTicketNums.readlines():
             ticket = ticket.split('\n')[0]
-            ticketNums.append(str(ticket))
+            ticketNums.append(ticket)
     im.executeModality('TEXT_default', str(ticketNums))
-    if len(ticketNums) > 0 and int(ticketNumber) in (map(int, ticketNums)):
+    if len(ticketNums) > 0 and ticketNumber in ticketNums:
         im.executeModality('TEXT_default', 'Your record has been saved in the database')
         say('Thank you for adding the information.', 'en')
-    else:
+    elif ticketNumber not in ticketNums:
         im.executeModality('TEXT_default', 'Sorry an error occured, please re-enter your information.')
         say('Sorry some of the information you entered is incorrect, please enter them again carefully', 'en')
     say('here 77', 'en')

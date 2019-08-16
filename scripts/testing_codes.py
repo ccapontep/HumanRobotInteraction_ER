@@ -144,6 +144,15 @@ recFile.write(ticketStr)
 recFile.close()
 
 
+ticketNums = []
+with open(os.path.join(directory, "PatientTicketNum.txt"), "r") as patientTicketNums:
+    for ticket in patientTicketNums.readlines():
+        ticket = ticket.split('\n')[0]
+        ticketNums.append(ticket)
+        
+ticketNumber in ticketNums
+#int(ticketNumber) in (map(int, ticketNums)) wrong
+
 # Calculate wait time for patient
 files = os.listdir(directory)
 
