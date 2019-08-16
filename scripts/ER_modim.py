@@ -891,7 +891,14 @@ mc.store_interaction(i2)
 mc.store_interaction(i1)
 mc.store_interaction(i0)
 mc.store_interaction(i3)
-mc.run_interaction(i1)
+FinishRuns = False
+epoch = 0
+max_epoch = 5
+while FinishRuns == False:
+    mc.run_interaction(i1)
+    if epoch == max_epoch:
+        FinishRuns = True
+    epoch += 1
 # mc.run_interaction(i0)
 
 
