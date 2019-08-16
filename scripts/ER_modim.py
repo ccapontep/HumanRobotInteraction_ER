@@ -770,6 +770,8 @@ def i3():
             NameList.append(file)
             with open(os.path.join(directory, file), "r") as record:
                 for line in record.readlines():
+                    if line[-1:] == '\n':
+                        line = line[:-1]
                     if line.startswith('UrgencyLevel'):
                         levelList.append(float(line.split('=')[1].split('-')[0]))
                     elif line.startswith('WaitTime'):
@@ -821,7 +823,9 @@ def i3():
     say('here 55', 'en')
     ticketFile = open(os.path.join(directory, "PatientTicketNum.txt"), "r")
     ticketStr = ticketFile.read()
-    ticketStr = ticketStr + ticketNumber
+    if ticketStr[-1:] == '\n':
+        ticketStr = ticketStr[:-1]
+    ticketStr = ticketStr + '\n' + ticketNumber
 
     recFile = open(os.path.join(directory, "PatientTicketNum.txt"), "w")
     recFile.write(ticketStr)
