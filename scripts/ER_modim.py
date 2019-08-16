@@ -165,15 +165,11 @@ def i2():
     # RecordNames = ['Name', 'Age', 'PastMedicalHistory', 'EmergencySymptoms', 'Symptoms','LocationofPain', 'LevelofConsciousness', 'TimeAdmitted','UrgencyLevel', 'RemainingWaitTime', 'ChangeinWaitTime']
     im.display.loadUrl('ERretrieve.html')
     im.executeModality('TEXT_title','Review of your Patient Record')
-    say('here 11', 'en')
     RecordTxt = ticketNumber + ".txt"
-    say('here 22', 'en')
     with open(os.path.join(directory, RecordTxt), "r") as record:
         for line in record.readlines():
-            say('here 33', 'en')
             line = line.replace('\n', '')
             item, info = line.split('=')
-            say('here 44', 'en')
             RecordDict.update({item : info})
     hello_say = 'Hello, ' + RecordDict["Name"]
     say(hello_say, 'en')
