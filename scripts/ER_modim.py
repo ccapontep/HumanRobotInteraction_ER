@@ -885,7 +885,7 @@ def i3():
     end()
 
 
-
+import os
 mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
 mc.store_interaction(i2)
 mc.store_interaction(i1)
@@ -900,6 +900,7 @@ while FinishRuns == False:
     if epoch == max_epoch:
         FinishRuns = True
     epoch += 1
+    os.chdir("..")
 # mc.run_interaction(i0)
 
 
