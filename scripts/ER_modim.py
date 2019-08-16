@@ -54,7 +54,8 @@ def i1():
     # im.gitpull()
     begin()
     im.display.remove_buttons()
-    im.display.loadUrl('ERslide.html')
+    im.display.loadUrl('..')
+    im.display.loadUrl('HRIER/ERslide.html')
 
     im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
     say('Welcome to Wellness Hospital', 'en')
@@ -893,21 +894,22 @@ def i3():
     end()
 
 
-mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
+# mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
 mc.store_interaction(i2)
 mc.store_interaction(i1)
 mc.store_interaction(i0)
 mc.store_interaction(i3)
-# FinishRuns = False
-# epoch = 0
-# max_epoch = 5
-# while FinishRuns == False:
-#     mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
-#     mc.run_interaction(i1)
-#     if epoch == max_epoch:
-#         FinishRuns = True
-#     epoch += 1
-mc.run_interaction(i0)
+FinishRuns = False
+epoch = 0
+max_epoch = 5
+while FinishRuns == False:
+    mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
+    mc.run_interaction(i1)
+    if epoch == max_epoch:
+        FinishRuns = True
+    epoch += 1
+    # mc.run_interaction(i00)
+# mc.run_interaction(i0)
 
 
 # mc.store_interaction(f)
