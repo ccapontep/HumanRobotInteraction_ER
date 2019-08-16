@@ -204,10 +204,10 @@ def i2():
             remain_time_sec = waitTimeSec - (curr_sec - admit_time)
             remain_min = (round(remain_time_sec) // 60) % 60
             remain_hr = round(remain_time_sec) // 3600
-            if remain_min <= 0 or remain_hr <= 0: # if no more remaining time
+            if remain_min <= 0 or remain_hr < 0: # if no more remaining time
                 remain_str = '0h0m'
                 Remain_print = 'Your emergency is a ' + urgencyStr + ' level. We will be with you shortly in 0 min.'
-                Remain_say = 'Your emergency ' + urgencyStr + ' level. No more wait time, someone will be with you shortly.'
+                Remain_say = 'Your emergency ' + urgencyStr + ' level. It is your turn, someone will be with you shortly.'
                 im.executeModality('TEXT_default', Remain_print)
                 say(Remain_say, 'en')
                 time.sleep(5)
