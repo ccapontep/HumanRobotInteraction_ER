@@ -799,9 +799,11 @@ def i3():
     remain_min = round(waitPat) % 60
     remain_hr = round(waitPat) // 60
     remain_str = str(int(remain_hr)) + '-' + str(int(remain_min))
+    say('here 331', 'en')
 
     RecordDict.update({"WaitTime" : remain_str})
     RecordDict.update({"OrderNum" : str(orderOld)})
+    say('here 332', 'en')
 
     stringDic = str(RecordDict)
     stringDic = stringDic.replace(', ','\n').replace("'","").replace('{','').replace('}','').replace(': u','=').replace(': ','=')
@@ -816,7 +818,7 @@ def i3():
     ticketStr = ticketFile.read()
     ticketStr = ticketStr + '\n' + ticketNumber
 
-    recFile = open(os.path.join(directory, "PatientTicketNum.txt"), "w+")
+    recFile = open(os.path.join(directory, "PatientTicketNum.txt"), "w")
     recFile.write(ticketStr)
     recFile.close()
     say('here 66', 'en')
