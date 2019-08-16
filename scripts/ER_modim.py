@@ -668,7 +668,8 @@ def i3():
     im.executeModality('TEXT_default', StrRecord)
     say(StrRecord, 'en')
     time.sleep(2)
-    StrRecord = 'Your time admitted is: ' + str(loc_time.tm_hour) + 'hours ' + str(loc_time.tm_min) + 'minutes'
+    StrRecord = 'Your time admitted is: ' + str(loc_time.tm_hour) + ':' + str(loc_time.tm_min)
+    StrSay = 'Your time admitted is: ' + str(loc_time.tm_hour) + 'hours ' + str(loc_time.tm_min) + 'minutes'
     im.executeModality('TEXT_default', StrRecord)
     say(StrRecord, 'en')
     time.sleep(2)
