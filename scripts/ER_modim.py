@@ -53,7 +53,7 @@ def i1():
     # im.gitpull()
     begin()
     im.display.remove_buttons()
-    im.display.loadUrl('HRIER/ERslide.html')
+    im.display.loadUrl('ERslide.html')
 
     im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
     say('Welcome to Wellness Hospital', 'en')
