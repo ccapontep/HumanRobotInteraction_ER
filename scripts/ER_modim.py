@@ -11,41 +11,7 @@ cmdserver_port = 9101
 
 mc = ModimWSClient()
 mc.setCmdServerAddr(cmdsever_ip, cmdserver_port)
-# patient = 'False'
-# mc.setGlobalVar(patient, 'False')
 
-# def f():
-#     return 1
-
-def i0():
-    begin()
-    # im.setDemoPath("/home/ubuntu/playground/HumanRobotInteraction_ER")
-
-    FinishRuns = False
-    epoch = 0
-    max_epoch = 5
-    while FinishRuns == False:
-        im.display.remove_buttons()
-        im.display.loadUrl('HRIER/ERstart.html')
-
-        im.executeModality('TEXT_title','Welcome to Wellness Hospital!')
-        say('Welcome to Wellness Hospital', 'en')
-        im.executeModality('TEXT_default','Ready to start the interaction?')
-        say('Press start to begin the interaction with me.', 'en')
-
-        im.executeModality('BUTTONS',[['start','Start!']])
-        im.executeModality('ASR',['start'])
-
-        startQ = im.ask(actionname=None, timeoutvalue=100000)
-        im.display.remove_buttons()
-        if startQ == 'start':
-            im.executeModality('TEXT_default','Starting the interaction..')
-            i1()
-        if epoch == max_epoch:
-            FinishRuns = True
-        epoch += 1
-
-    end()
 
 # Interaction to welcome and start interaction
 def i1():
@@ -73,13 +39,6 @@ def i1():
         a = im.ask(actionname=None, timeoutvalue=10000000)
         im.display.remove_buttons()
 
-        # run = True
-        #
-        # while run:
-        # aa = asr()
-        # say('the answer given is '+a)
-
-        # if ('yes' in aa) or a == 'yes':
         if a == 'yes':
             im.executeModality('TEXT_default','You are a patient in the database.')
             say('Welcome back', 'en')
@@ -316,6 +275,7 @@ def i2():
                 orderedLevel = sorted(levelList, reverse=True)
                 for level in orderedLevel:
                     if totalPoints > level + 10 and totalPoints > 50:
+                        NoChange = False
                         index = levelList.index(level)
                         newOrder = []
                         newWait = []
@@ -372,7 +332,7 @@ def i2():
                     say('Sorry some of the information you entered is incorrect, please enter them again carefully', 'en')
 
                 # Add other patient's information to their record
-                if NoChange == True:
+                if NoChange == False:
                     for file in files:
                         for index, name in enumerate(NameList):
                             if file == name:
@@ -598,7 +558,7 @@ def i2():
 
     end()
 
-# Interaction to retrieve info for the user
+# Interaction to get info from the user to save in database
 def i3():
     begin()
     im.display.loadUrl('ERnewpatient.html')
@@ -1007,6 +967,7 @@ def i3():
     orderedLevel = sorted(levelList, reverse=True)
     for level in orderedLevel:
         if totalPoints > level + 10 and totalPoints > 50:
+            NoChange = False
             index = levelList.index(level)
             newOrder = []
             newWait = []
@@ -1063,7 +1024,7 @@ def i3():
         say('Sorry some of the information you entered is incorrect, please enter them again carefully', 'en')
 
     # Add other patient's information to their record
-    if NoChange == True:
+    if NoChange == False:
         for file in files:
             for index, name in enumerate(NameList):
                 if file == name:
@@ -1096,15 +1057,11 @@ def i3():
 
     end()
 
-
-# mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
+# Main code to run:
+mc.setDemoPath('/home/ubuntu/playground/HumanRobotInteraction_ER')
+# store the interactions so the robot knows to run it later
 mc.store_interaction(i2)
 mc.store_interaction(i1)
-mc.store_interaction(i0)
 mc.store_interaction(i3)
 
 mc.run_interaction(i1)
-
-
-# mc.store_interaction(f)
-# mc.run_interaction(i3)
