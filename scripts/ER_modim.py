@@ -249,7 +249,7 @@ def i2():
             files = os.listdir(directory)
             drAppointTime = 15 # Time for a Dr to check each patient
 
-            if urgencyOld + 10 < totalPoints and totalPoints > 70:
+            if urgencyOld + 10 < totalPoints and totalPoints > 70 and int(RecordDict['OrderNum']) != 1:
                 StrRecord = 'Your urgency score has changed enough to require higher attention. Your new total urgency score is: ' + str(totalPoints) + ' from ' + urgencyOld + ', previously.'
                 im.executeModality('TEXT_default', StrRecord)
                 say(StrRecord, 'en')
