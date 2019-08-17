@@ -81,21 +81,21 @@ def i2():
         # First number:
         im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
         im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
-        Num1 = im.ask(actionname=None, timeoutvalue=1000)
+        Num1 = im.ask(actionname=None, timeoutvalue=10000000)
         say('number '+Num1)
         im.display.remove_buttons()
 
         # Second number:
         im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
         im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
-        Num2 = im.ask(actionname=None, timeoutvalue=200)
+        Num2 = im.ask(actionname=None, timeoutvalue=10000000)
         say('number'+Num2)
         im.display.remove_buttons()
 
         # Second number:
         im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
         im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
-        Num3 = im.ask(actionname=None, timeoutvalue=200)
+        Num3 = im.ask(actionname=None, timeoutvalue=10000000)
         say('number'+Num3)
         im.display.remove_buttons()
 
@@ -109,7 +109,7 @@ def i2():
         # Check if ticket was entered correctly
         im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
         im.executeModality('ASR',['yes','no'])
-        CorrTick = im.ask(actionname=None, timeoutvalue=100)
+        CorrTick = im.ask(actionname=None, timeoutvalue=10000000)
         im.display.remove_buttons()
         if CorrTick == 'yes':
             say('Great! Let me look at your information')
@@ -159,7 +159,7 @@ def i2():
         # Ask what the user wants
         im.executeModality('BUTTONS',[['waittime','Get my Remaining Wait Time'],['update','Update my Records'], ['done', 'Done, exit.']])
         im.executeModality('ASR',['waittime','update', 'done'])
-        UserQues = im.ask(actionname=None, timeoutvalue=100000000)
+        UserQues = im.ask(actionname=None, timeoutvalue=10000000)
         im.display.remove_buttons()
 
         if UserQues == 'done':
@@ -250,6 +250,10 @@ def i2():
             drAppointTime = 15 # Time for a Dr to check each patient
 
             if urgencyOld + 10 < totalPoints and totalPoints > 70:
+                StrRecord = 'Your urgency score has changed enough to require higher attention. Your new total urgency score is: ' + str(totalPoints) + ' from ' + urgencyOld + ', previously.'
+                im.executeModality('TEXT_default', StrRecord)
+                say(StrRecord, 'en')
+                time.sleep(2)
                 # Get wait, order, and urgency level from each patient to see if any change is necessary
                 NameList = []
                 levelList = []
@@ -415,7 +419,7 @@ def i2():
 
                 im.executeModality('BUTTONS',[['emergency','Emergency Symptoms'], ['symptoms', 'Symptoms'], ['location', 'Location of Pain'], ['conscious', 'Level of Consciousness'], ['painlevel', 'Pain Level'], ['done', 'Done, exit.']])
                 im.executeModality('ASR',['emergency', 'symptoms', 'location', 'conscious', 'painlevel', 'done'])
-                HistQues = im.ask(actionname=None, timeoutvalue=10000)
+                HistQues = im.ask(actionname=None, timeoutvalue=10000000)
                 im.display.remove_buttons()
 
                 if HistQues == 'done':
@@ -443,7 +447,7 @@ def i2():
                             im.executeModality('ASR',['sudden dizziness', 'swallowing poisonous', 'severe abdominal', 'head spine', 'feeling suicide murder', 'done'])
 
 
-                        emergQ = im.ask(actionname=None, timeoutvalue=10000)
+                        emergQ = im.ask(actionname=None, timeoutvalue=10000000)
                         im.display.remove_buttons()
 
                         if not emergQ == 'done' and not emergQ == 'next' and not emergQ == 'next2':
@@ -474,7 +478,7 @@ def i2():
                             im.executeModality('ASR',['pain', 'infection', 'inflammation', 'dizzy', 'recurring', 'done'])
 
 
-                        symQ = im.ask(actionname=None, timeoutvalue=10000)
+                        symQ = im.ask(actionname=None, timeoutvalue=10000000)
                         im.display.remove_buttons()
 
                         if not symQ == 'done' and not symQ == 'next':
@@ -497,7 +501,7 @@ def i2():
                         im.executeModality('BUTTONS',[ ['foot', 'Foot(x2)'], ['leg(s)', 'Leg(s)'], ['arm(s)', 'Arm(s)'], ['hand(s)', 'Hand(s)'], ['abdomen', 'Abdomen'], ['chest', 'Chest'], ['back', 'Back'], ['head/face', 'Head/Face'], ['done', 'Done, exit.']])
                         im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
 
-                        locQ = im.ask(actionname=None, timeoutvalue=10000)
+                        locQ = im.ask(actionname=None, timeoutvalue=10000000)
                         im.display.remove_buttons()
 
                         if not locQ == 'done':
@@ -517,7 +521,7 @@ def i2():
                     im.executeModality('BUTTONS',[ ['fully', 'Fully (awake, aware)'], ['medium', 'Medium (some confusion)'], ['barely', 'Barely (feeling of sleeping or fainting)'], ['none', 'Unconscious (fainted)']])
                     im.executeModality('ASR',['fully', 'medium', 'barely', 'none'])
 
-                    consQ = im.ask(actionname=None, timeoutvalue=10000)
+                    consQ = im.ask(actionname=None, timeoutvalue=10000000)
                     im.display.remove_buttons()
 
                     say(consQ, 'en')
@@ -536,7 +540,7 @@ def i2():
                     im.executeModality('BUTTONS',[ ['some', 'Some'], ['moderate', 'Moderate'], ['intense', 'Intense'], ['very intense', 'Very Intense'], ['excruciating', 'Excruciating']])
                     im.executeModality('ASR',['some', 'moderate', 'intense', 'very intense', 'abdomen', 'excruciating'])
 
-                    painQ = im.ask(actionname=None, timeoutvalue=10000)
+                    painQ = im.ask(actionname=None, timeoutvalue=10000000)
                     im.display.remove_buttons()
 
                     say(painQ, 'en')
@@ -572,21 +576,21 @@ def i3():
         # First number:
         im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
         im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
-        Num1 = im.ask(actionname=None, timeoutvalue=1000)
+        Num1 = im.ask(actionname=None, timeoutvalue=10000000)
         say('number '+Num1)
         im.display.remove_buttons()
 
         # Second number:
         im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
         im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
-        Num2 = im.ask(actionname=None, timeoutvalue=200)
+        Num2 = im.ask(actionname=None, timeoutvalue=10000000)
         say('number'+Num2)
         im.display.remove_buttons()
 
         # Second number:
         im.executeModality('BUTTONS',[['0','0'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9']])
         im.executeModality('ASR',['0','1','2', '3', '4', '5', '6', '7', '8', '9'])
-        Num3 = im.ask(actionname=None, timeoutvalue=200)
+        Num3 = im.ask(actionname=None, timeoutvalue=10000000)
         say('number'+Num3)
         im.display.remove_buttons()
 
@@ -600,7 +604,7 @@ def i3():
         # Check if ticket was entered correctly
         im.executeModality('BUTTONS',[['yes','Yes'],['no','No']])
         im.executeModality('ASR',['yes','no'])
-        CorrTick = im.ask(actionname=None, timeoutvalue=100)
+        CorrTick = im.ask(actionname=None, timeoutvalue=10000000)
         im.display.remove_buttons()
         if CorrTick == 'yes':
             say('Great! Let us add your information to your record')
@@ -623,7 +627,7 @@ def i3():
         im.executeModality('BUTTONS',[ ['a', 'A'], ['b', 'B'], ['c', 'C'], ['d', 'D'], ['e', 'E'], ['f', 'F'], ['g', 'G'], ['h', 'H'], ['i', 'I'], ['j', 'J'], ['k', 'K'], ['l', 'L'], ['m', 'M'], ['n', 'N'], ['o', 'O'], ['p', 'P'], ['q', 'Q'], ['r', 'R'], ['s', 'S'], ['t', 'T'], ['u', 'U'], ['v', 'V'], ['w', 'W'], ['x', 'X'], ['y', 'Y'], ['z', 'Z'], ['Space', 'space'], ['back', 'backspace'], ['done', 'Done']])
         # im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
 
-        nameQ = im.ask(actionname=None, timeoutvalue=100000)
+        nameQ = im.ask(actionname=None, timeoutvalue=10000000)
         im.display.remove_buttons()
 
         if not nameQ == 'done':
@@ -649,7 +653,7 @@ def i3():
         im.executeModality('BUTTONS',[ ['0', '0'], ['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5'], ['6', '6'], ['7', '7'], ['8', '8'], ['9', '9'], ['back', 'backspace'], ['done', 'Done']])
         # im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
 
-        ageQ = im.ask(actionname=None, timeoutvalue=100000)
+        ageQ = im.ask(actionname=None, timeoutvalue=10000000)
         im.display.remove_buttons()
 
         if not ageQ == 'done':
@@ -673,7 +677,7 @@ def i3():
     while histDone == True:
         im.executeModality('BUTTONS',[['overweight or obese','Overweight or Obese'],['smoke cigarettes','Smoke Cigarettes'], ['high cholesterol', 'High Cholesterol'], ['hypertension', 'Hypertension'], ['diabetes', 'Diabetes'], ['recurring symptoms', 'Current Symptoms Recurring'], ['none', 'None'], ['remove', 'Remove last item'], ['done', 'Done']])
         # im.executeModality('ASR',['overweight or obese','smoke cigarettes', 'high cholesterol', 'hypertension', 'diabetes', 'current symptoms recurring', 'done'])
-        histQ = im.ask(actionname=None, timeoutvalue=100000)
+        histQ = im.ask(actionname=None, timeoutvalue=10000000)
         im.display.remove_buttons()
 
         if histQ != 'done':
@@ -714,7 +718,7 @@ def i3():
             im.executeModality('ASR',['sudden dizziness', 'swallowing poisonous', 'severe abdominal', 'head spine', 'feeling suicide murder', 'done'])
 
 
-        emergQ = im.ask(actionname=None, timeoutvalue=100000)
+        emergQ = im.ask(actionname=None, timeoutvalue=10000000)
         im.display.remove_buttons()
 
         if emergQ != 'done' and emergQ != 'next' and emergQ != 'next2':
@@ -752,7 +756,7 @@ def i3():
             im.executeModality('ASR',['pain', 'infection', 'inflammation', 'dizzy', 'recurring', 'done'])
 
 
-        symQ = im.ask(actionname=None, timeoutvalue=100000)
+        symQ = im.ask(actionname=None, timeoutvalue=10000000)
         im.display.remove_buttons()
 
         if symQ != 'done' and symQ != 'next':
@@ -782,7 +786,7 @@ def i3():
         im.executeModality('BUTTONS',[ ['foot', 'Foot(x2)'], ['legs', 'Leg(s)'], ['arms', 'Arm(s)'], ['hands', 'Hand(s)'], ['abdomen', 'Abdomen'], ['chest', 'Chest'], ['back', 'Back'], ['head', 'Head/Face'], ['remove', 'Remove last item'], ['done', 'Done']])
         im.executeModality('ASR',['foot', 'leg(s)', 'arm(s)', 'hand(s)', 'abdomen', 'chest', 'back', 'head/face', 'done'])
 
-        locQ = im.ask(actionname=None, timeoutvalue=100000)
+        locQ = im.ask(actionname=None, timeoutvalue=10000000)
         im.display.remove_buttons()
 
         if not locQ == 'done':
@@ -810,7 +814,7 @@ def i3():
         im.executeModality('BUTTONS',[ ['fully', 'Fully (awake, aware)'], ['medium', 'Medium (some confusion)'], ['barely', 'Barely (feeling of sleeping or fainting)'], ['unconscious', 'Unconscious (fainted)'], ['confirm', 'Confirm']])
         im.executeModality('ASR',['fully', 'medium', 'barely', 'none'])
 
-        consQ = im.ask(actionname=None, timeoutvalue=100000)
+        consQ = im.ask(actionname=None, timeoutvalue=10000000)
         im.display.remove_buttons()
 
         if consQ != 'confirm':
@@ -829,7 +833,7 @@ def i3():
         im.executeModality('BUTTONS',[ ['some', 'Some'], ['moderate', 'Moderate'], ['intense', 'Intense'], ['very intense', 'Very Intense'], ['excruciating', 'Excruciating'], ['confirm', 'Confirm']])
         im.executeModality('ASR',['some', 'moderate', 'intense', 'very intense', 'abdomen', 'excruciating'])
 
-        painQ = im.ask(actionname=None, timeoutvalue=100000)
+        painQ = im.ask(actionname=None, timeoutvalue=10000000)
         im.display.remove_buttons()
 
         if painQ != 'confirm':
