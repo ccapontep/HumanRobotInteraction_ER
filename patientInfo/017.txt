@@ -1,0 +1,14 @@
+WaitTime=3-0
+EmergencySymptoms=chest pain/breathing
+PastMedicalHistory=none
+Age=22
+PainLevel=intense
+LocationofPain=back/head
+Symptoms=limited movement/pain/inflammation
+TimeAdmitted=1565958090.38627
+OrderNum=3
+LevelofConsciousness=medium
+Name=lucy edwards
+ChangeinWaitTime=has
+UrgencyLevel=84.5-high
+

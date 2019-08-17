@@ -1,0 +1,14 @@
+Symptoms=pain/inflammation
+EmergencySymptoms=chest pain/breathing
+PastMedicalHistory=smoke cigarettes
+UrgencyLevel=78.5-high
+Age=33
+PainLevel=intense
+LocationofPain=chest
+WaitTime=2-45
+TimeAdmitted=1565954919.628482
+OrderNum=5
+LevelofConsciousness=medium
+ChangeinWaitTime=has
+Name=jan parker
+

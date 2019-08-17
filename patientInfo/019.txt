@@ -1,0 +1,13 @@
+Symptoms=fever or chills/limited movement/pain/dizzy/recurring
+EmergencySymptoms=sudden severe pain/sudden dizziness/severe abdominal
+PastMedicalHistory=recurring symptoms
+UrgencyLevel=134-high
+Age=27
+PainLevel=very intense
+LocationofPain=head/abdomen
+WaitTime=0-15
+TimeAdmitted=1566003398.885196
+OrderNum=1
+LevelofConsciousness=barely
+ChangeinWaitTime=has not
+Name=cecilia aponte

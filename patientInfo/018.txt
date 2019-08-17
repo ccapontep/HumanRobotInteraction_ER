@@ -1,0 +1,13 @@
+WaitTime=3-45
+EmergencySymptoms=none
+PastMedicalHistory=none
+Age=5
+PainLevel=some
+LocationofPain=hands
+Symptoms=cut
+TimeAdmitted=1565958873.353094
+OrderNum=8
+LevelofConsciousness=medium
+Name=gina wilson
+ChangeinWaitTime=has
+UrgencyLevel=8.5-low
