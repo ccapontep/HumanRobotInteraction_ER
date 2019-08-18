@@ -234,7 +234,7 @@ def i2():
             RecordDict.update({"ChangeinWaitTime" : 'has not'}) # Update data in record
 
             urgencyStr = RecordDict["UrgencyLevel"].split('-')[1]
-            StrRecord = 'Your new total urgency score is: ' + str(totalPoints) + ' and your urgency level is ' + urgencyStr
+            StrRecord = 'Your total urgency score is: ' + str(totalPoints) + '. Your urgency level is: ' + urgencyStr
             im.executeModality('TEXT_default', StrRecord)
             say(StrRecord, 'en')
             time.sleep(2)
@@ -937,7 +937,7 @@ def i3():
     RecordDict.update({"ChangeinWaitTime" : 'has not'}) # Update data in record
 
     urgencyStr = RecordDict["UrgencyLevel"].split('-')[1]
-    StrRecord = 'Your total urgency score is: ' + totalPoints + ' and your urgency level is ' + urgencyStr
+    StrRecord = 'Your total urgency score is: ' + str(totalPoints) + '. Your urgency level is: ' + urgencyStr
     im.executeModality('TEXT_default', StrRecord)
     say(StrRecord, 'en')
     time.sleep(2)
