@@ -276,10 +276,10 @@ def i2():
                                     orderList.append(int(line.split('=')[1]))
                 # Check if order of patients has to change (total points has to be 10 points greater
                 # than another patient and at least a medium-high to change the patient's order)
+                NoChange = False
                 orderedLevel = sorted(levelList, reverse=True)
                 for level in orderedLevel:
                     if totalPoints > level + 10 and totalPoints > 50:
-                        NoChange = False
                         index = levelList.index(level)
                         newOrder = []
                         newWait = []
@@ -294,13 +294,13 @@ def i2():
                         orderOld = len(orderList) + 1
                         NoChange = True
 
-                # update info about new patient
+                # update info about new wait time for patient
                 waitPat = orderOld*drAppointTime
                 remain_min = round(waitPat) % 60
                 remain_hr = round(waitPat) // 60
                 remain_str = str(int(remain_hr)) + '-' + str(int(remain_min))
 
-                waitStr = 'A doctor will be with you in ' + remain_hr + ' hours and ' + remain_min + ' minutes.'
+                waitStr = 'Your wait time since you arrived is ' + remain_hr + ' hours and ' + remain_min + ' minutes.'
                 im.executeModality('TEXT_default', waitStr)
                 say(waitStr, 'en')
                 RecordDict.update({"WaitTime" : remain_str})
@@ -971,10 +971,10 @@ def i3():
                         orderList.append(int(line.split('=')[1]))
     # Check if order of patients has to change (total points has to be 10 points greater
     # than another patient and at least a medium-high to change the patient's order)
+    NoChange = False
     orderedLevel = sorted(levelList, reverse=True)
     for level in orderedLevel:
         if totalPoints > level + 10 and totalPoints > 50:
-            NoChange = False
             index = levelList.index(level)
             newOrder = []
             newWait = []
@@ -995,6 +995,9 @@ def i3():
     remain_hr = round(waitPat) // 60
     remain_str = str(int(remain_hr)) + '-' + str(int(remain_min))
 
+    waitStr = 'A doctor will be with you in ' + remain_hr + ' hours and ' + remain_min + ' minutes.'
+    im.executeModality('TEXT_default', waitStr)
+    say(waitStr, 'en')
     RecordDict.update({"WaitTime" : remain_str})
     RecordDict.update({"OrderNum" : str(orderOld)})
 
