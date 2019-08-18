@@ -300,7 +300,7 @@ def i2():
                 remain_hr = round(waitPat) // 60
                 remain_str = str(int(remain_hr)) + '-' + str(int(remain_min))
 
-                waitStr = 'Your wait time since you arrived is ' + remain_hr + ' hours and ' + remain_min + ' minutes.'
+                waitStr = 'Your wait time since you arrived is ' + str(remain_hr) + ' hours and ' + str(remain_min) + ' minutes.'
                 im.executeModality('TEXT_default', waitStr)
                 say(waitStr, 'en')
                 RecordDict.update({"WaitTime" : remain_str})
@@ -969,6 +969,7 @@ def i3():
                         waitList.append(waitMin)
                     elif line.startswith('OrderNum'):
                         orderList.append(int(line.split('=')[1]))
+
     # Check if order of patients has to change (total points has to be 10 points greater
     # than another patient and at least a medium-high to change the patient's order)
     NoChange = False
@@ -995,7 +996,7 @@ def i3():
     remain_hr = round(waitPat) // 60
     remain_str = str(int(remain_hr)) + '-' + str(int(remain_min))
 
-    waitStr = 'A doctor will be with you in ' + remain_hr + ' hours and ' + remain_min + ' minutes.'
+    waitStr = 'A doctor will be with you in ' + str(remain_hr) + ' hours and ' + str(remain_min) + ' minutes.'
     im.executeModality('TEXT_default', waitStr)
     say(waitStr, 'en')
     RecordDict.update({"WaitTime" : remain_str})
