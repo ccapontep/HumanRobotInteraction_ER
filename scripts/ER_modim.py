@@ -303,6 +303,7 @@ def i2():
                 waitStr = 'Your wait time since you arrived is ' + str(remain_hr) + ' hours and ' + str(remain_min) + ' minutes.'
                 im.executeModality('TEXT_default', waitStr)
                 say(waitStr, 'en')
+                time.sleep(3)
                 RecordDict.update({"WaitTime" : remain_str})
                 RecordDict.update({"OrderNum" : str(orderOld)})
 
@@ -999,6 +1000,7 @@ def i3():
     waitStr = 'A doctor will be with you in ' + str(remain_hr) + ' hours and ' + str(remain_min) + ' minutes.'
     im.executeModality('TEXT_default', waitStr)
     say(waitStr, 'en')
+    time.sleep(3)
     RecordDict.update({"WaitTime" : remain_str})
     RecordDict.update({"OrderNum" : str(orderOld)})
 
@@ -1030,6 +1032,7 @@ def i3():
     if len(ticketNums) > 0 and ticketNumber in ticketNums:
         im.executeModality('TEXT_default', 'Your record has been saved in the database')
         say('Thank you for adding the information.', 'en')
+        time.sleep(1)
     elif ticketNumber not in ticketNums:
         im.executeModality('TEXT_default', 'Sorry an error occured, please re-enter your information.')
         say('Sorry some of the information you entered is incorrect, please enter them again carefully', 'en')
