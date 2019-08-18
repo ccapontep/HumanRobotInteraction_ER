@@ -251,7 +251,7 @@ def i2():
             drAppointTime = 15 # Time for a Dr to check each patient
 
             if urgencyOld + 10 < totalPoints and totalPoints > 70 and int(RecordDict['OrderNum']) != 1:
-                StrRecord = 'Your urgency score has changed enough to require higher attention. Your new total urgency score is: ' + str(totalPoints) + ' from ' + urgencyOld + ', previously.'
+                StrRecord = 'Your urgency score has changed enough to require higher attention. Your new total urgency score is: ' + str(totalPoints) + ' from ' + str(urgencyOld) + ', previously.'
                 im.executeModality('TEXT_default', StrRecord)
                 say(StrRecord, 'en')
                 time.sleep(2)
@@ -370,6 +370,11 @@ def i2():
                 im.executeModality('TEXT_default', 'All records are updated, please wait for your turn.')
                 say('Thank you, please now wait for your turn', 'en')
                 time.sleep(3)
+
+            else:
+                StrRecord = 'Your urgency score has not changed enough to require higher attention.' 
+                im.executeModality('TEXT_default', StrRecord)
+                say(StrRecord, 'en')
 
             im.executeModality('TEXT_default', 'Thank you for checking your record.')
             say('Goodbye!', 'en')
