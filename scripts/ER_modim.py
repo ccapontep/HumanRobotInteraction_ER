@@ -300,6 +300,9 @@ def i2():
                 remain_hr = round(waitPat) // 60
                 remain_str = str(int(remain_hr)) + '-' + str(int(remain_min))
 
+                waitStr = 'A doctor will be with you in ' + remain_hr + ' hours and ' + remain_min + ' minutes.'
+                im.executeModality('TEXT_default', waitStr)
+                say(waitStr, 'en')
                 RecordDict.update({"WaitTime" : remain_str})
                 RecordDict.update({"OrderNum" : str(orderOld)})
 
