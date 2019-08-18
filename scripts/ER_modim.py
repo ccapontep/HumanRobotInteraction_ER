@@ -233,7 +233,8 @@ def i2():
             RecordDict.update({"UrgencyLevel" : stringPoints}) # Update data in record
             RecordDict.update({"ChangeinWaitTime" : 'has not'}) # Update data in record
 
-            StrRecord = 'Your new total urgency score is: ' + str(totalPoints)
+            urgencyStr = RecordDict["UrgencyLevel"].split('-')[1]
+            StrRecord = 'Your new total urgency score is: ' + str(totalPoints) + ' and your urgency level is ' + urgencyStr
             im.executeModality('TEXT_default', StrRecord)
             say(StrRecord, 'en')
             time.sleep(2)
@@ -300,7 +301,7 @@ def i2():
                 remain_hr = round(waitPat) // 60
                 remain_str = str(int(remain_hr)) + '-' + str(int(remain_min))
 
-                waitStr = 'Your wait time since you arrived is ' + str(remain_hr) + ' hours and ' + str(remain_min) + ' minutes.'
+                waitStr = 'Your wait time since you arrived is ' + str(int(remain_hr)) + ' hours and ' + str(int(remain_min)) + ' minutes.'
                 im.executeModality('TEXT_default', waitStr)
                 say(waitStr, 'en')
                 time.sleep(3)
@@ -935,7 +936,8 @@ def i3():
     RecordDict.update({"UrgencyLevel" : stringPoints}) # Update data in record
     RecordDict.update({"ChangeinWaitTime" : 'has not'}) # Update data in record
 
-    StrRecord = 'Your total urgency score is: ' + str(totalPoints)
+    urgencyStr = RecordDict["UrgencyLevel"].split('-')[1]
+    StrRecord = 'Your total urgency score is: ' + str(int(remain_hr)) + ' hours and ' + str(int(remain_min)) + ' minutes.'
     im.executeModality('TEXT_default', StrRecord)
     say(StrRecord, 'en')
     time.sleep(2)
@@ -997,7 +999,7 @@ def i3():
     remain_hr = round(waitPat) // 60
     remain_str = str(int(remain_hr)) + '-' + str(int(remain_min))
 
-    waitStr = 'A doctor will be with you in ' + str(remain_hr) + ' hours and ' + str(remain_min) + ' minutes.'
+    waitStr = 'A doctor will be with you in ' + str(int(remain_hr)) + ' hours and ' + str(int(remain_min)) + ' minutes.'
     im.executeModality('TEXT_default', waitStr)
     say(waitStr, 'en')
     time.sleep(3)
