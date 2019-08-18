@@ -937,7 +937,7 @@ def i3():
     RecordDict.update({"ChangeinWaitTime" : 'has not'}) # Update data in record
 
     urgencyStr = RecordDict["UrgencyLevel"].split('-')[1]
-    StrRecord = 'Your total urgency score is: ' + str(int(remain_hr)) + ' hours and ' + str(int(remain_min)) + ' minutes.'
+    StrRecord = 'Your total urgency score is: ' + totalPoints + ' and your urgency level is ' + urgencyStr
     im.executeModality('TEXT_default', StrRecord)
     say(StrRecord, 'en')
     time.sleep(2)
